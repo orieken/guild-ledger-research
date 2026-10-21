@@ -66,7 +66,7 @@ A small, single-task probe could use a fixed benign task, a recorded prompt and 
 
 ## Run the existing collector
 
-After this PR is available on the repository's default branch, run **Actions → Collect Copilot discovery report → Run workflow**. Supply this PR's number and `20261021T143620Z` as the report timestamp. The collector saves a 90-day artifact named `copilot-discovery-<PR>-20261021T143620Z`. It does not launch an agent, merge the PR, or retrieve private session telemetry. [Documented; E10]
+The existing collector workflow is already available on `main`; this report PR does not need to be merged. Run **Actions → Collect Copilot discovery report → Run workflow**. Supply PR **#1** and `20261021T143620Z` as the report timestamp. The collector saves a 90-day artifact named `copilot-discovery-1-20261021T143620Z`. It does not launch an agent, merge the PR, or retrieve private session telemetry. [Documented; E10]
 
 ## Claim status key
 
