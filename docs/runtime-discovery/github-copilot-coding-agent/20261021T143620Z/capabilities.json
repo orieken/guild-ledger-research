@@ -10,19 +10,27 @@
     "runner_os": "Linux",
     "runner_arch": "X64",
     "kernel": "Linux 6.17.0-1022-azure",
-    "evidence_refs": ["E01", "E02"]
+    "evidence_refs": [
+      "E01",
+      "E02"
+    ]
   },
   "version": {
     "runtime_build": {
       "value": "runtime-cca-vendored-a3b15b740302d352cffb1bec7e01de2f5a4bffce",
       "claim_status": "observed",
-      "evidence_refs": ["E02"]
+      "evidence_refs": [
+        "E02"
+      ]
     },
     "product_version": null,
     "client_version": null,
     "reasoning_effort": null,
     "pinning_state": null,
-    "unknown_evidence_refs": ["E03", "E04"]
+    "unknown_evidence_refs": [
+      "E03",
+      "E04"
+    ]
   },
   "model_identity": {
     "label": null,
@@ -32,106 +40,169 @@
     "available_pinning_controls": {
       "claim_status": "documented",
       "assessment": "Model selection and, for supported models, reasoning level are selectable on supported Copilot cloud-agent entry points; Auto applies when no picker is available.",
-      "evidence_refs": ["E04"]
+      "evidence_refs": [
+        "E04"
+      ]
     },
-    "evidence_refs": ["E03", "E04"]
+    "evidence_refs": [
+      "E03",
+      "E04"
+    ]
   },
   "capabilities": [
     {
       "id": "hosted_execution",
       "claim_status": "observed",
       "assessment": "This task executes in the GitHub-hosted Copilot coding-agent surface on Linux x86_64.",
-      "evidence_refs": ["E01", "E02"]
+      "evidence_refs": [
+        "E01",
+        "E02"
+      ]
     },
     {
       "id": "checkout_and_setup",
       "claim_status": "observed",
       "assessment": "The repository checkout is available in the task workspace. No repository AGENTS.md or Copilot setup-steps workflow was found in the inspected paths; no setup or installation was run.",
-      "evidence_refs": ["E02", "E05"]
+      "evidence_refs": [
+        "E02",
+        "E05"
+      ]
     },
     {
       "id": "monitor_and_steer",
       "claim_status": "documented",
       "assessment": "GitHub session management documents live progress, session logs, steering, token usage, and session length. This does not establish that detailed telemetry was exported to this task environment.",
-      "evidence_refs": ["E06", "E10"]
+      "evidence_refs": [
+        "E06",
+        "E10"
+      ]
     },
     {
       "id": "cancel_and_partial_results",
       "claim_status": "documented",
       "assessment": "Stop session ends the Actions run and preserves already-pushed commits. No interrupted task was tested.",
-      "evidence_refs": ["E06"]
+      "evidence_refs": [
+        "E06"
+      ]
     },
     {
       "id": "report_artifact_collection",
       "claim_status": "documented",
       "assessment": "The repository's manual Action retrieves three files by PR head SHA and uploads a 90-day artifact with a manifest and file hashes; it does not export session telemetry.",
-      "evidence_refs": ["E10"]
+      "evidence_refs": [
+        "E10"
+      ]
     },
     {
       "id": "available_tools_and_skills",
       "claim_status": "observed",
       "assessment": "The session interface exposed repository, shell, GitHub, browser/web, progress, validation/security, memory, and session-store tools; named skills available were customize-cloud-agent and merge-branch. Availability is not exercise.",
-      "evidence_refs": ["E07"]
+      "evidence_refs": [
+        "E07"
+      ]
     },
     {
       "id": "mcp",
       "claim_status": "observed",
       "assessment": "COPILOT_MCP_ENABLED was true and GitHub MCP tools were exposed. Other server policy/configuration and actual use are not established.",
-      "evidence_refs": ["E02", "E07"]
+      "evidence_refs": [
+        "E02",
+        "E07"
+      ]
     },
     {
       "id": "hooks_and_memory",
       "claim_status": "unknown",
       "assessment": "No repository hook configuration was identified in inspected files. Hook execution is unknown. Memory-related tools are exposed, but repository memory contents were not inspected or used.",
-      "evidence_refs": ["E05", "E07", "E08"]
+      "evidence_refs": [
+        "E05",
+        "E07",
+        "E08"
+      ]
     },
     {
       "id": "network_and_approval_controls",
       "claim_status": "unknown",
       "assessment": "Actual firewall/allow-list and approval rules were not read or tested. Permission mode metadata was observed, but does not identify exact human gates.",
-      "evidence_refs": ["E02", "E08", "E09"]
+      "evidence_refs": [
+        "E02",
+        "E08",
+        "E09"
+      ]
     },
     {
       "id": "usage_telemetry",
       "claim_status": "unknown",
       "assessment": "This environment did not provide an exportable record of per-session input/output/cache/reasoning tokens, request/session identifiers, retries, child calls, interrupted calls, or per-call timestamps. Missing values are unknown, not zero.",
-      "evidence_refs": ["E03", "E06", "E08"]
+      "evidence_refs": [
+        "E03",
+        "E06",
+        "E08"
+      ]
     },
     {
       "id": "billing_attribution",
       "claim_status": "unknown",
       "assessment": "Actual Copilot charges, estimates, plan allocation, credits/premium requests, and Actions compute are not available from this task. The task may consume normal Copilot allocation; Actions collector compute is separate.",
-      "evidence_refs": ["E05", "E08", "E10", "E11"]
+      "evidence_refs": [
+        "E05",
+        "E08",
+        "E10",
+        "E11"
+      ]
     },
     {
       "id": "H0_native_baseline",
-      "claim_status": "observed",
-      "assessment": "Feasible baseline with mandatory native platform behavior retained: hosted runtime, checkout, task context, available tools, and platform progress/commit path. No additional harness was configured.",
-      "evidence_refs": ["E01", "E02", "E05", "E07"]
+      "claim_status": "inferred",
+      "assessment": "Candidate baseline; not yet admitted to the controlled experiment. A hosted task without an added experimental harness was observed, with mandatory native platform behavior retained. Repeatable fresh-task setup, effective context exposure, fixed model/effort selection, and sufficient usage accounting remain unverified; controlled H0 feasibility requires validation.",
+      "evidence_refs": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E07",
+        "E08"
+      ]
     },
     {
       "id": "H1_fixed_guidelines",
       "claim_status": "inferred",
       "assessment": "Feasible in principle via fixed task/repository guidelines, but this run does not control or verify model pinning, full prompt capture, or repeatability.",
-      "evidence_refs": ["E04", "E05", "E10"]
+      "evidence_refs": [
+        "E04",
+        "E05",
+        "E10"
+      ]
     },
     {
       "id": "H2_custom_bounded_workflow",
       "claim_status": "documented",
       "assessment": "Feasible in principle using documented setup, custom agent/skills, MCP, hooks, runner, and firewall controls; not configured or exercised in this run.",
-      "evidence_refs": ["E05", "E07", "E09"]
+      "evidence_refs": [
+        "E05",
+        "E07",
+        "E09"
+      ]
     },
     {
       "id": "H3_loom",
       "claim_status": "unknown",
       "assessment": "No Loom execution or Loom-backed task was run; native Loom feasibility is not demonstrated.",
-      "evidence_refs": ["E05", "E08"]
+      "evidence_refs": [
+        "E05",
+        "E08"
+      ]
     },
     {
       "id": "isolation_retention_reproducibility",
       "claim_status": "documented",
       "assessment": "Cloud-agent environment is documented as ephemeral, with session logs retained on GitHub and shared by default among repository collaborators. Exact isolation boundary, account-specific retention, and reproducibility inputs remain unknown.",
-      "evidence_refs": ["E06", "E08", "E10"]
+      "evidence_refs": [
+        "E06",
+        "E08",
+        "E10"
+      ]
     }
   ],
   "evidence": [
@@ -212,27 +283,44 @@
     {
       "id": "Q01",
       "question": "What model/provider label, reasoning effort, model pinning state, product version, and entry point were used for this task?",
-      "evidence_refs": ["E03", "E04"]
+      "evidence_refs": [
+        "E03",
+        "E04"
+      ]
     },
     {
       "id": "Q02",
       "question": "Can an authorized export provide per-session input/output/cache/reasoning token counts, request/session IDs, retries, child calls, interruptions, timestamps, and model identifiers?",
-      "evidence_refs": ["E03", "E06", "E08"]
+      "evidence_refs": [
+        "E03",
+        "E06",
+        "E08"
+      ]
     },
     {
       "id": "Q03",
       "question": "What were the actual Copilot charge/credit/allowance and separate GitHub Actions compute amounts for this task and any later collector run?",
-      "evidence_refs": ["E08", "E10", "E11"]
+      "evidence_refs": [
+        "E08",
+        "E10",
+        "E11"
+      ]
     },
     {
       "id": "Q04",
       "question": "What firewall allow-list, approval gates, hooks, memory behavior, isolation boundary, and account-specific retention policy applied?",
-      "evidence_refs": ["E08", "E09"]
+      "evidence_refs": [
+        "E08",
+        "E09"
+      ]
     },
     {
       "id": "Q05",
       "question": "Can Loom be executed natively in a supported, bounded cloud-agent task, and what runtime evidence would prove that execution?",
-      "evidence_refs": ["E05", "E08"]
+      "evidence_refs": [
+        "E05",
+        "E08"
+      ]
     }
   ]
 }

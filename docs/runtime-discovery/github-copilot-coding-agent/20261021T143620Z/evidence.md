@@ -131,6 +131,17 @@ No report collector or other workflow was run during discovery.
 
 The task interface made repository inspection/editing, shell, GitHub, web/browser, progress reporting, validation/security, memory, and session-store tools available. The available named skills were `customize-cloud-agent` and `merge-branch`. This is a declaration of exposed options, not an invocation log; no additional agent/model session was launched.
 
+### E08 — Unavailable or unverified task/account evidence [Unknown]
+
+This entry records the limits of the discovery inspection; it is not a telemetry export or evidence that these capabilities do not exist.
+
+- No export of per-call input/output/cache/reasoning usage, retry/child/interruption accounting, or per-call timestamps was obtained. Environment identifiers were present but withheld in E01; their presence does not establish an exportable request/session lineage record.
+- No account billing/allowance ledger, invoice, Actions usage record, or account-specific retention settings were accessed.
+- Actual firewall/approval rules, effective hook execution, complete context exposure, runner image digest, and the exact isolation boundary were not independently verified.
+- Repeatable fresh-task setup and fixed model/effort selection were not demonstrated. E03 records the narrower model-metadata inspection; E04 documents product-level selection options.
+
+These are unknowns from the original discovery, not new negative findings or additional probes. No new runtime or account inspection was performed when adding this entry. E06, E09, and E11 describe documented features separately from observed task evidence.
+
 ## Official documentation
 
 All URLs below are GitHub documentation pages retrieved 2026-10-21. Documentation supports product-level capability statements; it does not prove that a feature was active or exercised in this task.
