@@ -81,3 +81,5 @@ Current runtime recommendation and treatment definitions: [runtime comparison](1
 11. [Local workspace layout](09-workspace-layout.md): separate child repositories and experiment isolation.
 
 12. [H1/H2 treatment definitions](16-h1-h2-treatment-definitions.md): exact package boundaries, stage contracts, digest registry and offline container loading.
+
+13. [H2 fake-stage controller](17-h2-fake-stage-controller.md): implementation/review/repair orchestration, shared limits, partial evidence and offline flow tests.

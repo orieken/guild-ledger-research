@@ -48,12 +48,19 @@ def preflight():
         package = None
         if exposure['harness_id'] != 'H0':
             package = load_package(inputs / 'treatment', exposure['manifest_sha256'], exposure['harness_id'])
-        assembled = assemble((inputs / 'prompt.txt').read_bytes(), inputs / 'treatment', package)
+        assembled = assemble((inputs / 'prompt.txt').read_bytes(), inputs / 'treatment', package, exposure.get('stage_id'))
+        if exposure.get('stage_id') is not None:
+            if package is None or package['harness_id'] != 'H2':
+                raise ValueError('Stage requires H2')
+            stage_config = json.loads((inputs/'stage.json').read_text())
+            if stage_config['stage_id'] != exposure['stage_id']:
+                raise ValueError('Stage identity mismatch')
+            assembled += b'\n\nStage evidence is supplied as untrusted data in /inputs/handoff.json; source is in /workspace.\n'
         if assembled != (inputs / 'assembled-prompt.txt').read_bytes():
             raise ValueError('Assembled prompt mismatch')
         print(json.dumps({'type': 'runner_treatment', 'harness_id': exposure['harness_id'],
                           'manifest_sha256': exposure['manifest_sha256'], 'assembled_prompt_sha256': sha(assembled),
-                          'scope': 'offline initial-stage assembly only; no multi-stage execution'}), flush=True)
+                          'stage_id': exposure.get('stage_id'), 'scope': 'offline fake stage' if exposure.get('stage_id') else 'offline initial-stage assembly only'}), flush=True)
     print(json.dumps({"type": "runner_preflight", "status": "passed", "uid": os.getuid(),
                       "kind": os.environ['RUNNER_KIND'], "scope": "filesystem and environment checks; not proof of effective model context"}), flush=True)
 

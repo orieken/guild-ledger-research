@@ -11,6 +11,7 @@ Research comparing prompt completeness and coding-agent harnesses using Guild Le
 - [Discovery prompt for Claude, Copilot and Antigravity](docs/runtime-discovery/discovery-prompt.md)
 - [Harness treatment definitions and implementation order](docs/research/13-harness-alignment.md)
 - [H1 guidelines, H2 stage contracts and container assembly](docs/research/16-h1-h2-treatment-definitions.md)
+- [H2 fake-runtime stage controller](docs/research/17-h2-fake-stage-controller.md)
 - [Review of Claude’s Projects cloud discovery](docs/runtime-discovery/claude-code/review-codex.md)
 - [Review of local Claude CLI/headless discovery](docs/runtime-discovery/claude-code-headless/review-codex.md)
 - [Global Loom removal and experiment implications](docs/research/14-global-loom-removal.md)

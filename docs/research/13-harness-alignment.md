@@ -36,7 +36,7 @@ Arrows to a runtime express intended profile support, not admission. Codex does 
 | H3-context / loom | Frozen selection of upstream Loom instructions/reference assets | Same base session mechanics as H0/H1 | Reduced context treatment, not native Loom; exclude extra product facts, model routing, privileged tools and unmetered review |
 | H3-native / loom | Pinned real Loom pipeline, agents, retrieval corpus, model policy, tools and human gates | Separate campaign C | Preserve native workflow; meter all stages; human gates stay visible, never silently bypassed |
 
-H2's stage count is a proposed treatment definition, not an already implemented orchestrator. A reviewer starts with fresh context; a repair session receives the review and working tree with all supplied context hashed. Planning/implementation/visible checks may occur in the initial coding session, with explicit checkpoints. Native spontaneous planning in H0 is allowed: we manipulate supplied process, not private reasoning. Capture concise plans and verdicts, never private reasoning text.
+H2's stage count is defined and exercised by the fake-only controller; real-runtime orchestration is not enabled. A reviewer starts with fresh context; a repair session receives the review and working tree with all supplied context hashed. Planning/implementation/visible checks may occur in the initial coding session, with explicit checkpoints. Native spontaneous planning in H0 is allowed: we manipulate supplied process, not private reasoning. Capture concise plans and verdicts, never private reasoning text.
 
 H1 guidelines should cover general implementation care without creating mandatory workflow stages. H2 explicitly measures a workflow added to the same H1 guidelines; H3-context is an alternative context package, not automatically H1 plus Loom. H2 versus H0 measures the combined package; H2 versus H1 more narrowly measures the added workflow. Do not claim all four treatments are an equal-token dose.
 
@@ -110,3 +110,7 @@ The [initial Claude containers](../../containers/claude/README.md) are built loc
 ## H1/H2 definition update
 
 Draft package version 0.1.0 is defined in the guidelines and harness repositories. H2 vendors identical H1 guideline bytes. The [treatment registry](../../harness-packages.json) pins manifest hashes; [detailed stage contracts](16-h1-h2-treatment-definitions.md) define handoffs, review validation, conditional repair and stop rules. Container integration verifies package exposure and prompt assembly using a fake runtime; it does not demonstrate a real H2 workflow.
+
+## Fake H2 controller update — 22 October 2026
+
+The [fake stage controller](17-h2-fake-stage-controller.md) now runs implementation, fresh review and conditional single repair in separate disposable containers. It validates review transitions, preserves partial source, rejects reviewer mutations, and shares one execution deadline and synthetic token allowance. Real provider accounting, paid limits, runtime context validation and evaluator execution remain unimplemented. The frozen H1/H2 treatment package bytes are unchanged.

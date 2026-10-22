@@ -71,7 +71,7 @@ The host verifies the explicit digest, asset hashes, exact file set, harness ide
 
 The assembled initial prompt is `assigned prompt` followed by ordered treatment assets with stable delimiters. H1 appends only the guidelines. H2 appends the same guidelines, workflow and implementation-stage instruction. Other stage prompts can be assembled deterministically, but live adapters must supply the stage-specific candidate/handoff/review inputs and record their hashes separately.
 
-The fake runtime consumes this assembled prompt. **No Claude inference or H2 stage orchestration is implemented by this integration.** Real CLI info still performs version/help only. Runtime effective-context confirmation, approved auth/network/tool policy, stage controller and aggregate accounting remain live-run gates.
+The fake runtime consumes this assembled prompt. **No Claude inference is enabled.** The later [fake H2 controller](17-h2-fake-stage-controller.md) now executes the stage graph offline. Real CLI info still performs version/help only. Runtime effective-context confirmation, approved auth/network/tool policy, real-runtime controller integration and provider accounting remain live-run gates.
 
 ## Package evolution and verification
 

@@ -5,3 +5,4 @@ build:
 test:
 	python3 -B tests/smoke.py
 	python3 -B tests/treatments.py
+	python3 -B tests/h2.py

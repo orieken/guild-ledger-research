@@ -1,19 +1,19 @@
 {
   "schema_version": "guild-ledger.container-verification/v1",
-  "verified_date": "2026-10-21",
+  "verified_date": "2026-10-22",
   "platform": "linux/arm64",
   "images": [
     {
       "tags": [
         "guild-ledger-claude-smoke:local"
       ],
-      "id": "sha256:43f3f0d739a029a567801d78502082f4dbd0cb6abb377c538d3e654b8a5e6687"
+      "id": "sha256:047010df27105b1e89c0d9a48d77125035ef04756cdd45653fdae04ad27f3f71"
     },
     {
       "tags": [
         "guild-ledger-claude:2.1.304"
       ],
-      "id": "sha256:0f00917eb69ed162d1a02f9f0221c2507752ceba1743ed7bef238398aa1152ae"
+      "id": "sha256:666dd116493571dde0ca76a8de6633cda4e7ddef30b643603b3fd0f082580adc"
     }
   ],
   "claude_version": "2.1.304",
@@ -37,7 +37,10 @@
     "explicit read-only treatment exposure and initial-stage assembly",
     "host rejection of tampered/missing/extra/unpinned packages",
     "container rejection of post-assembly tampering",
-    "H2 review control contract validation"
+    "H2 review control contract validation",
+    "24 fake H2 controller cases: pass/repair, failures, malformed results, human gates, review mutation, invalid paths, missing usage, aggregate limits and timeouts at all stages",
+    "original assigned prompt and explicit evidence handoffs preserved across stages",
+    "real Claude image refused by H2 controller"
   ],
   "inference_calls": 0,
   "credentials_provided": false,
@@ -46,19 +49,23 @@
     "effective model context unverified",
     "no live provider network/auth or usage calibration",
     "OS repositories not snapshot-pinned",
-    "H2 multi-stage execution not implemented",
     "H1/H2 live instruction delivery not calibrated",
-    "application/database/evaluator stack not included"
+    "application/database/evaluator stack not included",
+    "H2 real-runtime stage execution disabled",
+    "synthetic allowance only; provider usage and paid spend limits not validated",
+    "host crash recovery and durable out-of-worker evidence not implemented"
   ],
   "source_sha256": {
-    "run.py": "271a6ae560c40e8a68651e82cddbb26423140e9ae7ea8f16c658e6b72dbaed03",
+    "run.py": "20f6824dcdb38cf5e51af18551bd205f3a57da9cf3f9d7339437eebd65af4e68",
+    "h2.py": "4dc24556262fd1acdc926df50b88ae5d6c5c418786cd93dc0d93633e89a0b35a",
     "treatment.py": "6b2e8c26678d96f212c9c26b674ff91bb873d30ade382f71f30ee98ddc3788fd",
     "Dockerfile": "65ee00f1b5af55f306621988c6e4f7e610aa0639c32305534cfd365150557655",
-    "Makefile": "59292659e29d47d36492e020cb312d0771fb2b03f9f6299d5376a0a411f94092",
-    "entrypoint.py": "c5221c872b619fcb23401a8f46dab748e0767816e68d38df6e9703d766eb0590",
-    "fake-claude.py": "f2d693de1a0b8d3659b360f0e7c588585cdd005f612cda87bb36c3e35e12f8c6",
-    "README.md": "22f83399ba7e2e8f46c7fac7df5e55a63859db1b64a5502b639aefbe1d628f82",
+    "Makefile": "e42d50034897716cca7860c4891c2e0110c4418f83b876f671b5cb3868a1330b",
+    "entrypoint.py": "a3fd36a84a82533be8bcae7a7d82aa0045d878e2d00bdf3654e21887ddf8f318",
+    "fake-claude.py": "bc0afd9c0b23bd007e3befd9c51714891d4a0452532433fa2d2a81869bdba401",
+    "README.md": "03b51ac92b1cdf0d67a0f9f8ea1b0b909a25c2ce61ed3e873fd406fb240aab8a",
     ".dockerignore": "9bb14901056fb8c5b81fba164dfb66582bf26e77b2f8c0b1354079391242dcf4",
+    "tests/h2.py": "06f9298cc2e21be0c46b919a3944b7861a34508bde1606d4061393333af9a321",
     "tests/treatments.py": "b0405cc40776d69f5f833aaf2767c1c14f9e8ab14869ceeb7dbc660a519f424c",
     "tests/smoke.py": "f4819056711f4b376a0a573343b4e917e99946555bb891cf308bec4a01937a62"
   },
@@ -83,5 +90,15 @@
       "package_version": "0.1.0-draft",
       "status": "published draft; offline assembly verified, execution not admitted"
     }
-  ]
+  ],
+  "h2_controller": {
+    "runtime": "fake-only",
+    "verified_cases": 24,
+    "stage_limit": 3,
+    "review_limit": 1,
+    "repair_limit": 1,
+    "inference_calls": 0,
+    "result": "passed",
+    "network": "none"
+  }
 }
