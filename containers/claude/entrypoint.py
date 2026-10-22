@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from treatment import load_package, assemble, sha
 
 RULE_NAMES = {"agents.md", "claude.md", "gemini.md", "copilot-instructions.md"}
 STATE_DIRS = {".claude", ".codex", ".agents", ".gemini", ".git", "node_modules", ".venv"}
@@ -36,6 +37,23 @@ def preflight():
         'CLAUDE_CONFIG_DIR', 'CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC'}]
     if unexpected:
         raise ValueError("Unexpected environment keys: " + ', '.join(sorted(unexpected)))
+    inputs = Path('/inputs')
+    if (inputs / 'exposure.json').exists():
+        exposure = json.loads((inputs / 'exposure.json').read_text())
+        expected = exposure['files']
+        actual = {str(p.relative_to(inputs)): sha(p.read_bytes()) for p in inputs.rglob('*')
+                  if p.is_file() and p.name != 'exposure.json'}
+        if expected != actual:
+            raise ValueError('Input exposure digest/file-set mismatch')
+        package = None
+        if exposure['harness_id'] != 'H0':
+            package = load_package(inputs / 'treatment', exposure['manifest_sha256'], exposure['harness_id'])
+        assembled = assemble((inputs / 'prompt.txt').read_bytes(), inputs / 'treatment', package)
+        if assembled != (inputs / 'assembled-prompt.txt').read_bytes():
+            raise ValueError('Assembled prompt mismatch')
+        print(json.dumps({'type': 'runner_treatment', 'harness_id': exposure['harness_id'],
+                          'manifest_sha256': exposure['manifest_sha256'], 'assembled_prompt_sha256': sha(assembled),
+                          'scope': 'offline initial-stage assembly only; no multi-stage execution'}), flush=True)
     print(json.dumps({"type": "runner_preflight", "status": "passed", "uid": os.getuid(),
                       "kind": os.environ['RUNNER_KIND'], "scope": "filesystem and environment checks; not proof of effective model context"}), flush=True)
 

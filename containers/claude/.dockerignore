@@ -2,3 +2,4 @@
 !Dockerfile
 !entrypoint.py
 !fake-claude.py
+!treatment.py

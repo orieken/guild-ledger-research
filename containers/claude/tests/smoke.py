@@ -1,11 +1,13 @@
 """Docker integration checks. No credentials or model calls required."""
 import json
 import subprocess
+import sys
 from pathlib import Path
 import runpy
 import tempfile
 
 root=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(root))
 run=runpy.run_path(str(root/'run.py'))['run']
 audit=runpy.run_path(str(root/'entrypoint.py'))['audit_tree']
 with tempfile.TemporaryDirectory(prefix='guild-ledger-tests-') as temp:
@@ -19,7 +21,7 @@ with tempfile.TemporaryDirectory(prefix='guild-ledger-tests-') as temp:
         assert result['network']=='none'
         assert (out/'workspace/synthetic-result.txt').read_text()=='Synthetic edit: fixture task\n'
         events=[json.loads(line) for line in (out/'stdout.jsonl').read_text().splitlines()]
-        assert events[0]['status']=='passed' and events[-1]['synthetic'] is True
+        assert next(e for e in events if e['type']=='runner_preflight')['status']=='passed' and events[-1]['synthetic'] is True
     for label,limit,expected in [('__fixture_failure__',30,9),('__fixture_timeout__',2,137)]:
         prompt.write_text(label)
         result=run('guild-ledger-claude-smoke:local',task,prompt,temp/label,timeout=limit)

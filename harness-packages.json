@@ -1,0 +1,25 @@
+{
+  "schema_version": "guild-ledger.harness-registry/v1-draft",
+  "entries": [
+    {
+      "harness_id": "H1",
+      "repository": "orieken/guild-ledger-guidelines",
+      "local_package": "../guild-ledger-guidelines/package",
+      "source_commit": "3810224a1ea86499661bc6fdec6d11ac18b5eac6",
+      "manifest_sha256": "3c680bfcbe92527377016175cd08d4bc649bad968a5bd160bda798432562c8e4",
+      "guidelines_sha256": "fdf8e1e4d8abd311b2864ec54b51ecd640dcedd61c9587f8dcc46dad26344567",
+      "package_version": "0.1.0-draft",
+      "status": "published draft; offline assembly verified, execution not admitted"
+    },
+    {
+      "harness_id": "H2",
+      "repository": "orieken/guild-ledger-harness",
+      "local_package": "../guild-ledger-harness/package",
+      "source_commit": "2f2a8edd9968fb6895e714bb021bb31746b54651",
+      "manifest_sha256": "f5b160533d307fcd627080d4dc5555b71d2fdc53453ea56de2b3de644d18c5a6",
+      "guidelines_sha256": "fdf8e1e4d8abd311b2864ec54b51ecd640dcedd61c9587f8dcc46dad26344567",
+      "package_version": "0.1.0-draft",
+      "status": "published draft; offline assembly verified, execution not admitted"
+    }
+  ]
+}

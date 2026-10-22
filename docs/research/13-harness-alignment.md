@@ -105,4 +105,8 @@ The [Copilot collection workflow](../runtime-discovery/github-copilot-coding-age
 
 ## Container implementation update — 21 October 2026
 
-The [initial Claude containers](../../containers/claude/README.md) are built locally: real CLI 2.1.304 and a separate fake-runtime image. Offline checks cover fresh-state synthetic edits, known contamination rejection, source preservation and failure/timeout artifacts. The [verification receipt](../../containers/claude/verification.json) records image/source hashes. This implements a no-model runner foundation, not runtime admission: live mode, credentials, provider egress, effective context checks and H1/H2/H3 package injection remain disabled or unimplemented.
+The [initial Claude containers](../../containers/claude/README.md) are built locally: real CLI 2.1.304 and a separate fake-runtime image. Offline checks cover fresh-state synthetic edits, known contamination rejection, source preservation and failure/timeout artifacts. The [verification receipt](../../containers/claude/verification.json) records image/source hashes. This implements a no-model runner foundation, not runtime admission: live mode, credentials, provider egress, effective context checks and H3 package injection remain disabled or unimplemented. H1/H2 definitions and offline initial-stage assembly are now implemented; the H2 live stage controller remains unimplemented. See [treatment definitions](16-h1-h2-treatment-definitions.md).
+
+## H1/H2 definition update
+
+Draft package version 0.1.0 is defined in the guidelines and harness repositories. H2 vendors identical H1 guideline bytes. The [treatment registry](../../harness-packages.json) pins manifest hashes; [detailed stage contracts](16-h1-h2-treatment-definitions.md) define handoffs, review validation, conditional repair and stop rules. Container integration verifies package exposure and prompt assembly using a fake runtime; it does not demonstrate a real H2 workflow.

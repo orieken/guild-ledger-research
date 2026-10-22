@@ -10,6 +10,7 @@ Run from the research repository root, with Docker running:
 docker build --target smoke -t guild-ledger-claude-smoke:local containers/claude
 docker build --target claude -t guild-ledger-claude:2.1.304 containers/claude
 python3 -B containers/claude/tests/smoke.py
+python3 -B containers/claude/tests/treatments.py
 ```
 
 Builds download OS dependencies and a Claude release, but make no model calls. The Claude build verifies the release manifest's GPG signature against the documented signing fingerprint, then verifies the platform binary's SHA-256 checksum. The base Node/Go image references are pinned by digest. OS packages come from live Debian repositories: the resulting image ID is the repeatable execution reference; rebuilding later is not guaranteed byte-identical. Freeze OS package sources and archive images before campaign admission.
@@ -35,13 +36,13 @@ The launcher resolves the image tag to its local image ID before creating the co
 - Fresh tmpfs home and temporary directory per container; no host home, credentials, configuration cache, sibling checkout, Docker socket, or evaluator mount.
 - UID/GID 10001, read-only root filesystem, all Linux capabilities dropped, no privilege escalation, bounded memory/CPU/process count, and Docker init for child reaping.
 - Network disabled for every currently supported mode. No environment variables from the host are forwarded into the container.
-- Startup checks reject known instruction filenames, agent configuration directories, MCP configuration, dependency caches, symlinks and special files in inputs. The host performs the same input check before copying. This deliberately strict initial policy is H0-only; approved starter exceptions and H1/H2/Loom packages need explicit hash-based manifests before support is added.
+- Startup checks reject known instruction filenames, agent configuration directories, MCP configuration, dependency caches, symlinks and special files in inputs. The host performs the same input check before copying. Task inputs remain strict. H1/H2 packages now use a separate explicit, hash-verified read-only input; they do not bypass task auditing. Loom and starter exceptions remain unsupported.
 - Input audits are a bounded filesystem/environment check, not proof of effective model context. Native runtime tools and instructions still exist. Arbitrarily named instruction prose cannot be detected by filename checks; campaign input hashes and exposure review remain necessary.
 - A host watchdog kills the container on timeout and snapshots partial edits. Local termination does not prove cancellation of a remote provider request. These initial modes never submit one.
 
 ## Deliberate boundary before paid calibration
 
-The entrypoint accepts only `preflight`, `fake`, and `cli-info`. Live Claude execution, credentials, provider egress, H1/H2/H3 injection and application service networking are not enabled. The user has authorized container construction, not paid calls. No personal sign-ins or global installation are changed.
+The entrypoint accepts only `preflight`, `fake`, and `cli-info`. Live Claude execution, credentials, provider egress, H2 stage orchestration, H3 injection and application service networking are not enabled. H1/H2 initial-stage prompt assembly is supported offline. The user has authorized container construction, not paid calls. No personal sign-ins or global installation are changed.
 
 Before enabling live mode, implement and validate a fixed launch contract (candidate: bare mode with explicit task/treatment input and tool catalog), approved authentication, restricted provider egress, actual init-event tool/context verification, per-request/child usage accounting, aggregate limits and failure completeness. Bare mode and auth compatibility require calibration; do not copy the entire personal Claude directory. Permission approvals and tool availability are separate controls. Do not enable unrestricted permission bypass as a substitute for those decisions.
 
@@ -50,3 +51,7 @@ These containers share Docker's kernel boundary and are an initial development i
 ## Sources
 
 Checked 21 October 2026: [Claude development containers](https://code.claude.com/docs/en/devcontainer), [installation and release signature verification](https://code.claude.com/docs/en/setup#binary-integrity-and-code-signing), [CLI controls](https://code.claude.com/docs/en/cli-reference). Documentation describes available behavior; real runtime context and metering remain unvalidated.
+
+## H1/H2 package loading
+
+See [treatment definitions](../../docs/research/16-h1-h2-treatment-definitions.md) for package hashes and commands. Pass `--harness-id`, `--harness` (the package directory only), and `--harness-digest` together. H0 is the default. Both host and container validate the exact payload; no directory discovery is enabled. Fake execution confirms prompt assembly only, not agent compliance or a complete H2 workflow.

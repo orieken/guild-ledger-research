@@ -3,7 +3,7 @@ import json
 import time
 import sys
 from pathlib import Path
-prompt=Path('/inputs/prompt.txt').read_text()
+prompt=Path('/inputs/assembled-prompt.txt').read_text()
 Path('/workspace/synthetic-result.txt').write_text('Synthetic edit: ' + prompt + '\n')
 if prompt == '__fixture_timeout__':
     time.sleep(60)

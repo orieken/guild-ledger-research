@@ -10,6 +10,7 @@ import shutil
 import subprocess
 import tempfile
 import uuid
+from treatment import load_package, assemble, sha
 
 
 def digest_tree(root):
@@ -17,7 +18,7 @@ def digest_tree(root):
             for p in sorted(root.rglob('*')) if p.is_file() and not p.is_symlink()}
 
 
-def run(image, task, prompt, output, mode='fake', timeout=30):
+def run(image, task, prompt, output, mode='fake', timeout=30, harness=None, harness_digest=None, harness_id='H0'):
     # Imported without running the container entrypoint.
     import runpy
     audit = runpy.run_path(str(Path(__file__).with_name('entrypoint.py')))['audit_tree']
@@ -29,6 +30,12 @@ def run(image, task, prompt, output, mode='fake', timeout=30):
     if not task.is_dir() or not prompt.is_file():
         raise ValueError('Task directory and prompt file required')
     audit(task)
+    package = None
+    if harness is not None:
+        package = load_package(harness, harness_digest, harness_id)
+        audit(harness)
+    elif harness_id != 'H0' or harness_digest is not None:
+        raise ValueError('Non-H0 condition requires a pinned package')
     if prompt.is_symlink():
         raise ValueError('Prompt must not be a symlink')
     if output.exists():
@@ -38,6 +45,8 @@ def run(image, task, prompt, output, mode='fake', timeout=30):
     name='guild-ledger-'+uuid.uuid4().hex
     output.mkdir(parents=True)
     manifest={'schema_version':'guild-ledger.container-smoke/v1','synthetic':mode=='fake',
+              'harness_id':harness_id,'harness_manifest_sha256':harness_digest,
+              'assembly_only':True,'stage_execution_implemented':False,
               'mode':mode,'image_id':image_id,'image_repo_digests':image_info.get('RepoDigests',[]),
               'task_sha256':digest_tree(task),'prompt_sha256':hashlib.sha256(prompt.read_bytes()).hexdigest(),
               'network':'none','timeout_seconds':timeout,'started_at':datetime.datetime.now(datetime.timezone.utc).isoformat()}
@@ -46,6 +55,16 @@ def run(image, task, prompt, output, mode='fake', timeout=30):
         with tempfile.TemporaryDirectory(prefix='guild-ledger-attempt-') as temp:
             staging=Path(temp); workspace=staging/'workspace'; inputs=staging/'inputs'
             shutil.copytree(task,workspace);inputs.mkdir();shutil.copyfile(prompt,inputs/'prompt.txt')
+            if package is not None:
+                shutil.copytree(harness,inputs/'treatment')
+                package = load_package(inputs/'treatment',harness_digest,harness_id)
+            assembled=assemble((inputs/'prompt.txt').read_bytes(),inputs/'treatment',package)
+            (inputs/'assembled-prompt.txt').write_bytes(assembled)
+            exposure={'harness_id':harness_id,'manifest_sha256':harness_digest,'files':digest_tree(inputs)}
+            (inputs/'exposure.json').write_text(json.dumps(exposure,indent=2)+'\n')
+            manifest['assembled_prompt_sha256']=sha(assembled)
+            manifest['input_exposure']=exposure
+            shutil.copytree(inputs,output/'inputs')
             # The isolated UID must be able to edit copied files on Linux too.
             for p in [workspace,*workspace.rglob('*')]:
                 p.chmod(0o777 if p.is_dir() else (0o777 if p.stat().st_mode & 0o111 else 0o666))
@@ -84,8 +103,11 @@ if __name__=='__main__':
     p.add_argument('--image',required=True);p.add_argument('--task',type=Path,required=True)
     p.add_argument('--prompt',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--mode',choices=['fake','preflight','cli-info'],default='fake')
+    p.add_argument('--harness',type=Path,help='Explicit package directory, never the whole repository')
+    p.add_argument('--harness-id',choices=['H0','H1','H2'],default='H0')
+    p.add_argument('--harness-digest',help='Expected manifest SHA-256 from the reviewed package')
     p.add_argument('--timeout',type=int,default=30)
     a=p.parse_args()
     if not 1<=a.timeout<=120: p.error('timeout must be between 1 and 120 seconds')
-    result=run(a.image,a.task,a.prompt,a.output,a.mode,a.timeout)
+    result=run(a.image,a.task,a.prompt,a.output,a.mode,a.timeout,a.harness,a.harness_digest,a.harness_id)
     raise SystemExit(0 if result.get('exit_code')==0 and not result.get('timed_out') else 1)

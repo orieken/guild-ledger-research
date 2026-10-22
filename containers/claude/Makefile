@@ -4,3 +4,4 @@ build:
 	docker build --target claude -t guild-ledger-claude:2.1.304 .
 test:
 	python3 -B tests/smoke.py
+	python3 -B tests/treatments.py

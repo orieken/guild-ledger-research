@@ -14,7 +14,6 @@ ENV PATH=/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sb
     PYTHONDONTWRITEBYTECODE=1
 RUN useradd --uid 10001 --create-home --shell /bin/bash runner \
     && mkdir /workspace /inputs /opt/runner && chown runner:runner /workspace
-COPY entrypoint.py fake-claude.py /opt/runner/
 WORKDIR /workspace
 USER 10001:10001
 ENTRYPOINT ["/usr/bin/tini", "--", "python3", "/opt/runner/entrypoint.py"]
@@ -22,6 +21,7 @@ CMD ["preflight"]
 
 FROM base AS smoke
 ENV RUNNER_KIND=synthetic
+COPY entrypoint.py fake-claude.py treatment.py /opt/runner/
 
 FROM base AS claude
 USER root
@@ -45,5 +45,6 @@ RUN set -eu; case "$(dpkg --print-architecture)" in arm64) platform=linux-arm64;
     printf '%s\n' "$CLAUDE_VERSION" > /opt/runner/release/version; \
     sha256sum /usr/local/bin/claude > /opt/runner/release/binary.sha256; \
     rm -rf /tmp/claude-release /root/.gnupg /home/runner/.gnupg
+COPY entrypoint.py fake-claude.py treatment.py /opt/runner/
 ENV RUNNER_KIND=claude
 USER 10001:10001

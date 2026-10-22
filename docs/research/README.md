@@ -79,3 +79,5 @@ Suggested tasks: T01 quest board, T02 accept an expedition, and T03 reservation 
 Current runtime recommendation and treatment definitions: [runtime comparison](12-runtime-options.md) and [harness alignment](13-harness-alignment.md). Claude CLI is the first controlled candidate; Codex CLI is the replication candidate; Copilot and Antigravity are native-workflow candidates. No profile is admitted. Open choices: visibility; exact model/auth and versions; resource limits; final H1/H2/H3 packages; spending caps and pricing; whether optional clarification behavior gets a separate study. These do not prevent drafting tasks, tests, and local ingestion contracts.
 
 11. [Local workspace layout](09-workspace-layout.md): separate child repositories and experiment isolation.
+
+12. [H1/H2 treatment definitions](16-h1-h2-treatment-definitions.md): exact package boundaries, stage contracts, digest registry and offline container loading.
