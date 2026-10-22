@@ -8,15 +8,18 @@ First build the shared `guild-ledger-claude-smoke:local` runner per [Claude cont
 
 ```sh
 python3 -B containers/loom/prepare.py \
-  --source /absolute/path/to/ai-assistant-dot-files \
+  --snapshot vendor/loom/loom-3f2817818c68.tar.gz \
   --package ../guild-ledger-loom/package \
   --manifest-digest a85d54356d04fbdcfd3caf90a12ff6de48571e7188d8e49093ab0697561212af
 
 docker build -t guild-ledger-loom-mock:local containers/loom
+python3 -B containers/loom/tests/source_snapshot.py
 python3 -B containers/loom/tests/pipeline.py
 ```
 
-The source must contain pinned upstream commit `3f2817818c68f42520229aab9342ce91533cef2f`; current working-tree state is irrelevant. `prepare.py` uses `git archive` at that revision, checks its tree and compressed-archive digest, and writes only the ignored `build/` directory. It does not use untracked files, reset the checkout, install globally, or execute upstream setup scripts. Clone/export that exact upstream revision when preparing another machine; do not silently select its latest HEAD.
+The checked-in [tested source snapshot](../../vendor/loom/README.md) supplies commit `3f2817818c68f42520229aab9342ce91533cef2f`, which is not currently fetchable from the upstream public remote. `prepare.py` verifies its digest against the unchanged H3 profile and rejects unsafe archive paths/links before copying it into ignored `build/`. User authorization to publish this exact tracked-source snapshot is recorded in its provenance. No other local commits or untracked files are published.
+
+For a local checkout that already contains the exact revision, `--source /absolute/path/to/checkout` remains an alternative to `--snapshot`. It uses `git archive` at the pin and verifies tree/archive hashes; it does not reset the checkout or execute setup scripts. The snapshot is the default CI/build path.
 
 The compiler is Go 1.26.5 in a digest-pinned image. Build dependencies are resolved with the upstream go.sum and `-mod=readonly`; the binary is built with `CGO_ENABLED=0`, `GOTOOLCHAIN=local`, `-trimpath`, and VCS auto-discovery off. The source archive, compiler image and resulting binary/image identities are recorded in the [verification receipt](verification.json). Compiler base is pinned; the local shared runtime base tag is mutable, so the receipt records its actual image ID. Freeze/archive the resulting images for campaign use rather than assuming a later rebuild is identical.
 

@@ -1,0 +1,56 @@
+name: Offline harness setup
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/offline-harness-tests.yml'
+      - 'scripts/offline_harness_ci.py'
+      - 'containers/**'
+      - 'harness-packages.json'
+      - 'vendor/loom/**'
+  pull_request:
+    paths:
+      - '.github/workflows/offline-harness-tests.yml'
+      - 'scripts/offline_harness_ci.py'
+      - 'containers/**'
+      - 'harness-packages.json'
+      - 'vendor/loom/**'
+permissions:
+  contents: read
+concurrency:
+  group: offline-harness-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    name: Build and test all offline harnesses
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: guild-ledger-research
+    steps:
+      - name: Check out research
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          path: guild-ledger-research
+          persist-credentials: false
+      - name: Verify packages and export pinned upstream source
+        run: python3 -B scripts/offline_harness_ci.py prepare
+      - name: Build offline runtime images
+        if: always()
+        run: python3 -B scripts/offline_harness_ci.py build
+      - name: Run all offline suites
+        if: always()
+        run: python3 -B scripts/offline_harness_ci.py test
+      - name: Summarize and collect identities
+        if: always()
+        run: python3 -B scripts/offline_harness_ci.py report
+      - name: Save verification evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: offline-harness-${{ github.run_id }}-${{ github.run_attempt }}
+          path: guild-ledger-research/ci-offline-results/
+          if-no-files-found: error
+          retention-days: 30

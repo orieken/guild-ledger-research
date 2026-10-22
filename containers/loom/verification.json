@@ -47,7 +47,10 @@
     "refuse non-mock resume state",
     "native posture and post-review warnings preserved",
     "untracked source content excluded from archive",
-    "built image retains expected shared runtime layers"
+    "built image retains expected shared runtime layers",
+    "approved source snapshot digest matches tested export",
+    "snapshot tamper/traversal/external-link rejection",
+    "fresh CI preparation without unpublished upstream Git object"
   ],
   "limitations": [
     "mock output does not measure code quality or effective model context",
@@ -60,14 +63,38 @@
   "source_sha256": {
     "run.py": "8471fa9d678ece8f4e4ac55f77e608b0cb9bda3114c173bb8d16aa823656489e",
     "Dockerfile": "61a58ca4462585dec359722f1c2263b0d6cf9a62db8cc42ceea6694d0d914973",
-    "Makefile": "6a192c06a8be57441806312253d0085b3c3cfa9686ecb6bf6ec2b03f4a8f68c5",
+    "Makefile": "90c2da81b9e8ed4c06f1b87e515454172d1a54238a720e562723e7fd6075add5",
     "entrypoint.py": "28fd25a3f629fc94d9120c1670a5e99cc52269a90de34e74d6712aa2c4b467d7",
-    "README.md": "fb8b11ba48d6a2b88a98c265c1e9dd91bf1e6d0e25288c5638ea34d15a3f1d5c",
+    "README.md": "d056dcc325b22388a6088bf09318a1b1b847be58c29fb8617f13c02ef8796ffa",
     ".dockerignore": "a2f9015b45f8294bfeea28cc8ea7daac401887848ce248b42a84fb4995c42899",
     ".gitignore": "020c2606e8ed484089c2083e0be438b9d0736bee1558a6b76af0d58bd23f69cf",
-    "prepare.py": "e9783f26e0ec66038aa1dd56aec258dcbcdf0488b6251be9f3291ea43b43a052",
+    "prepare.py": "3723143a35122d68d182d0b0b567d126f5898da5abcd104f753a220a1e5a1ebf",
+    "tests/source_snapshot.py": "e5701ac333c53eca956858c83ba5089d5b0cb663d6fd5ed15d7e2b05ee432290",
     "tests/pipeline.py": "be6633c128bfeba56bb7d5b540b92f81015897cd659a67e0e8570ca4aa9dd602"
   },
   "wrapper_repository": "orieken/guild-ledger-loom",
-  "wrapper_source_commit": "3542be18e1d608d3fca57df871156c2aa147cfff"
+  "wrapper_source_commit": "3542be18e1d608d3fca57df871156c2aa147cfff",
+  "source_snapshot": {
+    "schema_version": "guild-ledger.source-snapshot/v1",
+    "published_with_user_authorization": "2026-10-22",
+    "upstream_repository": "https://github.com/orieken/loom.git",
+    "source_commit": "3f2817818c68f42520229aab9342ce91533cef2f",
+    "source_tree": "7095c1ceb8c167b30acd4821b0890162290309c4",
+    "archive_file": "loom-3f2817818c68.tar.gz",
+    "archive_sha256": "99a12e8c129457b3c291d6efbc07e5998a18be098f416e1a595ccc189a555d63",
+    "archive_bytes": 2823902,
+    "archive_entries": 1994,
+    "archive_format": "git archive --format=tar.gz",
+    "upstream_commit_publicly_fetchable_at_publication": false,
+    "working_tree_or_untracked_files_included": false,
+    "audit": {
+      "path_traversal_entries": 0,
+      "links_outside_archive_root": 0,
+      "credential_patterns": "only two documentation mentions of a private-key header; no complete key blocks or matched API/GitHub tokens"
+    },
+    "licenses": {
+      "LICENSE": "412527733a071206aab47281281cd76b87addedbbf43529ee00dcff4638b204c",
+      "LICENSE-CONTENT.md": "c88989489cae0975bd723c95655645926b439248ec897098befb0d5c2d52abb2"
+    }
+  }
 }

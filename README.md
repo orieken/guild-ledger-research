@@ -14,6 +14,7 @@ Research comparing prompt completeness and coding-agent harnesses using Guild Le
 - [H2 fake-runtime stage controller](docs/research/17-h2-fake-stage-controller.md)
 - [Loom native/mock container and pipeline checks](containers/loom/README.md)
 - [H4 Harness² adaptive comparison and deterministic container](docs/research/19-harness2-adaptive-comparison.md)
+- [Offline build/test workflow and reproducibility gate](docs/research/20-offline-ci-verification.md)
 - [Review of Claude’s Projects cloud discovery](docs/runtime-discovery/claude-code/review-codex.md)
 - [Review of local Claude CLI/headless discovery](docs/runtime-discovery/claude-code-headless/review-codex.md)
 - [Global Loom removal and experiment implications](docs/research/14-global-loom-removal.md)

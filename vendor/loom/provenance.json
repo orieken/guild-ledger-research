@@ -1,0 +1,23 @@
+{
+  "schema_version": "guild-ledger.source-snapshot/v1",
+  "published_with_user_authorization": "2026-10-22",
+  "upstream_repository": "https://github.com/orieken/loom.git",
+  "source_commit": "3f2817818c68f42520229aab9342ce91533cef2f",
+  "source_tree": "7095c1ceb8c167b30acd4821b0890162290309c4",
+  "archive_file": "loom-3f2817818c68.tar.gz",
+  "archive_sha256": "99a12e8c129457b3c291d6efbc07e5998a18be098f416e1a595ccc189a555d63",
+  "archive_bytes": 2823902,
+  "archive_entries": 1994,
+  "archive_format": "git archive --format=tar.gz",
+  "upstream_commit_publicly_fetchable_at_publication": false,
+  "working_tree_or_untracked_files_included": false,
+  "audit": {
+    "path_traversal_entries": 0,
+    "links_outside_archive_root": 0,
+    "credential_patterns": "only two documentation mentions of a private-key header; no complete key blocks or matched API/GitHub tokens"
+  },
+  "licenses": {
+    "LICENSE": "412527733a071206aab47281281cd76b87addedbbf43529ee00dcff4638b204c",
+    "LICENSE-CONTENT.md": "c88989489cae0975bd723c95655645926b439248ec897098befb0d5c2d52abb2"
+  }
+}

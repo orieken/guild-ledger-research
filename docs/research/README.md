@@ -87,3 +87,5 @@ Current runtime recommendation and treatment definitions: [runtime comparison](1
 14. [Loom native/mock integration](18-loom-native-mock-integration.md): pinned source build, preserved gates, fixture approvals and mock-only pipeline verification.
 
 15. [H4 Harness² adaptive comparison](19-harness2-adaptive-comparison.md): native learning versus frozen optimization, stream isolation, full optimization cost and offline demo setup.
+
+16. [Offline CI verification](20-offline-ci-verification.md): all container builds and offline suites, retained evidence, and the approved Loom source snapshot.

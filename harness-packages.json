@@ -30,7 +30,12 @@
       "upstream_source_commit": "3f2817818c68f42520229aab9342ce91533cef2f",
       "manifest_sha256": "a85d54356d04fbdcfd3caf90a12ff6de48571e7188d8e49093ab0697561212af",
       "package_version": "0.1.0-draft",
-      "status": "published draft; offline native integration verified; live/controlled admission pending"
+      "status": "published draft; offline native integration verified; live/controlled admission pending",
+      "source_snapshot": {
+        "path": "vendor/loom/loom-3f2817818c68.tar.gz",
+        "sha256": "99a12e8c129457b3c291d6efbc07e5998a18be098f416e1a595ccc189a555d63",
+        "provenance": "vendor/loom/provenance.json"
+      }
     },
     {
       "harness_id": "H4",
