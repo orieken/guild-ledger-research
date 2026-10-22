@@ -1,0 +1,453 @@
+{
+  "schema_version": "guild-ledger.runtime-discovery/v1-draft",
+  "tool_id": "github-copilot-coding-agent",
+  "captured_at": "2026-10-21T06:57:24Z",
+  "surface": "Interactive Copilot SDK in VS Code session, operating on a local macOS workspace; not GitHub.com Copilot cloud agent",
+  "version": null,
+  "model_identity": {
+    "visible_label": null,
+    "backend_model": null,
+    "backend_revision": null,
+    "pinning": "unknown",
+    "limitations": "Current session metadata does not expose a runtime version, model label, backend revision, or immutable model pin. A surface label does not prove backend identity.",
+    "evidence_ids": [
+      "E01",
+      "E04"
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "identity.surface",
+      "status": "observed",
+      "value": "Copilot SDK in VS Code interactive assistant session",
+      "scope": "this session",
+      "limitations": "This is the runtime-provided surface identity, not an independently attested app/build version; not GitHub.com Copilot cloud agent.",
+      "evidence_ids": [
+        "E01"
+      ]
+    },
+    {
+      "id": "identity.runtime_version",
+      "status": "unknown",
+      "value": null,
+      "scope": "this session",
+      "limitations": "No app, extension, SDK, or host runtime version was exposed by inspected session metadata or read-only checks.",
+      "evidence_ids": [
+        "E01",
+        "E04"
+      ]
+    },
+    {
+      "id": "identity.model",
+      "status": "unknown",
+      "value": null,
+      "scope": "this session",
+      "limitations": "No selected model label, provider request parameter, inference backend, dated revision, or effort setting was available.",
+      "evidence_ids": [
+        "E01",
+        "E04"
+      ]
+    },
+    {
+      "id": "identity.model_pinning",
+      "status": "unknown",
+      "value": null,
+      "scope": "future experiment",
+      "limitations": "No evidence of an immutable model/revision pin or server-side enforcement.",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "environment.execution",
+      "status": "observed",
+      "value": {
+        "operating_system": "macOS 26.6.2",
+        "kernel": "Darwin 25.6.0",
+        "architecture": "arm64",
+        "workspace": "/Users/oscarrieken/Projects/Rieken/guild-ledger/guild-ledger-research"
+      },
+      "scope": "shell/workspace used for this task",
+      "limitations": "Does not identify model-inference location, host isolation boundary, or general filesystem reach.",
+      "evidence_ids": [
+        "E02",
+        "E03"
+      ]
+    },
+    {
+      "id": "task.start_and_prompt_delivery",
+      "status": "observed",
+      "value": "Current task was delivered as a prompt in an interactive conversation; session metadata exposed creation time and working directory.",
+      "scope": "this task only",
+      "limitations": "No public task-submission API, repeatable task launcher, or fresh-session API was observed.",
+      "evidence_ids": [
+        "E01",
+        "E05"
+      ]
+    },
+    {
+      "id": "task.repository_checkout",
+      "status": "observed",
+      "value": "The task used an existing local repository checkout and executed shell checks against it.",
+      "scope": "this task only",
+      "limitations": "No cloud checkout or automated repository setup job was observed. Pre-existing local checkout state was untracked and had no valid HEAD.",
+      "evidence_ids": [
+        "E02",
+        "E05"
+      ]
+    },
+    {
+      "id": "task.setup_steps",
+      "status": "unknown",
+      "value": null,
+      "scope": "this task",
+      "limitations": "No task setup lifecycle or setup workflow was exposed. GitHub cloud-agent setup documentation is a different surface.",
+      "evidence_ids": [
+        "E04",
+        "D02"
+      ]
+    },
+    {
+      "id": "task.progress",
+      "status": "observed",
+      "value": "Conversation/tool interaction was visible; session metadata returned status inProgress when checked.",
+      "scope": "this session",
+      "limitations": "No independently queryable progress API, event stream, or durable task monitor was verified.",
+      "evidence_ids": [
+        "E01",
+        "E05"
+      ]
+    },
+    {
+      "id": "task.cancellation",
+      "status": "unknown",
+      "value": null,
+      "scope": "this surface",
+      "limitations": "No cancellation control or cancellation behavior was tested or exposed in the inspected session metadata.",
+      "evidence_ids": [
+        "E01",
+        "E04",
+        "D03"
+      ]
+    },
+    {
+      "id": "task.changed_file_retrieval",
+      "status": "observed",
+      "value": "Files in the local workspace are readable and the Git worktree can be queried.",
+      "scope": "local checkout",
+      "limitations": "No platform-generated patch or artifact export was tested; repository had no HEAD, so ordinary Git diff against HEAD was unavailable.",
+      "evidence_ids": [
+        "E02",
+        "E05"
+      ]
+    },
+    {
+      "id": "instructions.repository",
+      "status": "observed",
+      "value": {
+        "matching_files_found": false,
+        "patterns": [
+          "AGENTS.md",
+          ".github/copilot-instructions.md",
+          "*.instructions.md",
+          "*.agent.md",
+          "*.prompt.md"
+        ]
+      },
+      "scope": "research checkout only",
+      "limitations": "Does not establish files outside the checkout, actual context injection, or hidden mandatory instructions.",
+      "evidence_ids": [
+        "E06"
+      ]
+    },
+    {
+      "id": "instructions.platform_and_organization",
+      "status": "unknown",
+      "value": null,
+      "scope": "this session / organization",
+      "limitations": "Mandatory platform instructions and effective organization policies are not exportable here and are not reproduced.",
+      "evidence_ids": [
+        "E01",
+        "E06"
+      ]
+    },
+    {
+      "id": "state.skills_and_memory",
+      "status": "observed",
+      "value": {
+        "skill_catalog_exposed": true,
+        "skill_invoked_for_this_discovery": false,
+        "memory_state": null
+      },
+      "scope": "this session",
+      "limitations": "Catalog exposure does not prove execution. No memory inventory or effective-context report was available.",
+      "evidence_ids": [
+        "E01",
+        "E04"
+      ]
+    },
+    {
+      "id": "state.hooks",
+      "status": "unknown",
+      "value": null,
+      "scope": "this surface",
+      "limitations": "No hook configuration, invocation record, or policy was exposed or tested.",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "network_and_permissions",
+      "status": "observed",
+      "value": {
+        "shell_read_only_checks": "worked",
+        "official_web_retrieval": "worked",
+        "repository_file_read_and_write_tools": "available"
+      },
+      "scope": "operations exercised or exposed in this session",
+      "limitations": "No network allowlist, full permission manifest, sandbox boundary, or universal approval policy was exposed. Bash network access was not tested.",
+      "evidence_ids": [
+        "E02",
+        "E03",
+        "E05"
+      ]
+    },
+    {
+      "id": "human_gates",
+      "status": "observed",
+      "value": "No approval prompt appeared during the bounded read-only checks.",
+      "scope": "checks performed",
+      "limitations": "Does not establish whether writes, future tasks, or external actions require approval.",
+      "evidence_ids": [
+        "E05"
+      ]
+    },
+    {
+      "id": "usage.tokens_and_calls",
+      "status": "unknown",
+      "value": {
+        "input_tokens": null,
+        "output_tokens": null,
+        "cache_tokens": null,
+        "reasoning_tokens": null,
+        "request_ids": null,
+        "child_call_usage": null,
+        "retry_usage": null
+      },
+      "scope": "this session",
+      "limitations": "No provider usage record or raw request/call event export was available through inspected interfaces; no additional model call was made to probe it.",
+      "evidence_ids": [
+        "E01",
+        "E04",
+        "E05"
+      ]
+    },
+    {
+      "id": "usage.events_and_timing",
+      "status": "observed",
+      "value": "The live conversation displayed tool interactions and session timestamps.",
+      "scope": "visible session interface",
+      "limitations": "Not a complete provider event ledger; per-request timing, retries, failure lineage, and export semantics are unknown.",
+      "evidence_ids": [
+        "E01",
+        "E04",
+        "E05"
+      ]
+    },
+    {
+      "id": "accounting.attributable_cost",
+      "status": "unknown",
+      "value": {
+        "billing_mode": null,
+        "credits_or_premium_requests": null,
+        "attributable_usd": null,
+        "estimate": null
+      },
+      "scope": "this session",
+      "limitations": "No authorized billing record, price basis, or request-to-charge lineage was available. Do not substitute zero or a list-price estimate.",
+      "evidence_ids": [
+        "E04",
+        "D05"
+      ]
+    },
+    {
+      "id": "accounting.actions_compute",
+      "status": "observed",
+      "value": "No GitHub Actions job or Actions compute was observed or used for this task.",
+      "scope": "this task",
+      "limitations": "No claim about other tasks or costs. Cloud-agent setup documentation describes a different surface.",
+      "evidence_ids": [
+        "E05",
+        "D02"
+      ]
+    },
+    {
+      "id": "retention_export_and_ownership",
+      "status": "unknown",
+      "value": null,
+      "scope": "session/provider records",
+      "limitations": "Retention, deletion, export, ownership, and administrator controls were not established.",
+      "evidence_ids": [
+        "E01",
+        "E04"
+      ]
+    },
+    {
+      "id": "harness.H0_baseline",
+      "status": "inferred",
+      "value": "Possible as a no-added-harness condition only; not demonstrated as instruction-free or isolated.",
+      "scope": "future controlled experiment",
+      "limitations": "Mandatory platform context, fresh-session controls, stable model identity, and exposure equality are unverified.",
+      "evidence_ids": [
+        "E01",
+        "E04",
+        "E06"
+      ]
+    },
+    {
+      "id": "harness.H1_fixed_guidelines",
+      "status": "inferred",
+      "value": "A guideline file can be placed in the workspace and read; automatic loading and controlled exposure are unverified.",
+      "scope": "future controlled experiment",
+      "limitations": "No matching instructions file was present; no H1 run was made. File support is not enforcement.",
+      "evidence_ids": [
+        "E02",
+        "E06",
+        "D01"
+      ]
+    },
+    {
+      "id": "harness.H2_custom_bounded_workflow",
+      "status": "inferred",
+      "value": "A workflow can be requested conversationally and manually followed with available tools; native enforcement is unverified.",
+      "scope": "future controlled experiment",
+      "limitations": "No external call/time/spend limit, orchestrator, or complete usage telemetry was demonstrated.",
+      "evidence_ids": [
+        "E01",
+        "E05"
+      ]
+    },
+    {
+      "id": "harness.H3_loom_native",
+      "status": "unknown",
+      "value": null,
+      "scope": "future controlled experiment",
+      "limitations": "No Loom runtime, selector, or invocation was observed or tested. Loom-like instructions are not evidence of native execution.",
+      "evidence_ids": [
+        "E01",
+        "E04"
+      ]
+    },
+    {
+      "id": "repository.normal_pr_flow",
+      "status": "observed",
+      "value": "Unavailable at capture time because the hosted repository had no advertised remote HEAD/default branch.",
+      "scope": "orieken/guild-ledger-research",
+      "limitations": "No commit, push, or PR was created. A base branch must first be established; local changes remain uncommitted.",
+      "evidence_ids": [
+        "E02",
+        "E07"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "kind": "session_metadata",
+      "reference": "Current session metadata tool response; session title, status, start time, and working directory observed. Opaque session URI omitted."
+    },
+    {
+      "id": "E02",
+      "kind": "command_output",
+      "reference": "Read-only pwd, git rev-parse, git status --short --branch, git branch --show-current, git remote show origin, and git ls-remote --symref origin HEAD checks in the workspace and research checkout."
+    },
+    {
+      "id": "E03",
+      "kind": "command_output",
+      "reference": "Read-only sw_vers and uname -a output from the shell used for this task."
+    },
+    {
+      "id": "E04",
+      "kind": "bounded_absence",
+      "reference": "Inspected current session metadata and bounded read-only checks did not expose build/model identity, usage export, billing, cancellation, or retention records; absence is limited to those inspected interfaces."
+    },
+    {
+      "id": "E05",
+      "kind": "observed_operations",
+      "reference": "Visible tool interactions in this documentation session: workspace reads/search, shell checks, official web retrieval, and workspace file creation. No extra model task or benchmark was run."
+    },
+    {
+      "id": "E06",
+      "kind": "workspace_search",
+      "reference": "Bounded file search for AGENTS.md, .github/copilot-instructions.md, *.instructions.md, *.agent.md, and *.prompt.md under the research checkout; no matching files found. README and user discovery prompt read."
+    },
+    {
+      "id": "E07",
+      "kind": "repository_metadata",
+      "reference": "gh repo view reported public repository and empty defaultBranchRef.name; git ls-remote --symref origin HEAD returned no refs with exit 0; git remote show origin reported unknown HEAD branch."
+    },
+    {
+      "id": "D01",
+      "kind": "official_documentation",
+      "reference": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github (retrieved 2026-10-21); GitHub.com Copilot/cloud-agent overview, not this local SDK surface."
+    },
+    {
+      "id": "D02",
+      "kind": "official_documentation",
+      "reference": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment (retrieved 2026-10-21); cloud-agent GitHub Actions setup."
+    },
+    {
+      "id": "D03",
+      "kind": "official_documentation",
+      "reference": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/manage-and-track-agents (retrieved 2026-10-21); cloud-agent session management and stopping."
+    },
+    {
+      "id": "D04",
+      "kind": "official_documentation",
+      "reference": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/research-plan-iterate (retrieved 2026-10-21); cloud-agent task, branch, and PR flow."
+    },
+    {
+      "id": "D05",
+      "kind": "official_documentation",
+      "reference": "https://docs.github.com/en/copilot/reference/copilot-billing/request-based-billing-legacy/copilot-requests (retrieved 2026-10-21); explicitly legacy plan request billing, not evidence of this session's billing."
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "Q01",
+      "question": "Can an authorized runtime/session export identify the SDK build, selected model, backend revision, effective settings, and stable task ID?",
+      "proposed_probe": {
+        "purpose": "Establish identity and pinning evidence without running a benchmark.",
+        "inputs": "A new, explicitly authorized session in a clean non-production workspace; no repository code or secrets.",
+        "expected_evidence": "Version/build metadata, requested model label and settings, backend/revision fields if provided, and an explicit statement of missing fields.",
+        "maximum_calls": 1,
+        "proposed_cap": "One user prompt/task, 5-minute wall-clock timeout, no additional tool-created agent tasks; proceed only with a human-approved provider usage cap and stop criteria.",
+        "approval": "Human approval required before any new model/cloud run; no run was performed for this discovery."
+      }
+    },
+    {
+      "id": "Q02",
+      "question": "Can raw usage and event telemetry be exported with request IDs, input/output/cache/reasoning token categories, child calls, tools, timestamps, retries, errors, and deduplication semantics?",
+      "proposed_probe": {
+        "purpose": "Determine whether a minimal session has complete attributable usage lineage.",
+        "inputs": "Prefer an authorized existing-session export; only if unavailable, one separately approved low-impact session with no code-generation task.",
+        "expected_evidence": "Redacted schema/sample showing nullable fields, aggregation semantics, event ordering, and documented export/retention policy.",
+        "maximum_calls": 1,
+        "proposed_cap": "No second cloud/model run without human approval and a provider-enforced usage cap; preserve USD as unknown if no authoritative charge record.",
+        "approval": "Human and account owner approval required for usage/billing exports or any new run."
+      }
+    },
+    {
+      "id": "Q03",
+      "question": "Can the exact surface support isolated, repeatable H0-H3 executions, including automatically loading fixed guidelines, enforcing H2 limits, and invoking native Loom?",
+      "proposed_probe": {
+        "purpose": "Validate exposure and enforcement rather than infer them from file/tool availability.",
+        "inputs": "A clean non-production repo copy, frozen common prompt, distinct no-op sentinel per profile, documented model/runtime config, and external timeout/usage controller.",
+        "expected_evidence": "Per-profile effective-input manifest, model/runtime identity, observable orchestration trace, changed-file snapshot, stop behavior, and complete cost/usage export.",
+        "maximum_calls": 4,
+        "proposed_cap": "At most one user task per H0-H3 profile, 10 minutes per task, no retries or follow-ups; do not start until human approval and a verifiable account-level usage cap are in place.",
+        "approval": "Human approval required. If fixed model/runtime identity, isolation, or billing cap cannot be enforced, do not treat the results as a controlled comparison."
+      }
+    }
+  ]
+}

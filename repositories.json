@@ -1,0 +1,41 @@
+{
+  "schema_version": "guild-ledger.repository-registry/v1-draft",
+  "status": "repository locations only; campaign admission and immutable revisions not resolved",
+  "repositories": [
+    {
+      "role": "research",
+      "harness_id": null,
+      "repository": "orieken/guild-ledger-research",
+      "clone_url": "https://github.com/orieken/guild-ledger-research.git",
+      "local_directory": "guild-ledger-research"
+    },
+    {
+      "role": "harness",
+      "harness_id": "H0",
+      "repository": "orieken/guild-ledger-baseline",
+      "clone_url": "https://github.com/orieken/guild-ledger-baseline.git",
+      "local_directory": "guild-ledger-baseline"
+    },
+    {
+      "role": "harness",
+      "harness_id": "H1",
+      "repository": "orieken/guild-ledger-guidelines",
+      "clone_url": "https://github.com/orieken/guild-ledger-guidelines.git",
+      "local_directory": "guild-ledger-guidelines"
+    },
+    {
+      "role": "harness",
+      "harness_id": "H2",
+      "repository": "orieken/guild-ledger-harness",
+      "clone_url": "https://github.com/orieken/guild-ledger-harness.git",
+      "local_directory": "guild-ledger-harness"
+    },
+    {
+      "role": "harness",
+      "harness_id": "H3",
+      "repository": "orieken/guild-ledger-loom",
+      "clone_url": "https://github.com/orieken/guild-ledger-loom.git",
+      "local_directory": "guild-ledger-loom"
+    }
+  ]
+}

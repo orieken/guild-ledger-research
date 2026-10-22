@@ -1,0 +1,415 @@
+{
+  "schema_version": "guild-ledger.runtime-discovery/v1-draft",
+  "tool_id": "codex-headless",
+  "captured_at": "2026-10-21T05:35:48Z",
+  "surface": {
+    "discovery": "interactive desktop chat with local shell",
+    "target": "installed local Codex CLI noninteractive exec",
+    "headless_exercised": false,
+    "inference_location": "unknown"
+  },
+  "version": {
+    "installed_cli": "0.163.0",
+    "desktop": null
+  },
+  "model_identity": {
+    "configured_label": "gpt-6.1-sol",
+    "configured_reasoning_effort": "low",
+    "effective_session_model": null,
+    "backend_revision": null
+  },
+  "capabilities": [
+    {
+      "id": "surface",
+      "status": "observed",
+      "value": "Interactive desktop chat with local macOS shell; separate installed Codex CLI",
+      "scope": "current_session",
+      "limitations": "Not an exercised headless session. Desktop product context plus filesystem evidence; process ancestry unavailable. Inference hosting location unknown.",
+      "evidence_ids": [
+        "E05",
+        "E02"
+      ]
+    },
+    {
+      "id": "version",
+      "status": "observed",
+      "value": "codex-cli 0.163.0",
+      "scope": "installed_cli",
+      "limitations": "Does not identify desktop harness version or backend revision.",
+      "evidence_ids": [
+        "E02"
+      ]
+    },
+    {
+      "id": "model_configuration",
+      "status": "observed",
+      "value": {
+        "configured_model": "gpt-6.1-sol",
+        "configured_reasoning_effort": "low",
+        "verified_backend_model": null
+      },
+      "scope": "user_config",
+      "limitations": "Configuration is not proof of the model/effort used by this chat.",
+      "evidence_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "pinning",
+      "status": "observed",
+      "value": {
+        "model_selector": true,
+        "config_override": true,
+        "backend_revision_pin": null
+      },
+      "scope": "installed_cli_help",
+      "limitations": "Flags available; selection enforcement and immutable backend identity untested. Binary version/hash can be recorded; no update performed.",
+      "evidence_ids": [
+        "E02"
+      ]
+    },
+    {
+      "id": "account_mode",
+      "status": "observed",
+      "value": "ChatGPT login",
+      "scope": "installed_cli",
+      "limitations": "Subscription allocation, plan tier, desktop auth mode and actual charges unknown.",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "cleanup_plugins",
+      "status": "observed",
+      "value": {
+        "configured_entries": 13,
+        "explicitly_enabled": 0
+      },
+      "scope": "local_user_config",
+      "limitations": "All configured entries false; active chat still exposes connector tools. Cache presence does not mean enabled.",
+      "evidence_ids": [
+        "E03",
+        "E05"
+      ]
+    },
+    {
+      "id": "cleanup_memory_rules",
+      "status": "observed",
+      "value": {
+        "features.memories": false,
+        "memories.use_memories": false,
+        "memories.generate_memories": false,
+        "personal_rules_files": 0,
+        "global_AGENTS_present": false
+      },
+      "scope": "inspected_local_paths",
+      "limitations": "Does not erase this chat history or establish cloud/organization state.",
+      "evidence_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "cleanup_mcp",
+      "status": "observed",
+      "value": {
+        "node_repl_enabled_field": null,
+        "computer-use_enabled": false,
+        "cua_repl_enabled": false,
+        "features.js_repl": false
+      },
+      "scope": "local_user_config",
+      "limitations": "node_repl lacks explicit disable; prior reset receipt cannot be reaffirmed. Startup/effective availability in a fresh CLI remains untested.",
+      "evidence_ids": [
+        "E03",
+        "E01"
+      ]
+    },
+    {
+      "id": "instructions",
+      "status": "observed",
+      "value": "Project mirror AGENTS; built-in/system skills; current conversation context and exposed tool catalog",
+      "scope": "current_session_and_ancestor_inventory",
+      "limitations": "No additional AGENTS/AGENTS.override found on checkout or mirror ancestor chains; managed/internal instructions are not exported or claimed fully inventoried.",
+      "evidence_ids": [
+        "E03",
+        "E05"
+      ]
+    },
+    {
+      "id": "hooks",
+      "status": "observed",
+      "value": {
+        "notification_configured": true,
+        "hook_trust_metadata_present": true
+      },
+      "scope": "local_user_config",
+      "limitations": "Trust records are not execution evidence; notification command not run; effective hook execution unknown.",
+      "evidence_ids": [
+        "E03"
+      ]
+    },
+    {
+      "id": "headless_start_context",
+      "status": "observed",
+      "value": {
+        "exec": true,
+        "stdin_prompt": true,
+        "cd": true,
+        "ignore_user_config": true,
+        "ignore_rules": true,
+        "ephemeral": true
+      },
+      "scope": "installed_cli_help",
+      "limitations": "Available flags only; no fresh model task exercised. Ignoring config/rules does not prove all instruction sources isolated.",
+      "evidence_ids": [
+        "E02"
+      ]
+    },
+    {
+      "id": "structured_events",
+      "status": "documented",
+      "value": {
+        "jsonl": true,
+        "final_message_file": true,
+        "output_schema": true
+      },
+      "scope": "official_headless_contract",
+      "limitations": "JSONL behavior not exercised; installed help confirms option names only.",
+      "evidence_ids": [
+        "E06",
+        "E02"
+      ]
+    },
+    {
+      "id": "usage_categories",
+      "status": "documented",
+      "value": {
+        "input_tokens": true,
+        "cached_input_tokens": true,
+        "output_tokens": true,
+        "reasoning_output_tokens": true
+      },
+      "scope": "official_example_schema",
+      "limitations": "No real usage captured; example is not assurance all categories appear for every model. Cache/reasoning must not be blindly added as independent totals.",
+      "evidence_ids": [
+        "E06"
+      ]
+    },
+    {
+      "id": "provider_request_ids",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "child_call_accounting",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "duplicate_event_semantics",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "resumed_cumulative_totals",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "interrupted_usage",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "actual_charges",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "subscription_allocation",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "hard_spend_cap",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "backend_revision",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "desktop_runtime_version",
+      "status": "unknown",
+      "value": null,
+      "scope": "current_discovery",
+      "limitations": "Not exposed by allowed observations; no additional model task, billing access or conversation log inspection.",
+      "evidence_ids": []
+    },
+    {
+      "id": "session_ids",
+      "status": "documented",
+      "value": "thread.started thread_id; explicit resume ID",
+      "scope": "headless_contract",
+      "limitations": "Not a provider request ID; no real thread event exported.",
+      "evidence_ids": [
+        "E06",
+        "E02"
+      ]
+    },
+    {
+      "id": "stop_and_limits",
+      "status": "inferred",
+      "value": "External supervisor can time-limit and terminate a dedicated process group",
+      "scope": "proposed_headless_adapter",
+      "limitations": "No cancellation exercised. No max-turn/token/USD flag visible in exec help; in-flight requests and remote work may outlive local stop.",
+      "evidence_ids": [
+        "E02"
+      ]
+    },
+    {
+      "id": "artifacts",
+      "status": "inferred",
+      "value": "Snapshot workspace, tracked diffs and untracked files independently of final message",
+      "scope": "local_headless_adapter",
+      "limitations": "Disk writes can be partial/non-atomic; no headless artifacts produced. Checkout currently has no HEAD; diff HEAD is invalid here.",
+      "evidence_ids": [
+        "E07",
+        "E02"
+      ]
+    },
+    {
+      "id": "H0",
+      "status": "inferred",
+      "value": "Candidate only after fresh-session isolation",
+      "scope": "codex_headless",
+      "limitations": "Not admitted: remaining MCP ambiguity, inherited app context, mandatory runtime behavior and no input-isolation proof.",
+      "evidence_ids": [
+        "E01",
+        "E03",
+        "E05"
+      ]
+    },
+    {
+      "id": "H1",
+      "status": "inferred",
+      "value": "Frozen guideline input appears feasible",
+      "scope": "codex_headless",
+      "limitations": "Match H0 envelope and hash the exact added file; injection precedence and enforcement untested.",
+      "evidence_ids": [
+        "E01",
+        "E02"
+      ]
+    },
+    {
+      "id": "H2",
+      "status": "inferred",
+      "value": "Planning and bounded verification can be specified; external enforcement required",
+      "scope": "codex_headless",
+      "limitations": "No bounded workflow exercised; child/reviewer accounting unknown. No reviewers authorized here.",
+      "evidence_ids": [
+        "E01",
+        "E02"
+      ]
+    },
+    {
+      "id": "loom_context_only",
+      "status": "inferred",
+      "value": "Explicit frozen context-only package may be supplied",
+      "scope": "codex_headless",
+      "limitations": "No Loom run or package inspected; keep separate from native-pipeline claims.",
+      "evidence_ids": [
+        "E01",
+        "E02"
+      ]
+    },
+    {
+      "id": "loom_native_pipeline",
+      "status": "unknown",
+      "value": null,
+      "scope": "codex_headless",
+      "limitations": "Alignment document reports no Codex provider in its inspected selector; current upstream compatibility not verified.",
+      "evidence_ids": [
+        "E01"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "kind": "project_documents",
+      "reference": "../../../research/13-harness-alignment.md; ../../../research/15-local-agent-reset.md; ../../discovery-prompt.md"
+    },
+    {
+      "id": "E02",
+      "kind": "local_cli",
+      "reference": "codex --version; codex --help; codex exec --help; codex exec resume --help; exit 0"
+    },
+    {
+      "id": "E03",
+      "kind": "local_inventory",
+      "reference": "Selective TOML inspection and ancestor-file inventory, 2026-10-21; see evidence.md"
+    },
+    {
+      "id": "E04",
+      "kind": "authentication_status",
+      "reference": "codex login status; exit 0; Logged in using ChatGPT"
+    },
+    {
+      "id": "E05",
+      "kind": "session_observation",
+      "reference": "Current interactive desktop session; local shell filesystem/OS checks; see evidence.md; no hidden prompt export"
+    },
+    {
+      "id": "E06",
+      "kind": "official_documentation",
+      "reference": "https://learn.chatgpt.com/docs/non-interactive-mode; retrieved 2026-10-21"
+    },
+    {
+      "id": "E07",
+      "kind": "repository_inventory",
+      "reference": "git status --short exit 0; git rev-parse HEAD exit 128; no existing codex-headless directory"
+    },
+    {
+      "id": "E08",
+      "kind": "report_validation",
+      "reference": "Local JSON, evidence-reference and relative-link validation; see evidence.md"
+    }
+  ],
+  "open_questions": [
+    "What reintroduced or retained node_repl without an explicit disabled flag?",
+    "Which tools and instructions load in a fresh CLI task?",
+    "Does usage include retries, reviews and all children, and how do resume/interruption totals behave?",
+    "Can attributable charges be reconciled for this account mode?",
+    "Can a backend revision and effective effort be independently confirmed?"
+  ]
+}

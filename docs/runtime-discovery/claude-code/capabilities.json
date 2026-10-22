@@ -1,0 +1,295 @@
+{
+  "schema_version": "guild-ledger.runtime-discovery/v1-draft",
+  "tool_id": "claude-code",
+  "captured_at": "2026-10-21T01:25:00Z",
+  "surface": "Claude Code running as a thread (child cloud session) of a Claude Projects project on claude.ai, in an Anthropic-hosted cloud container (entrypoint remote_projects, environment cloud_default). Not the local CLI, IDE extension, Desktop app, Agent SDK, or GitHub Action.",
+  "version": "2.1.305",
+  "model_identity": {
+    "configured_label": "claude-opus-5-5[1m]",
+    "session_context_model": "claude-opus-5-5[1m]",
+    "last_served_model": "claude-opus-5-5",
+    "per_response_model_field": "claude-opus-5-5",
+    "configured_fallbacks": ["claude-opus-5[1m]", "claude-opus-4-8[1m]"],
+    "effort": "medium",
+    "dated_snapshot_pinned": null,
+    "backend_identity_verified": false,
+    "status": "observed",
+    "notes": "Labels come from the host session record and the API response's message.model field. No dated model revision was observable, and the host may fall back to another model mid-session. Thread model and effort are project settings (documented), but whether a model can be pinned against fallback is unknown.",
+    "evidence_ids": ["E04", "E05", "D04"]
+  },
+  "capabilities": [
+    {
+      "id": "identity.surface",
+      "status": "observed",
+      "value": "claude-projects-thread/cloud",
+      "scope": "this session",
+      "limitations": "The CCR_SURFACE flag reads 'tag', which is internal and unexplained. The environment variable CLAUDE_CODE_VERSION=2.1.42 conflicts with the binary and transcript version 2.1.305.",
+      "evidence_ids": ["E02", "E04"]
+    },
+    {
+      "id": "identity.runtime_version",
+      "status": "observed",
+      "value": "2.1.305",
+      "scope": "container binary and running transcript",
+      "limitations": "The host chooses this version, and the researcher cannot pin it on this surface (inferred). The researcher's local CLI was 2.1.292 (E14).",
+      "evidence_ids": ["E01", "E05", "E14"]
+    },
+    {
+      "id": "identity.environment",
+      "status": "observed",
+      "value": "Ubuntu 24.04.5, Linux 6.18 x86_64, 4 vCPU, 15 GiB, root, IS_SANDBOX=1, anthropic_cloud",
+      "scope": "this container",
+      "limitations": "The container is ephemeral and is reclaimed after inactivity. The base image can change between sessions.",
+      "evidence_ids": ["E03", "E04", "D01"]
+    },
+    {
+      "id": "identity.model_pinning",
+      "status": "unknown",
+      "value": null,
+      "scope": "project/thread",
+      "limitations": "Thread model and effort can be selected per project (documented), but a fallback chain is configured and no dated snapshot id is exposed.",
+      "evidence_ids": ["E04", "D04"]
+    },
+    {
+      "id": "automation.start_fresh_task",
+      "status": "documented",
+      "value": "UI/coordinator for project threads. External program options: `claude --cloud \"<task>\"` from a logged-in CLI creates a standalone cloud session (not a project thread); a routine API trigger POST /v1/claude_code/routines/<id>/fire returns a session id and URL.",
+      "scope": "claude.ai account (subscription login)",
+      "limitations": "No documented public API creates a Projects thread; threads are created by the coordinator. Routines are a research preview behind a beta header, and fire text arrives wrapped as untrusted data. None of these were executed here.",
+      "evidence_ids": ["D01", "D04", "D05"]
+    },
+    {
+      "id": "automation.supply_prompt_workspace",
+      "status": "documented",
+      "value": "The prompt comes from the CLI argument, routine saved prompt plus fire text, or the coordinator relay. The workspace is a GitHub repo cloned at start (needs the Claude GitHub App for projects/push) or a bundle upload via `claude --cloud` (CCR_FORCE_BUNDLE=1). Project files are mounted at /mnt/project-files.",
+      "scope": "cloud sessions",
+      "limitations": "In this thread the coordinator rewrote and wrapped the user's task (E12). The target repo is empty on GitHub (E09).",
+      "evidence_ids": ["D01", "D04", "D05", "E09", "E12"]
+    },
+    {
+      "id": "automation.observe_progress",
+      "status": "observed",
+      "value": "get_session returns status, status_bucket, models, and context/rate-limit metadata. The claude.ai UI shows the transcript. `claude -p \"<msg>\" --cloud <id>` sends follow-ups.",
+      "scope": "same claude.ai account",
+      "limitations": "Only get_session for the current session was exercised. Event-stream access for an external program (list_events) was not tested.",
+      "evidence_ids": ["E04", "E07", "D01"]
+    },
+    {
+      "id": "automation.stop",
+      "status": "documented",
+      "value": "Project Pause interrupts all threads. Sessions can be archived or deleted in the UI. An interrupt_session tool is exposed to this agent.",
+      "scope": "claude.ai account",
+      "limitations": "Not exercised. What survives an interruption on this surface is unverified.",
+      "evidence_ids": ["D01", "D04", "E07"]
+    },
+    {
+      "id": "automation.retrieve_changes",
+      "status": "documented",
+      "value": "Push a claude/ branch and open a PR, use --teleport to a local checkout, or write files into /mnt/project-files (observed writable).",
+      "scope": "cloud sessions",
+      "limitations": "Push to orieken/guild-ledger-research was refused (no Claude GitHub App access). Project-file sync back to the user's local folder is unknown.",
+      "evidence_ids": ["E08", "E10", "D01"]
+    },
+    {
+      "id": "instructions.mandatory_layers",
+      "status": "observed",
+      "value": "The built-in system prompt, cloud and Projects thread role instructions, hook reminders, the session-context block, and the coordinator relay are always present.",
+      "scope": "every project thread",
+      "limitations": "They cannot be disabled from inside the thread. Full text is not exported, and `--bare` is not available on this surface (inferred).",
+      "evidence_ids": ["E06", "E12"]
+    },
+    {
+      "id": "instructions.project_instructions_and_memory",
+      "status": "documented",
+      "value": "Project instructions (up to 16,000 chars) reach every new thread. Project memory MEMORY.md is read at thread start. Repo CLAUDE.md files are loaded from clones. Here, instructions were empty and the memory index was empty.",
+      "scope": "project",
+      "limitations": "Users and the coordinator can both edit memory. Threads may write memory, which affects later threads. Instructions and memory are model-followed, not enforced.",
+      "evidence_ids": ["D04", "E12"]
+    },
+    {
+      "id": "instructions.skills_plugins_connectors",
+      "status": "observed",
+      "value": "Account-synced plugins and skills, account connectors, and hosted MCP servers are present. Some plugin MCP servers failed to connect.",
+      "scope": "account",
+      "limitations": "Account-level additions leak into every thread. Disabling a connector changes the account default (documented). Skills and plugins cannot be removed from inside the thread (inferred).",
+      "evidence_ids": ["E06", "E07", "D04"]
+    },
+    {
+      "id": "instructions.context_management",
+      "status": "observed",
+      "value": "Auto-compaction triggers at 80% of a 500k window (host override). /compact is available and /clear is not.",
+      "scope": "cloud sessions",
+      "limitations": "The host override supersedes a user value (documented). Compaction summaries alter context mid-attempt.",
+      "evidence_ids": ["E02", "D01"]
+    },
+    {
+      "id": "tools.edit_shell_tests",
+      "status": "observed",
+      "value": true,
+      "scope": "container filesystem and /mnt/project-files",
+      "limitations": "Runs as root in a sandbox. Test running is available via Bash but no application tests were run.",
+      "evidence_ids": ["E03", "E07", "E10"]
+    },
+    {
+      "id": "tools.network",
+      "status": "observed",
+      "value": "Egress goes through an agent proxy with a policy-governed allowlist. WebFetch reached code.claude.com. Some MCP hosts were refused (403).",
+      "scope": "environment network policy",
+      "limitations": "The exact allowlist for this environment was not enumerated.",
+      "evidence_ids": ["E07", "D01"]
+    },
+    {
+      "id": "tools.subagents",
+      "status": "observed",
+      "value": "The Agent tool is available, with max spawn depth 1 for this child session.",
+      "scope": "this session",
+      "limitations": "Not exercised. The platform prompt discourages spawning unless asked. Child usage lineage on this surface is untested.",
+      "evidence_ids": ["E02", "E07"]
+    },
+    {
+      "id": "tools.permissions",
+      "status": "observed",
+      "value": "Permission mode is auto (a classifier reviews actions). permissions.allow=[Skill]. Hosted rules require human approval for irreversible steps.",
+      "scope": "this session",
+      "limitations": "Classifier decisions are not exported here. Approvals go through the thread UI.",
+      "evidence_ids": ["E04", "E06", "D04"]
+    },
+    {
+      "id": "tools.human_intervention",
+      "status": "observed",
+      "value": "Humans can message the thread, answer decision cards, and pause the project. The coordinator can relay messages.",
+      "scope": "project",
+      "limitations": "Any human or coordinator message is an uncontrolled input from the experiment's point of view.",
+      "evidence_ids": ["E12", "D04"]
+    },
+    {
+      "id": "metrics.per_call_usage",
+      "status": "observed",
+      "value": "The container transcript JSONL records per-response usage: input, output, cache creation (5m/1h), cache read, thinking tokens, server tool counts, service tier, inference_geo, plus message.id, requestId and timestamps.",
+      "scope": "container-local transcript",
+      "limitations": "Entries are duplicated per content block, so deduplicate by message.id. Per-step output_tokens may be a placeholder (documented for SDK). The file is lost when the container is reclaimed. Coordinator usage is in a different session.",
+      "evidence_ids": ["E05", "D03"]
+    },
+    {
+      "id": "metrics.aggregate_usage",
+      "status": "documented",
+      "value": "The Project settings Usage page shows token use by thread and by model.",
+      "scope": "project UI",
+      "limitations": "No documented export or API. Not inspected here.",
+      "evidence_ids": ["D04"]
+    },
+    {
+      "id": "metrics.child_reviewer_usage",
+      "status": "unknown",
+      "value": null,
+      "scope": "subagents and coordinator",
+      "limitations": "The isSidechain flag exists in the transcript. Headless parent_tool_use_id lineage is documented for -p, not verified here.",
+      "evidence_ids": ["E05", "D02"]
+    },
+    {
+      "id": "metrics.errors_retries",
+      "status": "inferred",
+      "value": "A retry watchdog is enabled. system/api_retry events are documented for stream-json, not observed in this transcript.",
+      "scope": "runtime",
+      "limitations": "No retry happened during capture.",
+      "evidence_ids": ["E02", "D02"]
+    },
+    {
+      "id": "cost.accounting_mode",
+      "status": "observed",
+      "value": "subscription plan limits (five_hour rate-limit window, overage not in use)",
+      "scope": "claude.ai account",
+      "limitations": "The plan tier was not read. Usage credits (overage) may be enabled by the user.",
+      "evidence_ids": ["E04", "D01", "D04"]
+    },
+    {
+      "id": "cost.per_attempt_usd",
+      "status": "inferred",
+      "value": false,
+      "scope": "this surface",
+      "limitations": "There is no cost field in the transcript and no invoice per session. Only a list-price estimate from deduplicated tokens is possible. Subscription allocation is not an attributable charge.",
+      "evidence_ids": ["E05", "D01", "D03"]
+    },
+    {
+      "id": "artifacts.interruption_survival",
+      "status": "documented",
+      "value": "On environment expiry the conversation is restored, but running background work, subagents and shell commands are not. Pushed branches and /mnt/project-files persist.",
+      "scope": "cloud sessions",
+      "limitations": "Survival of the local transcript file, uncommitted container files, and partial usage was not tested.",
+      "evidence_ids": ["D01", "E10"]
+    },
+    {
+      "id": "artifacts.stable_ids",
+      "status": "observed",
+      "value": "Stable IDs exist: session_ id (host), local session UUID, msg_ and req_ per API response, uuid per transcript entry, parent_session_id for the coordinator.",
+      "scope": "this session",
+      "limitations": "No exported run bundle. The researcher must collect the files.",
+      "evidence_ids": ["E04", "E05"]
+    },
+    {
+      "id": "harness.H0",
+      "status": "inferred",
+      "value": "partial",
+      "scope": "Projects thread",
+      "limitations": "We can add nothing, but mandatory host layers (thread role prompt, coordinator rewrite, hooks, synced skills/plugins/connectors, project memory) form a large, unexportable baseline. Not equivalent to headless `claude --bare` H0.",
+      "evidence_ids": ["E06", "E07", "E12"]
+    },
+    {
+      "id": "harness.H1",
+      "status": "documented",
+      "value": "feasible via repo CLAUDE.md or project instructions",
+      "scope": "project",
+      "limitations": "Requires a non-empty repo with the Claude GitHub App installed. Instructions are model-followed. Coordinator and memory may add content.",
+      "evidence_ids": ["D04", "E08", "E09"]
+    },
+    {
+      "id": "harness.H2",
+      "status": "inferred",
+      "value": "instruction-level only",
+      "scope": "Projects thread",
+      "limitations": "Planning, verification and bounded review can be written as instructions, and subagents exist (depth 1). Hard caps, reviewer metering and enforced gates are not provided by the surface.",
+      "evidence_ids": ["E02", "E07", "D04"]
+    },
+    {
+      "id": "harness.H3_loom",
+      "status": "unknown",
+      "value": null,
+      "scope": "Projects thread",
+      "limitations": "Loom's native provider invokes the claude CLI headlessly. The binary exists here, but running it would be a nested model session with unknown auth and metering (not executed). A context-only Loom profile is possible but is not native-pipeline support.",
+      "evidence_ids": ["E01", "E02", "E14"]
+    }
+  ],
+  "evidence": [
+    {"id": "E01", "kind": "command", "reference": "claude --version; which claude (exit 0)"},
+    {"id": "E02", "kind": "command", "reference": "printf of 19 selected non-secret runtime variables"},
+    {"id": "E03", "kind": "command", "reference": "uname, os-release, id, nproc, free, toolchain --version"},
+    {"id": "E04", "kind": "tool_call", "reference": "mcp__claude-code-remote__get_session (self)"},
+    {"id": "E05", "kind": "file_schema", "reference": "~/.claude/projects/-home-claude/<uuid>.jsonl keys/types/counts"},
+    {"id": "E06", "kind": "file_structure", "reference": "~/.claude/launcher-settings.json hooks and permissions; ~/.claude directory names"},
+    {"id": "E07", "kind": "tool_inventory", "reference": "agent-visible tool and MCP server list"},
+    {"id": "E08", "kind": "tool_call", "reference": "list_repos(guild-ledger); add_repo(orieken/guild-ledger-research, push) -> push_check refused"},
+    {"id": "E09", "kind": "command", "reference": "git clone --depth 1 (empty repository); git ls-remote origin (no refs)"},
+    {"id": "E10", "kind": "command", "reference": "create/read/remove .scratch-edit-probe.txt in report folder, 2026-10-21T01:17:32Z"},
+    {"id": "E11", "kind": "tool_call", "reference": "hearthbot list_devices -> no devices or folders"},
+    {"id": "E12", "kind": "observation", "reference": "instruction layers visible to agent (categories only)"},
+    {"id": "E13", "kind": "tool_call", "reference": "read_documentation(session.resources, github.access)"},
+    {"id": "E14", "kind": "repo_doc", "reference": "docs/research/12-runtime-options.md (local CLI 2.1.292, different surface)"},
+    {"id": "D01", "kind": "documentation", "reference": "https://code.claude.com/docs/en/claude-code-on-the-web", "retrieved": "2026-10-21"},
+    {"id": "D02", "kind": "documentation", "reference": "https://code.claude.com/docs/en/headless", "retrieved": "2026-10-21"},
+    {"id": "D03", "kind": "documentation", "reference": "https://code.claude.com/docs/en/agent-sdk/cost-tracking", "retrieved": "2026-10-21"},
+    {"id": "D04", "kind": "documentation", "reference": "https://code.claude.com/docs/en/claude-projects", "retrieved": "2026-10-21"},
+    {"id": "D05", "kind": "documentation", "reference": "https://code.claude.com/docs/en/routines", "retrieved": "2026-10-21"},
+    {"id": "D06", "kind": "platform_guidance", "reference": "read_documentation github.access (see E13)", "retrieved": "2026-10-21"}
+  ],
+  "open_questions": [
+    "Can a Projects thread model be pinned to a dated snapshot and fallback disabled?",
+    "What does CLAUDE_CODE_VERSION=2.1.42 denote, given the binary and transcript report 2.1.305?",
+    "Is there any export or API for the Project Usage page, or for host-side OTLP metrics, per thread?",
+    "Does per-step output_tokens in the cloud transcript carry the placeholder caveat documented for the SDK?",
+    "What survives an interrupt_session or Pause: the local transcript, uncommitted files, partial usage?",
+    "Can a project thread be started by an external program, rather than only by the coordinator or UI?",
+    "Can account-level skills, plugins and connectors be excluded per project to approach a clean H0?",
+    "Does /mnt/project-files sync back to the user's local guild-ledger folder?",
+    "How would a nested `claude -p` inside the container authenticate and meter, which Loom native H3 needs?"
+  ]
+}

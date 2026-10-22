@@ -1,0 +1,101 @@
+{
+  "schema_version": "guild-ledger.run/v1",
+  "synthetic": true,
+  "notes": "Fabricated format example only. IDs, usage, cost, hashes and times are illustrative, not measured evidence. No paid run occurred.",
+  "identity": {
+    "campaign_id": "synthetic-format-demo",
+    "slot_id": "T02-P1-H0-r1",
+    "attempt_id": "synthetic-attempt-001",
+    "retry_of_attempt_id": null,
+    "repetition": 1,
+    "task_id": "T02",
+    "prompt_level": "P1",
+    "harness_id": "H0",
+    "profile": "controlled",
+    "model_config_id": "fake-provider-fixture-v1"
+  },
+  "provenance": {
+    "resolved_manifest_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "starter_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "prompt_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+    "harness_commit": "4444444444444444444444444444444444444444",
+    "subject_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+    "environment_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+    "evaluator_commit": "7777777777777777777777777777777777777777",
+    "requirements_map_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+    "github": null
+  },
+  "generation": {
+    "status": "completed",
+    "stop_reason": "Synthetic fixture: agent returned final output",
+    "started_at": "2026-10-20T15:00:00Z",
+    "ended_at": "2026-10-20T15:03:00Z"
+  },
+  "evaluation": {
+    "status": "completed",
+    "communicated": {
+      "critical_total": 5,
+      "critical_passed": 5,
+      "accepted": true
+    },
+    "full_target": {
+      "critical_total": 17,
+      "critical_passed": 11,
+      "accepted": false
+    },
+    "regression": {
+      "total": 8,
+      "passed": 8
+    }
+  },
+  "acceptance": {
+    "communicated": true,
+    "full_target": false
+  },
+  "integrity": {
+    "status": "valid",
+    "reason": "Synthetic fixture only; not real provenance verification"
+  },
+  "usage": {
+    "invocations": 2,
+    "tool_calls": 17,
+    "input_tokens": 12000,
+    "output_tokens": 2000,
+    "cache_read_input_tokens": 3000,
+    "cache_write_input_tokens": 0,
+    "reasoning_tokens": null,
+    "input_includes_cache": true,
+    "output_includes_reasoning": null,
+    "completeness": "complete"
+  },
+  "generation_cost": {
+    "currency": "USD",
+    "reported_usd": null,
+    "estimated_usd": 0.084,
+    "comparison_usd": 0.084,
+    "basis": "estimated",
+    "completeness": "complete",
+    "pricing_snapshot_sha256": "9999999999999999999999999999999999999999999999999999999999999999"
+  },
+  "other_costs": {
+    "evaluation_usd": null,
+    "compute_usd": null,
+    "tools_usd": null,
+    "storage_usd": null
+  },
+  "durations": {
+    "generation_elapsed_seconds": 180,
+    "agent_active_seconds": 180,
+    "gate_wait_seconds": 0,
+    "human_active_seconds": 0,
+    "queue_seconds": 8,
+    "evaluation_seconds": 30
+  },
+  "evidence": {
+    "bundle_reference": "synthetic://fixture/bundle",
+    "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "usage_reference": "invocations.jsonl",
+    "requirements_reference": "requirements.json",
+    "subject_reference": "subject.tar"
+  }
+}

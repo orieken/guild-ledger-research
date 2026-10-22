@@ -1,0 +1,54 @@
+{
+  "schema_version": "guild-ledger.container-verification/v1",
+  "verified_date": "2026-10-21",
+  "platform": "linux/arm64",
+  "images": [
+    {
+      "tags": [
+        "guild-ledger-claude-smoke:local"
+      ],
+      "id": "sha256:b445cc3cddab2f60b13554cdef626900a79280ab8d4ef50029bd9b00d3c50800"
+    },
+    {
+      "tags": [
+        "guild-ledger-claude:2.1.304"
+      ],
+      "id": "sha256:a272c9bb15b4912e3a2f389f9f4ba16a8a7f763ecbb4c6708176ab2ea6397442"
+    }
+  ],
+  "claude_version": "2.1.304",
+  "claude_binary_sha256": "c487117526509ab6d2ee6013e14f181faf68d6d6afe6bb0d4b2b4a9feca5ecb3",
+  "release_signature_verified": true,
+  "node_version": "24.10.0",
+  "python_version": "3.11.2",
+  "go_version": "1.26.0",
+  "checks": [
+    "two fresh synthetic offline attempts",
+    "host task unchanged",
+    "known instruction and MCP file rejection",
+    "input symlink rejection",
+    "partial source captured on nonzero exit",
+    "partial source captured on timeout",
+    "real CLI version and help only",
+    "unexpected auth environment key rejected without value disclosure"
+  ],
+  "inference_calls": 0,
+  "credentials_provided": false,
+  "live_mode_supported": false,
+  "limitations": [
+    "effective model context unverified",
+    "no live provider network/auth or usage calibration",
+    "OS repositories not snapshot-pinned",
+    "application/database/evaluator stack not included"
+  ],
+  "source_sha256": {
+    "run.py": "f68d6be19007dde14415a1ec27eafe360f4dfdb42e1403939ddd4f852391214f",
+    "Dockerfile": "0bc66f7e9582d61678361b2b4f3f39a7d0c4c6769af2866e5c8806c7e56b4906",
+    "Makefile": "4ae13429bdb8c4812193bb9fd58cffc944b6f969ba5710d8eb494b643410b4ac",
+    "entrypoint.py": "a3191c0d26d1e27f50279cb48fbe6e1f825ab3fd192d1b17271bc196f33a464b",
+    "fake-claude.py": "da8b86e77d254191df3c1bc754da5546e0d9190380c22099a0c9432b92b75607",
+    "README.md": "a5afcd4e67ffccf2fb9638a97860122cb789e2ae8c8d253963e9a81f3bdc079b",
+    ".dockerignore": "c81bc39ae8a274334278a3848508ab063ddca626432026dbffc03b41d01a94ba",
+    "tests/smoke.py": "7ee8686ab2e1d14ef5aefbebcdbd8b3fe7fbd7b05b6f4cc6680ec2100f849d18"
+  }
+}

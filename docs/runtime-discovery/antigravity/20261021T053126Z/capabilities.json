@@ -1,0 +1,285 @@
+{
+  "schema_version": "guild-ledger.runtime-discovery/v1-draft",
+  "tool_id": "antigravity",
+  "captured_at": "2026-10-21T05:31:26Z",
+  "surface": "Antigravity IDE 2.5.5 (VS Code fork 1.107.0, antigravity extension 0.2.0) running interactively on macOS Darwin 25.6.0 arm64. Local language server daemon language_server_macos_arm (ide-2.4.5) communicates via loopback IPC to Electron (PID 64171, port 62662) and HTTPS to Google backend (https://cloudcode-pa.googleapis.com). Attended IDE chat/agent surface with local shell/file execution.",
+  "version": "2.5.5",
+  "model_identity": {
+    "configured_label": "Gemini 3.8 Flash (High)",
+    "human_readable_name": "Gemini 3.8 Flash (High reasoning effort)",
+    "internal_variant": "gemini-3.8-flash-n",
+    "model_enum": "MODEL_PLACEHOLDER_M318",
+    "effort": "high",
+    "dated_snapshot_pinned": null,
+    "backend_identity_verified": false,
+    "status": "observed",
+    "notes": "User settings change selected 'Gemini 3.8 Flash (High)'. Direct inspection of the conversation SQLite database (gen_metadata blob) observed internal model string 'gemini-3.8-flash-n' and model_enum 'MODEL_PLACEHOLDER_M318'. Outbound network connections terminate at Google Cloud / Google APIs (cloudcode-pa.googleapis.com). No immutable dated backend revision snapshot or commit hash is observable.",
+    "evidence_ids": ["E04", "E07"]
+  },
+  "capabilities": [
+    {
+      "id": "identity.surface",
+      "status": "observed",
+      "value": "antigravity-ide/desktop-attended",
+      "scope": "this session",
+      "limitations": "Process ancestry verified: launchd (PID 1) -> Electron (PID 64171, /Applications/Antigravity IDE.app) -> language_server_macos_arm (PID 64781) -> zsh tool subshell. ANTIGRAVITY_AGENT=1, ANTIGRAVITY_LS_VERSION=ide-2.4.5, subclient_type=ide.",
+      "evidence_ids": ["E01", "E02", "E03", "E04"]
+    },
+    {
+      "id": "identity.runtime_version",
+      "status": "observed",
+      "value": "IDE 2.5.5; core editor 1.107.0; extension 0.2.0; language server ide-2.4.5 (MD5: 4cce31914fcf08f689da569e00e3b303)",
+      "scope": "this machine's installed application",
+      "limitations": "Observed via Info.plist, extension package.json, and ANTIGRAVITY_LS_VERSION environment variable.",
+      "evidence_ids": ["E02", "E03"]
+    },
+    {
+      "id": "identity.environment",
+      "status": "observed",
+      "value": "macOS Darwin 25.6.0 arm64, user-level process (oscarrieken), non-containerized local execution",
+      "scope": "this machine",
+      "limitations": "Local processes run directly under the macOS user account with full local filesystem access within permissions.",
+      "evidence_ids": ["E01", "E03"]
+    },
+    {
+      "id": "identity.model_pinning",
+      "status": "unknown",
+      "value": null,
+      "scope": "this surface / backend",
+      "limitations": "Model selection in the IDE UI and agentapi allows choosing broad tiers (e.g., flash_lite, flash, pro, Gemini 3.8 Flash (High)). No dated immutable snapshot identifier (e.g. gemini-3.8-flash-001) or backend deployment hash is exposed or pinnable by the researcher.",
+      "evidence_ids": ["E05", "E07"]
+    },
+    {
+      "id": "automation.start_fresh_task",
+      "status": "documented",
+      "value": "agentapi new-conversation [--model=<flash_lite|flash|pro>] [--title=<title>] [--profile=<profile>] <prompt>; or via Python SDK Agent(config).chat()",
+      "scope": "local CLI / Python SDK",
+      "limitations": "agentapi CLI is present in ~/.gemini/antigravity-ide/bin/agentapi (wrapping language_server_macos_arm). It supports new-conversation, but lacks explicit workspace path flags (--cwd is inherited). The public Python SDK (google-antigravity) is not installed in the system Python environment.",
+      "evidence_ids": ["E05", "E14", "D05"]
+    },
+    {
+      "id": "automation.supply_prompt_workspace",
+      "status": "observed",
+      "value": "Workspace supplied via IDE workspace folder (file:///Users/oscarrieken/Projects/Rieken/guild-ledger) and language server metadata; prompts delivered via IDE chat canvas or agentapi new-conversation/send-message.",
+      "scope": "this session",
+      "limitations": "Workspace folder is established at conversation initialization and stored in conversation SQLite db and agentapi metadata.",
+      "evidence_ids": ["E03", "E06", "E07"]
+    },
+    {
+      "id": "automation.observe_progress",
+      "status": "observed",
+      "value": "Live updates stream into the IDE UI. Structured execution steps are appended synchronously to ~/.gemini/antigravity-ide/brain/<conv-id>/.system_generated/logs/transcript.jsonl and stored in ~/.gemini/antigravity-ide/conversations/<conv-id>.db.",
+      "scope": "this machine, this conversation",
+      "limitations": "Transcript and SQLite records provide step-level actions, thinking strings, and tool inputs/outputs, but omit token usage counts and financial cost metrics.",
+      "evidence_ids": ["E07", "E08"]
+    },
+    {
+      "id": "automation.stop",
+      "status": "observed",
+      "value": "IDE Stop button cancels generation; manage_task(Action='kill') cancels background tasks via Go context cancellation; SIGINT/SIGTERM to subshell terminates command execution.",
+      "scope": "this session",
+      "limitations": "Task cancellation verified when background task-98 was killed via manage_task, generating a cancellation event and crash log.",
+      "evidence_ids": ["E16"]
+    },
+    {
+      "id": "automation.retrieve_changes",
+      "status": "observed",
+      "value": "Direct local filesystem mutation; artifact documents written to ~/.gemini/antigravity-ide/brain/<conv-id>/; transcripts in .system_generated/logs/.",
+      "scope": "this machine",
+      "limitations": "Changes are applied directly to the working tree. Git operations are uncommitted unless explicitly commanded.",
+      "evidence_ids": ["E08", "E13", "E15"]
+    },
+    {
+      "id": "instructions.user_rules",
+      "status": "observed",
+      "value": "Empty. ~/.gemini/GEMINI.md is 0 bytes; ~/.gemini/antigravity-ide/rules is an empty symlink pointing to empty ~/.claude/rules.",
+      "scope": "user global configuration",
+      "limitations": "Verified by directory listing and file size check. No personal rules loaded.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "instructions.project_rules",
+      "status": "observed",
+      "value": "Absent. Neither GEMINI.md, AGENTS.md, nor .agents/ directory exists in guild-ledger or guild-ledger-research.",
+      "scope": "project workspace",
+      "limitations": "Verified by directory walk and file checks across the workspace.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "instructions.skills_and_plugins",
+      "status": "observed",
+      "value": "5 global plugins in ~/.gemini/config/plugins/ (chrome-devtools-plugin, firebase, google-antigravity-sdk, modern-web-guidance-plugin, science) exposing 41 on-demand skills; 2 built-in skills (antigravity_guide, agy-customizations).",
+      "scope": "global configuration",
+      "limitations": "Skills follow progressive disclosure: only names and descriptions are injected into prompt context. SKILL.md is only loaded when explicitly read via view_file.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "id": "instructions.memory_ki",
+      "status": "observed",
+      "value": "Empty. Knowledge Items directory ~/.gemini/antigravity-ide/knowledge contains only knowledge.lock (0 bytes). No active KIs.",
+      "scope": "this machine",
+      "limitations": "Prompt includes Knowledge Items system instructions, but no KIs exist on disk.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "instructions.mcp",
+      "status": "observed",
+      "value": "Empty. ~/.gemini/config/mcp_config.json and ~/.gemini/antigravity-ide/mcp_config.json are both 0 bytes.",
+      "scope": "this session",
+      "limitations": "No external MCP server tools are connected or exposed.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "tools.edit_shell_tests",
+      "status": "observed",
+      "value": "Full suite available: run_command (zsh), view_file, replace_file_content, multi_replace_file_content, write_to_file, list_dir, grep_search.",
+      "scope": "this session",
+      "limitations": "Commands execute locally under macOS user permissions with CWD restricted to workspace unless non-workspace file access policy allows otherwise.",
+      "evidence_ids": ["E03", "E13"]
+    },
+    {
+      "id": "tools.browser_network",
+      "status": "observed",
+      "value": "browser_subagent available (restricted to 78 domains in browserAllowlist.txt); read_url_content and search_web available; language server has full network egress to Google Cloud.",
+      "scope": "this session",
+      "limitations": "Browser tool enforces allowlist; HTTP fetch and web search tools operate without observable domain restrictions.",
+      "evidence_ids": ["E04", "E11"]
+    },
+    {
+      "id": "tools.subagents",
+      "status": "observed",
+      "value": "browser_subagent supported; manage_task supported for background processes; general subagent delegation documented in SDK but not spawned in this session.",
+      "scope": "this session",
+      "limitations": "No subagents were spawned during this discovery session.",
+      "evidence_ids": ["E06", "E16"]
+    },
+    {
+      "id": "tools.permissions",
+      "status": "observed",
+      "value": "globalPermissionGrants in ~/.gemini/config/config.json whitelist 29 command/read patterns; IDE attended mode prompts for unwhitelisted actions.",
+      "scope": "this machine / IDE session",
+      "limitations": "System protection boundary rules also enforce hardcoded read blocks (e.g. read_file on binary agentapi was blocked by protection rule).",
+      "evidence_ids": ["E05", "E09"]
+    },
+    {
+      "id": "tools.loom_binary",
+      "status": "observed",
+      "value": "Absent. which loom returned 127; uninstalled and backed up in .local-backups/loom-global-20261021T034807Z.",
+      "scope": "this machine",
+      "limitations": "Loom CLI is not installed or available on PATH.",
+      "evidence_ids": ["E12"]
+    },
+    {
+      "id": "metrics.per_call_usage",
+      "status": "observed",
+      "value": false,
+      "scope": "this session's transcript and database",
+      "limitations": "Neither ~/.gemini/antigravity-ide/brain/<conv-id>/.system_generated/logs/transcript.jsonl nor the conversation SQLite database records prompt_tokens, output_tokens, cached_tokens, thinking_tokens, or cost metrics. Per-step tokens are completely absent from the local telemetry.",
+      "evidence_ids": ["E07", "E08"]
+    },
+    {
+      "id": "metrics.sdk_usage_contract",
+      "status": "documented",
+      "value": "agent.conversation.total_usage provides prompt_token_count, cached_content_token_count, candidates_token_count, thoughts_token_count, total_token_count in the Python SDK.",
+      "scope": "Python SDK (google-antigravity)",
+      "limitations": "Documented in SDK observability guide (D05); not present or verified in this IDE session.",
+      "evidence_ids": ["D05"]
+    },
+    {
+      "id": "metrics.cost_tracking",
+      "status": "unknown",
+      "value": null,
+      "scope": "this session / account",
+      "limitations": "No financial cost or quota consumption metric is exposed to the agent or exported locally.",
+      "evidence_ids": ["E07", "E08"]
+    },
+    {
+      "id": "cost.accounting_mode",
+      "status": "inferred",
+      "value": "Google account authentication / Cloud Code backend subscription/internal quota; not per-token metered API key billing.",
+      "scope": "this installation",
+      "limitations": "Language server connects to cloudcode-pa.googleapis.com with OAuth/CSRF tokens; no GEMINI_API_KEY was found in the environment.",
+      "evidence_ids": ["E03", "E04"]
+    },
+    {
+      "id": "artifacts.interruption_survival",
+      "status": "observed",
+      "value": "manage_task(Action='kill') cleanly stops background processes with exit status recorded and partial task logs preserved; conversation state and steps up to cancellation remain in SQLite db and transcript.jsonl.",
+      "scope": "this session",
+      "limitations": "Demonstrated via cancellation of task-98.",
+      "evidence_ids": ["E07", "E08", "E16"]
+    },
+    {
+      "id": "artifacts.stable_ids",
+      "status": "observed",
+      "value": "ANTIGRAVITY_CONVERSATION_ID (UUID: 299c055d-0914-4b64-b8e6-3601f0308fac), ANTIGRAVITY_TRAJECTORY_ID (UUID: a56e9152-5ffe-4570-b5b7-6ce6cde07275), sessionID (-3750763034362895579), step indices, tool call IDs (e.g. call_1139402).",
+      "scope": "this session",
+      "limitations": "Stable UUIDs identify the conversation across transcript files, database tables, and environment variables.",
+      "evidence_ids": ["E03", "E06", "E07", "E08"]
+    },
+    {
+      "id": "harness.H0",
+      "status": "inferred",
+      "value": "partially compatible, requires global plugin isolation",
+      "scope": "Antigravity IDE / CLI",
+      "limitations": "Current session has no local project or user rules (GEMINI.md is empty, rules directory is empty), but inherits 5 global plugins (41 skills) from ~/.gemini/config/plugins/. True H0 baseline requires isolating or temporarily unlinking ~/.gemini/config/plugins/.",
+      "evidence_ids": ["E09", "E10"]
+    },
+    {
+      "id": "harness.H1",
+      "status": "inferred",
+      "value": "feasible via root GEMINI.md or AGENTS.md in task repository",
+      "scope": "per-condition checkout",
+      "limitations": "Antigravity discovers project rules walking up to repository root. Subject to H0 clean plugin baseline prerequisite.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "harness.H2",
+      "status": "inferred",
+      "value": "feasible via structured prompt/workflow instructions or Python SDK hooks; external supervision required for turn/spend bounding",
+      "scope": "per-condition checkout / external harness",
+      "limitations": "IDE surface lacks native CLI flags for --max-turns or --max-budget-usd; enforcement must be performed by an external supervisor or SDK wrapper.",
+      "evidence_ids": ["E05", "D05"]
+    },
+    {
+      "id": "harness.H3_loom",
+      "status": "observed",
+      "value": "blocked: loom binary uninstalled on this machine; context-only profile feasible, native pipeline blocked",
+      "scope": "this machine",
+      "limitations": "which loom returned 127. Loom was backed up and uninstalled during global cleanup. Furthermore, Loom v0.1.1 lacked pipeline run commands and has no native Antigravity IDE adapter.",
+      "evidence_ids": ["E12"]
+    }
+  ],
+  "evidence": [
+    {"id": "E01", "kind": "command", "reference": "ps -p $$ -o pid,ppid,args; ps -p $PPID; ps -p 64171; ps -p 64781 (exit 0)"},
+    {"id": "E02", "kind": "file_structure", "reference": "/Applications/Antigravity IDE.app/Contents/Info.plist; /Applications/Antigravity IDE.app/Contents/Resources/app/package.json; /Applications/Antigravity IDE.app/Contents/Resources/app/extensions/antigravity/package.json; md5 on language_server_macos_arm"},
+    {"id": "E03", "kind": "command", "reference": "python3 os.environ inspection of ANTIGRAVITY_*, VSCODE_* environment variables"},
+    {"id": "E04", "kind": "command", "reference": "ps -ww -p 64781; lsof -Pan -p 64781 -i; lsof -Pan -p 64171 -i"},
+    {"id": "E05", "kind": "command", "reference": "which agy (exit 127); ls -la /Users/oscarrieken/.gemini/antigravity-ide/bin/agentapi; cat agentapi; agentapi --help (exit 0)"},
+    {"id": "E06", "kind": "command", "reference": "agentapi get-conversation-metadata 299c055d-0914-4b64-b8e6-3601f0308fac (exit 0)"},
+    {"id": "E07", "kind": "file_schema", "reference": "sqlite3 inspection of ~/.gemini/antigravity-ide/conversations/299c055d-0914-4b64-b8e6-3601f0308fac.db (schema, trajectory_meta, gen_metadata blob strings)"},
+    {"id": "E08", "kind": "file_schema", "reference": "python3 JSON lines analysis of ~/.gemini/antigravity-ide/brain/299c055d-0914-4b64-b8e6-3601f0308fac/.system_generated/logs/transcript.jsonl"},
+    {"id": "E09", "kind": "file_structure", "reference": "ls -la ~/.gemini/; cat ~/.gemini/config/config.json; ls -la ~/.gemini/antigravity-ide/rules; ls -la ~/.gemini/antigravity-ide/knowledge"},
+    {"id": "E10", "kind": "file_structure", "reference": "ls -la ~/.gemini/config/plugins (5 plugins observed, 41 skills exposed)"},
+    {"id": "E11", "kind": "command", "reference": "cat ~/.gemini/antigravity-ide/browserAllowlist.txt (78 domains)"},
+    {"id": "E12", "kind": "command", "reference": "which loom (exit 127); ls -la /opt/homebrew/bin/loom (absent); ls -la .local-backups/loom-global-20261021T034807Z"},
+    {"id": "E13", "kind": "command", "reference": "mkdir/cat/rm of .scratch-edit-probe.txt in report folder at 2026-10-21T06:36:50Z (exit 0)"},
+    {"id": "E14", "kind": "command", "reference": "python3 -c 'import google.antigravity' (exit 1, ModuleNotFoundError)"},
+    {"id": "E15", "kind": "command", "reference": "git status in guild-ledger (exit 128, not a git repo); git status in guild-ledger-research (exit 0, branch main, untracked docs/)"},
+    {"id": "E16", "kind": "command", "reference": "manage_task(Action='kill') on background task-98; inspection of ~/.gemini/antigravity-ide/crashes/crash_96459_*"},
+    {"id": "D01", "kind": "documentation", "reference": "https://antigravity.google/docs", "retrieved": "2026-10-21"},
+    {"id": "D02", "kind": "documentation", "reference": "https://antigravity.google/docs/cli/reference", "retrieved": "2026-10-21"},
+    {"id": "D03", "kind": "documentation", "reference": "https://antigravity.google/docs/ide/browser", "retrieved": "2026-10-21"},
+    {"id": "D04", "kind": "documentation", "reference": "https://antigravity.google/docs/permissions", "retrieved": "2026-10-21"},
+    {"id": "D05", "kind": "documentation", "reference": "https://github.com/google-antigravity/antigravity-sdk-python", "retrieved": "2026-10-21"},
+    {"id": "D06", "kind": "documentation", "reference": "https://ai.google.dev/gemini-api/docs/models/gemini", "retrieved": "2026-10-21"}
+  ],
+  "open_questions": [
+    "Does agentapi new-conversation support an explicit workspace root argument or flags for non-interactive execution, or does it strictly inherit the working directory of the caller?",
+    "Where does the Google backend log actual prompt and candidate token counts for IDE sessions, and can a researcher obtain them via Cloud Console / Cloud Code audit logs?",
+    "Can the 5 global plugins in ~/.gemini/config/plugins/ be selectively disabled via environment variable or workspace configuration without physically removing them from disk?",
+    "Can the Antigravity Python SDK (google-antigravity) run against the existing local language server daemon (localhost:62669) without requiring a separate GEMINI_API_KEY?",
+    "Does Antigravity support an immutable backend snapshot pinning mechanism (e.g. specifying a dated model revision string in agentapi or IDE settings)?",
+    "What are the precise semantics and billing attribution of the internal Cloud Code endpoint https://cloudcode-pa.googleapis.com (Google internal quota vs Google Cloud project billing)?"
+  ]
+}

@@ -1,0 +1,343 @@
+{
+  "schema_version": "guild-ledger.runtime-discovery/v1-draft",
+  "tool_id": "claude-code-headless",
+  "captured_at": "2026-10-21T02:50:00Z",
+  "surface": "Claude Code CLI running interactively in a local terminal (macOS Terminal.app) session, entrypoint=cli, process ancestry traced to Terminal.app/launchd with no cloud relay or coordinator. Not a Claude Projects cloud thread, not a nested CLI inside one, and not itself a headless (-p) invocation -- this session documents the headless interface without executing it.",
+  "version": "2.1.304",
+  "model_identity": {
+    "configured_label": "claude-sonnet-5",
+    "effort": "high",
+    "per_response_model_field": "claude-sonnet-5",
+    "dated_snapshot_pinned": null,
+    "backend_identity_verified": false,
+    "status": "observed",
+    "notes": "40/40 assistant transcript entries this session report model=claude-sonnet-5, matching this turn's own system reminder. --model accepts an alias or full model id per session (a selection), not a pin to a dated backend revision. No dated snapshot id was observable anywhere.",
+    "evidence_ids": ["E04", "E11"]
+  },
+  "capabilities": [
+    {
+      "id": "identity.surface",
+      "status": "observed",
+      "value": "claude-code-cli/local-interactive",
+      "scope": "this session",
+      "limitations": "Confirmed by process-ancestry walk (claude -> zsh -> login -> Terminal.app -> launchd) and CLAUDE_CODE_ENTRYPOINT=cli; this is a necessary condition for 'local terminal' but the full ancestry chain beyond launchd (PID 1) was not inspected.",
+      "evidence_ids": ["E01", "E02", "E04"]
+    },
+    {
+      "id": "identity.entrypoint_anomaly",
+      "status": "unknown",
+      "value": "CLAUDE_CODE_CHILD_SESSION=1",
+      "scope": "this session's environment",
+      "limitations": "Set despite process ancestry showing a plain top-level terminal launch with no parent Claude/cloud process. Meaning not established; left as an open question rather than resolved.",
+      "evidence_ids": ["E02", "E04"]
+    },
+    {
+      "id": "identity.runtime_version",
+      "status": "observed",
+      "value": "2.1.304",
+      "scope": "this machine's installed binary and this session's transcript",
+      "limitations": "Binary (--version), claude doctor, and every transcript entry's version field agree. Whether the researcher can pin this across upgrades (vs. the package manager auto-updating it) was not tested.",
+      "evidence_ids": ["E01", "E10", "E11"]
+    },
+    {
+      "id": "identity.environment",
+      "status": "observed",
+      "value": "macOS Darwin 25.6.0 arm64, user-level process (not root, no container observed), homebrew install",
+      "scope": "this machine",
+      "limitations": "No sandbox/container boundary was observed on this surface, in contrast to the cloud thread's container. Resource limits (CPU/memory) were not enumerated.",
+      "evidence_ids": ["E01", "E05", "E10"]
+    },
+    {
+      "id": "identity.model_pinning",
+      "status": "unknown",
+      "value": null,
+      "scope": "this session / this account",
+      "limitations": "--model selects an alias or full model id per session; no dated snapshot id is exposed to pin against. Whether this account can pin a dated revision via any mechanism is unknown.",
+      "evidence_ids": ["E04", "E09"]
+    },
+    {
+      "id": "automation.start_fresh_task",
+      "status": "documented",
+      "value": "claude -p \"<prompt>\" [--session-id|--continue|--resume|--fork-session]; claude --bg for a named background agent managed by claude agents/attach/logs/stop/rm/respawn",
+      "scope": "this machine, same account",
+      "limitations": "Not executed this session (explicitly out of scope). --bg and --cloud are mutually exclusive with -p per the docs.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.supply_prompt_workspace",
+      "status": "documented",
+      "value": "Prompt via CLI arg or piped stdin (10MB cap). Workspace is the literal cwd, extendable with --add-dir. Context supplied explicitly via --append-system-prompt(-file), --settings, --mcp-config, --agents, --plugin-dir/--plugin-url.",
+      "scope": "local CLI",
+      "limitations": "Not executed. Without --bare, a -p session still auto-discovers hooks/skills/CLAUDE.md/AGENTS.md/MCP from the working directory and ~/.claude, even in an untrusted folder, with no trust dialog shown.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.observe_progress",
+      "status": "documented",
+      "value": "--output-format stream-json --verbose --include-partial-messages streams token deltas; system/init event reports model/tools/MCP/plugins/capabilities; claude agents / claude logs <id> for background sessions",
+      "scope": "local CLI",
+      "limitations": "Not exercised this session.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.stop",
+      "status": "documented",
+      "value": "SIGTERM: exit 143, in-flight turn left unfinished with no result recorded, SessionEnd hooks still run. SIGINT or Agent SDK interrupt() ends the turn cleanly instead. claude stop|kill <id> for background sessions.",
+      "scope": "local CLI",
+      "limitations": "Not exercised; documented behavior only (see proposed probe P2).",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.retrieve_changes",
+      "status": "observed",
+      "value": "Direct local filesystem access -- this session's working tree already IS the local checkout.",
+      "scope": "this machine",
+      "limitations": "No push, commit, or export mechanism was exercised or needed.",
+      "evidence_ids": ["E15"]
+    },
+    {
+      "id": "instructions.user_rules",
+      "status": "observed",
+      "value": "~/.claude/rules symlinked to ai-assistant-dot-files/shared/rules (17 files); loaded into this session as 'user's private global instructions for all projects'",
+      "scope": "every project on this machine, per account",
+      "limitations": "Confirmed by directory listing and by this turn's own system prompt content; the official doc describing ~/.claude/rules as per-machine personal rules was read separately (D06) and matches.",
+      "evidence_ids": ["E06"]
+    },
+    {
+      "id": "instructions.project_instructions_source",
+      "status": "observed",
+      "value": "AGENTS.md at /Users/oscarrieken/AGENTS.md (home directory, two levels above cwd) loaded as project instructions because no CLAUDE.md exists in cwd or any ancestor directory; ~/.claude/CLAUDE.md is a broken symlink and does not count toward that check regardless",
+      "scope": "this project tree (walked up to the home directory)",
+      "limitations": "Exact discovery rule cross-confirmed against official docs (D06), not merely inferred from file placement.",
+      "evidence_ids": ["E06", "E18"]
+    },
+    {
+      "id": "instructions.hooks",
+      "status": "observed",
+      "value": false,
+      "scope": "this session",
+      "limitations": "No hooks key in the only active settings file (~/.claude/settings.json); no project .claude/settings.json exists; no managed-settings file exists on this machine. Does not rule out a hook defined inside a synced plugin that wasn't inspected.",
+      "evidence_ids": ["E06", "E07", "E17"]
+    },
+    {
+      "id": "instructions.skills_plugins_mcp",
+      "status": "observed",
+      "value": "71 skills via ~/.claude/skills symlink plus built-ins; multiple account-level and marketplace-plugin MCP servers in mixed connected/needs-auth/failed states",
+      "scope": "account, every project on this machine",
+      "limitations": "None of this is project-scoped for guild-ledger (no .mcp.json). SEP-2352 OAuth-issuer warnings appeared on several MCP health checks; cause not investigated.",
+      "evidence_ids": ["E06", "E08"]
+    },
+    {
+      "id": "instructions.exclusion_mechanisms",
+      "status": "documented",
+      "value": "--bare, --safe-mode, --restricted, --setting-sources, --strict-mcp-config each strip a documented subset of CLAUDE.md/AGENTS.md/skills/plugins/hooks/MCP/keychain discovery",
+      "scope": "local CLI, per invocation",
+      "limitations": "Not applied this session (task requires leaving current config untouched). --bare requires ANTHROPIC_API_KEY, a different auth path than this session's OAuth login; compatibility not tested.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "tools.edit_shell_tests",
+      "status": "observed",
+      "value": true,
+      "scope": "this session",
+      "limitations": "Bash/Read/Write/Edit were available and used for read-only inventory and file writes; no application tests were run (none exist in this research repo yet, and running tests was outside scope).",
+      "evidence_ids": ["E06", "E07"]
+    },
+    {
+      "id": "tools.network",
+      "status": "observed",
+      "value": "WebFetch succeeded against code.claude.com for official documentation lookups",
+      "scope": "this session",
+      "limitations": "WebSearch was available (deferred-tool list) but not exercised. No proxy/allowlist boundary was observed on this surface (contrast the cloud thread's egress proxy).",
+      "evidence_ids": []
+    },
+    {
+      "id": "tools.subagents",
+      "status": "documented",
+      "value": "Agent tool available; default spawn depth 3, default concurrency 20, overridable via CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH / CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS, neither set in this session",
+      "scope": "this session (defaults apply)",
+      "limitations": "Not exercised this session (task constraint). No dollar/token cap exists beyond depth/concurrency/maxTurns/model routing, per the documentation.",
+      "evidence_ids": ["E19"]
+    },
+    {
+      "id": "tools.permissions",
+      "status": "observed",
+      "value": "permission mode auto throughout this session (11 permission-mode transcript entries, all 'auto'); CLAUDE_CODE_SESSION_ATTENDED=1",
+      "scope": "this session",
+      "limitations": "Classifier decision details are not exported into the transcript.",
+      "evidence_ids": ["E04", "E12"]
+    },
+    {
+      "id": "tools.loom_binary",
+      "status": "observed",
+      "value": "/opt/homebrew/bin/loom v0.1.1; subcommands completion, health, install, tools, uninstall, update, version only",
+      "scope": "this machine",
+      "limitations": "No run/pipeline-execution subcommand in this installed version. Whether a different Loom release provides pipeline execution is unknown.",
+      "evidence_ids": ["E14"]
+    },
+    {
+      "id": "metrics.per_call_usage",
+      "status": "observed",
+      "value": "Local transcript ~/.claude/projects/<project>/<session-uuid>.jsonl records per-assistant-entry usage: input_tokens, output_tokens, cache_creation_input_tokens, cache_read_input_tokens, cache_creation.{5m,1h}, output_tokens_details.thinking_tokens, server_tool_use, service_tier, speed, inference_geo, fallback_credit, iterations[], plus message.id/requestId/timestamp",
+      "scope": "this session's local transcript file",
+      "limitations": "40 assistant entries at time of inspection collapsed to 17 distinct message.id/requestId values -- must deduplicate by message.id before any total is meaningful. Per-step output_tokens is documented as a placeholder (D02); not independently re-verified against a result message in this session since no -p call was made.",
+      "evidence_ids": ["E11"]
+    },
+    {
+      "id": "metrics.cost_field_presence",
+      "status": "observed",
+      "value": false,
+      "scope": "this session's interactive transcript",
+      "limitations": "No total_cost_usd/costUSD field exists anywhere in this transcript; the only string matches were this session's own conversational content, not a runtime-emitted field. Consistent with the documented fact that cost appears only on a -p/SDK result message.",
+      "evidence_ids": ["E13"]
+    },
+    {
+      "id": "metrics.usage_vs_modelusage",
+      "status": "documented",
+      "value": "usage excludes subagent tokens (main loop only); total_cost_usd and modelUsage include subagent requests",
+      "scope": "any -p/SDK call on this surface",
+      "limitations": "Not exercised this session; read from official docs only.",
+      "evidence_ids": []
+    },
+    {
+      "id": "metrics.resume_accumulation",
+      "status": "documented",
+      "value": "A resumed/continued call's result reports the session's whole cumulative spend (since v2.1.277); independent calls must be summed by the caller",
+      "scope": "any -p/SDK call with --resume/--continue",
+      "limitations": "Not exercised this session.",
+      "evidence_ids": []
+    },
+    {
+      "id": "metrics.crash_zeroing",
+      "status": "documented",
+      "value": "error_during_execution on a session crash may carry usage, total_cost_usd, and modelUsage all zeroed; recovery uses the prior turn's result or, for input/cache tokens only, summed per-step usage",
+      "scope": "any -p/SDK call",
+      "limitations": "Not exercised; no crash occurred in this session.",
+      "evidence_ids": []
+    },
+    {
+      "id": "metrics.subagent_lineage",
+      "status": "documented",
+      "value": "parent_tool_use_id distinguishes subagent messages (null for main loop); each subagent gets its own transcript file at a documented path",
+      "scope": "any session using the Agent tool or forked skills",
+      "limitations": "Not exercised this session -- no subagents were spawned (E19).",
+      "evidence_ids": ["E19"]
+    },
+    {
+      "id": "metrics.aggregate_local_usage",
+      "status": "documented",
+      "value": "/usage shows a local Session block plus, on Pro/Max/Team/Enterprise, a plan-usage breakdown attributing recent usage to skills/subagents/plugins/MCP servers, computed only from local session history on this machine",
+      "scope": "this machine, this account",
+      "limitations": "Not run this session, to avoid an extra request. Explicitly excludes usage from other devices or claude.ai per the documentation.",
+      "evidence_ids": []
+    },
+    {
+      "id": "cost.accounting_mode",
+      "status": "observed",
+      "value": "individual Pro/Max subscription (inferred from no ANTHROPIC_API_KEY, OAuth credentials file, and claude doctor's organization-policy/managed-settings messages)",
+      "scope": "this account",
+      "limitations": "Not a direct account-tier readout -- inferred from the absence/presence of specific indicators. Matches the separately-observed cloud-thread report for what appears to be the same account.",
+      "evidence_ids": ["E04", "E06", "E10"]
+    },
+    {
+      "id": "cost.per_attempt_usd",
+      "status": "inferred",
+      "value": false,
+      "scope": "this interactive session",
+      "limitations": "No cost field exists in this session's transcript. A -p/SDK result message would carry total_cost_usd/modelUsage, but that was not produced here, and the documentation states those figures are client-side list-price estimates, not authoritative billing, which matters less for a Pro/Max subscriber since billing isn't per-task to begin with.",
+      "evidence_ids": ["E13"]
+    },
+    {
+      "id": "artifacts.interruption_survival",
+      "status": "documented",
+      "value": "SIGTERM: exit 143, unfinished turn with no result recorded, SessionEnd hooks still run, Bash process tree killed. SIGINT/interrupt(): turn ends cleanly. Working-directory deletion mid-session: session keeps running, shell commands fail until restored.",
+      "scope": "local CLI / Agent SDK",
+      "limitations": "Not exercised this session (see proposed probe P2).",
+      "evidence_ids": []
+    },
+    {
+      "id": "artifacts.stable_ids",
+      "status": "observed",
+      "value": "CLAUDE_CODE_SESSION_ID (36-char UUID) matches the transcript filename; per-response message.id (msg_) and requestId (req_); per-transcript-entry uuid/parentUuid",
+      "scope": "this session",
+      "limitations": "Session-id value itself not reproduced in evidence.md (only its length was confirmed) since the user can already see it in their own terminal.",
+      "evidence_ids": ["E04", "E11"]
+    },
+    {
+      "id": "artifacts.local_file_durability",
+      "status": "observed",
+      "value": "This session's transcript and all written files are ordinary files on local disk, not container-ephemeral; guild-ledger-research is a local git working tree with origin set but no local commits yet",
+      "scope": "this machine",
+      "limitations": "Says nothing about export, backup, or retention policy beyond ordinary filesystem/git guarantees -- cross-session durability beyond that was not tested.",
+      "evidence_ids": ["E11", "E15", "E16"]
+    },
+    {
+      "id": "harness.H0",
+      "status": "inferred",
+      "value": "partial, but more controllable than the cloud surface",
+      "scope": "local CLI",
+      "limitations": "This session itself loaded the full personal stack (rules/AGENTS.md/skills/MCP) with no hooks active. --bare/--safe-mode/--restricted/--setting-sources are real documented knobs to approach a cleaner baseline in a future run, none applied here.",
+      "evidence_ids": ["E06", "E07", "E09", "E17"]
+    },
+    {
+      "id": "harness.H1",
+      "status": "documented",
+      "value": "feasible via a single CLAUDE.md or .claude/settings.json committed at a per-condition repo root",
+      "scope": "per-condition local checkout",
+      "limitations": "Depends on which condition repo is checked out as cwd; not exercised this session.",
+      "evidence_ids": []
+    },
+    {
+      "id": "harness.H2",
+      "status": "inferred",
+      "value": "instruction-level, with real local enforcement primitives (--max-budget-usd, --permission-mode/--permission-prompts none, subagent depth/concurrency/maxTurns) not documented as available on the cloud surface",
+      "scope": "local CLI",
+      "limitations": "No built workflow exists yet; these are primitives only, none exercised this session.",
+      "evidence_ids": ["E09", "E19"]
+    },
+    {
+      "id": "harness.H3_loom",
+      "status": "observed",
+      "value": "blocked by the installed binary: loom v0.1.1 has no run/pipeline subcommand",
+      "scope": "this machine's installed Loom",
+      "limitations": "Whether a different Loom release supports pipeline execution (as the project's own shared rules describe: loom run, loom memory agents, loom ki scan) is unknown from this session.",
+      "evidence_ids": ["E14"]
+    }
+  ],
+  "evidence": [
+    {"id": "E01", "kind": "command", "reference": "which claude; claude --version (exit 0)"},
+    {"id": "E02", "kind": "command", "reference": "ps -p $PPID / ps -ef / ppid-walk loop -- process ancestry to Terminal.app/launchd"},
+    {"id": "E03", "kind": "command", "reference": "env | cut -d= -f1 | grep -i claude (names only)"},
+    {"id": "E04", "kind": "command", "reference": "individual echo of non-secret env var values; wc -c on session-id length only"},
+    {"id": "E05", "kind": "command", "reference": "whoami, hostname, uname -srm, node --version, date -u"},
+    {"id": "E06", "kind": "file_structure", "reference": "ls ~/.claude/; cat ~/.claude/settings.json; cat ~/.claude/framework-install.json"},
+    {"id": "E07", "kind": "command", "reference": "ls/cat on guild-ledger/.claude/* -- all absent"},
+    {"id": "E08", "kind": "command", "reference": "claude mcp list"},
+    {"id": "E09", "kind": "command", "reference": "claude --help (full flag/subcommand enumeration)"},
+    {"id": "E10", "kind": "command", "reference": "claude doctor"},
+    {"id": "E11", "kind": "file_schema", "reference": "~/.claude/projects/-Users-oscarrieken-Projects-Rieken-guild-ledger/<session-uuid>.jsonl -- keys/types/counts via local python3 script"},
+    {"id": "E12", "kind": "file_schema", "reference": "same transcript -- additional entry-type key tallies (system/mode/permission-mode/api-request*)"},
+    {"id": "E13", "kind": "command", "reference": "grep for cost field names/strings in the same transcript -- no genuine match"},
+    {"id": "E14", "kind": "command", "reference": "which loom; loom --version; loom --help"},
+    {"id": "E15", "kind": "command", "reference": "git status --short --branch; git remote -v (guild-ledger-research)"},
+    {"id": "E16", "kind": "command", "reference": "create/read/remove .scratch-edit-probe.txt in the report folder, 2026-10-21T02:43:12Z"},
+    {"id": "E17", "kind": "command", "reference": "ls on managed-settings.json candidate paths -- both absent"},
+    {"id": "E18", "kind": "command", "reference": "find for CLAUDE.md/AGENTS.md under the project tree; ls -la ~/AGENTS.md"},
+    {"id": "E19", "kind": "command", "reference": "env grep for subagent-depth/concurrency vars; find on the project's transcript directory -- no subagents/ subfolder"},
+    {"id": "D01", "kind": "documentation", "reference": "https://code.claude.com/docs/en/headless", "retrieved": "2026-10-21"},
+    {"id": "D02", "kind": "documentation", "reference": "https://code.claude.com/docs/en/agent-sdk/cost-tracking", "retrieved": "2026-10-21"},
+    {"id": "D03", "kind": "documentation", "reference": "https://code.claude.com/docs/en/settings", "retrieved": "2026-10-21"},
+    {"id": "D04", "kind": "documentation", "reference": "https://code.claude.com/docs/en/costs", "retrieved": "2026-10-21"},
+    {"id": "D05", "kind": "documentation", "reference": "https://code.claude.com/docs/en/sub-agents", "retrieved": "2026-10-21"},
+    {"id": "D06", "kind": "documentation", "reference": "https://code.claude.com/docs/en/memory", "retrieved": "2026-10-21"}
+  ],
+  "open_questions": [
+    "What does CLAUDE_CODE_CHILD_SESSION=1 mean in a plain, directly-launched local terminal session with no parent Claude/cloud process in its ancestry?",
+    "Does --bare authenticate at all under this account's current OAuth-only setup, or does it require ANTHROPIC_API_KEY to be set as the docs imply?",
+    "Does a -p/--output-format json call on this account actually emit total_cost_usd/modelUsage/session_id as documented, and do the figures look reasonable against /usage?",
+    "Does the documented SIGTERM behavior (exit 143, no result recorded) hold on this exact installed version and OS?",
+    "Is there a different, more current Loom release that provides a run/pipeline-execution subcommand, and if so, does it shell out to headless claude as the project's shared rules describe?",
+    "Can subagent depth/concurrency/maxTurns and --max-budget-usd be composed into an actual enforced H2 workflow, or do they only bound individual primitives?",
+    "What, if anything, differs about this session's settings/instruction stack if the same cwd is attached to one of the per-condition repos (guild-ledger-baseline/-guidelines/-harness/-loom) instead of the bare guild-ledger parent folder?"
+  ]
+}

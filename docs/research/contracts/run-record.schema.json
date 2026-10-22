@@ -1,0 +1,808 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Guild Ledger attempt summary",
+  "description": "Draft v1 summary contract. Cross-field arithmetic and provenance require semantic validation. Synthetic records must be excluded from research datasets.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "guild-ledger.run/v1"
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "slot_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attempt_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retry_of_attempt_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "repetition": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_level": {
+          "enum": [
+            "P1",
+            "P2",
+            "P3"
+          ]
+        },
+        "harness_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile": {
+          "enum": [
+            "controlled",
+            "native"
+          ]
+        },
+        "model_config_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "campaign_id",
+        "slot_id",
+        "attempt_id",
+        "retry_of_attempt_id",
+        "repetition",
+        "task_id",
+        "prompt_level",
+        "harness_id",
+        "profile",
+        "model_config_id"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resolved_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "starter_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "prompt_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "harness_commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "subject_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "environment_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "evaluator_commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "requirements_map_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "github": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "repository_id": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "repository": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "workflow_id": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "run_id": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "run_attempt": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "workflow_commit": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{40}$"
+                }
+              },
+              "required": [
+                "repository_id",
+                "repository",
+                "workflow_id",
+                "run_id",
+                "run_attempt",
+                "workflow_commit"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "resolved_manifest_sha256",
+        "starter_sha256",
+        "prompt_sha256",
+        "harness_commit",
+        "subject_sha256",
+        "environment_sha256",
+        "evaluator_commit",
+        "requirements_map_sha256",
+        "github"
+      ]
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "completed",
+            "needs_human",
+            "budget_limit",
+            "time_limit",
+            "agent_error",
+            "infrastructure_error",
+            "cancelled"
+          ]
+        },
+        "stop_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ended_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "status",
+        "stop_reason",
+        "started_at",
+        "ended_at"
+      ]
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "completed",
+            "error",
+            "not_run"
+          ]
+        },
+        "communicated": {
+          "$ref": "#/$defs/criterion"
+        },
+        "full_target": {
+          "$ref": "#/$defs/criterion"
+        },
+        "regression": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "total": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "passed": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "required": [
+            "total",
+            "passed"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "communicated",
+        "full_target",
+        "regression"
+      ]
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "communicated": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "full_target": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "communicated",
+        "full_target"
+      ],
+      "description": "Autonomous endpoints: require completed generation, valid integrity, and passing artifact criteria. null means not measurable."
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "valid",
+            "invalid",
+            "pending"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "status",
+        "reason"
+      ]
+    },
+    "usage": {
+      "$ref": "#/$defs/usage"
+    },
+    "generation_cost": {
+      "$ref": "#/$defs/cost"
+    },
+    "other_costs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evaluation_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "compute_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "tools_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "storage_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "required": [
+        "evaluation_usd",
+        "compute_usd",
+        "tools_usd",
+        "storage_usd"
+      ]
+    },
+    "durations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "generation_elapsed_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "agent_active_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "gate_wait_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "human_active_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "queue_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "evaluation_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "required": [
+        "generation_elapsed_seconds",
+        "agent_active_seconds",
+        "gate_wait_seconds",
+        "human_active_seconds",
+        "queue_seconds",
+        "evaluation_seconds"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bundle_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "usage_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requirements_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_reference": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "bundle_reference",
+        "manifest_sha256",
+        "usage_reference",
+        "requirements_reference",
+        "subject_reference"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "synthetic",
+    "notes",
+    "identity",
+    "provenance",
+    "generation",
+    "evaluation",
+    "acceptance",
+    "integrity",
+    "usage",
+    "generation_cost",
+    "other_costs",
+    "durations",
+    "evidence"
+  ],
+  "$defs": {
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "critical_total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "critical_passed": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "accepted": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "critical_total",
+        "critical_passed",
+        "accepted"
+      ]
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "invocations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_calls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "input_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "output_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cache_read_input_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cache_write_input_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "reasoning_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "input_includes_cache": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "output_includes_reasoning": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "completeness": {
+          "enum": [
+            "complete",
+            "partial",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "invocations",
+        "tool_calls",
+        "input_tokens",
+        "output_tokens",
+        "cache_read_input_tokens",
+        "cache_write_input_tokens",
+        "reasoning_tokens",
+        "input_includes_cache",
+        "output_includes_reasoning",
+        "completeness"
+      ]
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "const": "USD"
+        },
+        "reported_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "estimated_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "comparison_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "basis": {
+          "enum": [
+            "reported",
+            "estimated",
+            "unknown"
+          ]
+        },
+        "completeness": {
+          "enum": [
+            "complete",
+            "partial",
+            "unknown"
+          ]
+        },
+        "pricing_snapshot_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "currency",
+        "reported_usd",
+        "estimated_usd",
+        "comparison_usd",
+        "basis",
+        "completeness",
+        "pricing_snapshot_sha256"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "const": "unknown"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "comparison_usd": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "completeness": {
+                "enum": [
+                  "partial",
+                  "unknown"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "comparison_usd": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "enum": [
+                  "reported",
+                  "estimated"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "comparison_usd": {
+                "type": "number",
+                "minimum": 0
+              },
+              "completeness": {
+                "const": "complete"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evaluation": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "error",
+                  "not_run"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evaluation": {
+            "properties": {
+              "communicated": {
+                "properties": {
+                  "critical_total": {
+                    "type": "null"
+                  },
+                  "critical_passed": {
+                    "type": "null"
+                  },
+                  "accepted": {
+                    "type": "null"
+                  }
+                }
+              },
+              "full_target": {
+                "properties": {
+                  "critical_total": {
+                    "type": "null"
+                  },
+                  "critical_passed": {
+                    "type": "null"
+                  },
+                  "accepted": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          },
+          "acceptance": {
+            "properties": {
+              "communicated": {
+                "type": "null"
+              },
+              "full_target": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evaluation": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evaluation": {
+            "properties": {
+              "communicated": {
+                "properties": {
+                  "critical_total": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "critical_passed": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "accepted": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "full_target": {
+                "properties": {
+                  "critical_total": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "critical_passed": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "accepted": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

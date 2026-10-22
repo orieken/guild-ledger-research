@@ -1,0 +1,712 @@
+{
+  "schema_version": "guild-ledger.runtime-discovery/v1-draft",
+  "tool_id": "claude-code-headless",
+  "captured_at": "2026-10-21T05:47:18Z",
+  "surface": "Claude desktop app 3.1623.0 Code-tab session (bundled Claude Code 2.1.304, Agent SDK 0.3.304, entrypoint claude-desktop), launched from Claude Projects over Remote Control on a local macOS machine; interactive, not headless",
+  "version": "2.1.304",
+  "model_identity": {
+    "requested_label": "claude-opus-5-5[1m]",
+    "request_param": "claude-opus-5-5",
+    "response_model": "claude-opus-5-5",
+    "effort": "medium",
+    "thinking": "adaptive",
+    "verified_backend_revision": null,
+    "status": "observed label; backend unknown",
+    "evidence_ids": [
+      "E03",
+      "E04"
+    ]
+  },
+  "capabilities": [
+    {
+      "id": "identity.surface",
+      "status": "observed",
+      "value": "Claude desktop app (Code tab) embedded Claude Code session, launched from Claude Projects via Remote Control; interactive and attended",
+      "scope": "desktop-session",
+      "limitations": "Not headless; not the Homebrew terminal CLI",
+      "evidence_ids": [
+        "E01",
+        "E03",
+        "E16"
+      ]
+    },
+    {
+      "id": "identity.runtime_version",
+      "status": "observed",
+      "value": {
+        "bundled_claude_code": "2.1.304",
+        "desktop_app": "3.1623.0",
+        "agent_sdk": "0.3.304",
+        "also_on_disk": [
+          "2.1.299"
+        ]
+      },
+      "scope": "desktop-session",
+      "limitations": "App updates its bundled runtime independently of Homebrew",
+      "evidence_ids": [
+        "E02"
+      ]
+    },
+    {
+      "id": "identity.entrypoint",
+      "status": "observed",
+      "value": "claude-desktop",
+      "scope": "desktop-session",
+      "limitations": "CLAUDE_CODE_CHILD_SESSION=1 also set; meaning unknown",
+      "evidence_ids": [
+        "E03",
+        "E04"
+      ]
+    },
+    {
+      "id": "identity.model_label",
+      "status": "observed",
+      "value": {
+        "requested": "claude-opus-5-5[1m]",
+        "request_param": "claude-opus-5-5",
+        "response_model": "claude-opus-5-5"
+      },
+      "scope": "desktop-session",
+      "limitations": "Alias only; no dated snapshot exposed",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "identity.model_backend_verified",
+      "status": "unknown",
+      "value": null,
+      "scope": "all",
+      "limitations": "No verified backend revision observable",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "identity.effort",
+      "status": "observed",
+      "value": {
+        "effort": "medium",
+        "thinking": {
+          "type": "adaptive",
+          "display": "summarized"
+        },
+        "max_tokens": 128000
+      },
+      "scope": "desktop-session",
+      "limitations": "Differs from terminal session (claude-sonnet-5/high); client-recorded request params",
+      "evidence_ids": [
+        "E03",
+        "E04"
+      ]
+    },
+    {
+      "id": "identity.model_pinning",
+      "status": "documented",
+      "value": "Alias selection via --model/--effort or Code tab picker; no settings default set; no dated-revision pin observed",
+      "scope": "all",
+      "limitations": "Selection is not a backend pin",
+      "evidence_ids": [
+        "E11",
+        "E12",
+        "D01"
+      ]
+    },
+    {
+      "id": "cost.account_mode",
+      "status": "observed",
+      "value": "Pro subscription; extra usage disabled; no ANTHROPIC_API_KEY",
+      "scope": "account",
+      "limitations": "Plan reported by app tool; account identifiers withheld",
+      "evidence_ids": [
+        "E03",
+        "E10"
+      ]
+    },
+    {
+      "id": "instructions.user_files",
+      "status": "observed",
+      "value": "No ~/.claude/CLAUDE.md, ~/AGENTS.md, rules files or settings.local.json",
+      "scope": "user",
+      "limitations": "File-level check only",
+      "evidence_ids": [
+        "E05"
+      ]
+    },
+    {
+      "id": "instructions.project_files",
+      "status": "observed",
+      "value": "No project .claude/, CLAUDE.md or AGENTS.md in guild-ledger or guild-ledger-research",
+      "scope": "project",
+      "limitations": "Depth-limited listing",
+      "evidence_ids": [
+        "E13"
+      ]
+    },
+    {
+      "id": "instructions.host_prompt",
+      "status": "observed",
+      "value": "Desktop app and Projects host inject a large system prompt and per-turn reminders (~26k tokens system prompt at capture)",
+      "scope": "desktop-session",
+      "limitations": "Text not reproduced; cannot be disabled from inside the session",
+      "evidence_ids": [
+        "E09",
+        "E16"
+      ]
+    },
+    {
+      "id": "state.auto_memory",
+      "status": "observed",
+      "value": false,
+      "scope": "user+project",
+      "limitations": "autoMemoryEnabled=false and no memory dir for this project",
+      "evidence_ids": [
+        "E05",
+        "E15"
+      ]
+    },
+    {
+      "id": "state.hooks",
+      "status": "inferred",
+      "value": "No hooks in user settings; plugin- or app-contributed hooks not enumerated",
+      "scope": "desktop-session",
+      "limitations": "Effective hooks unverified",
+      "evidence_ids": [
+        "E05"
+      ]
+    },
+    {
+      "id": "plugins.local_settings",
+      "status": "observed",
+      "value": "engineering, data, searchfit-seo disabled in enabledPlugins and claude plugin list",
+      "scope": "user CLI config",
+      "limitations": "Does not govern desktop session",
+      "evidence_ids": [
+        "E05",
+        "E06"
+      ]
+    },
+    {
+      "id": "plugins.effective_in_session",
+      "status": "observed",
+      "value": "All three account plugins load: 37 skills and 17 plugin MCP servers present",
+      "scope": "desktop-session",
+      "limitations": "claude.ai account plugins enabled; local disable ignored on this surface",
+      "evidence_ids": [
+        "E07",
+        "E08",
+        "D02"
+      ]
+    },
+    {
+      "id": "mcp.connectors_effective",
+      "status": "observed",
+      "value": [
+        "Claude Docs",
+        "Indeed",
+        "visualize",
+        "ZipRecruiter"
+      ],
+      "scope": "desktop-session",
+      "limitations": "Connected despite disableClaudeAiConnectors=true",
+      "evidence_ids": [
+        "E05",
+        "E07"
+      ]
+    },
+    {
+      "id": "mcp.cli_configured",
+      "status": "observed",
+      "value": [],
+      "scope": "user CLI config",
+      "limitations": "claude mcp list empty",
+      "evidence_ids": [
+        "E06"
+      ]
+    },
+    {
+      "id": "tools.available_now",
+      "status": "observed",
+      "value": "Bash, Read, Write, Edit, Agent, WebFetch/WebSearch (deferred), Artifact, browser pane, desktop session/settings/PR tools, Projects messaging, scheduled tasks, Chrome and iOS simulator tool names",
+      "scope": "desktop-session",
+      "limitations": "Availability is not exercise; most not used",
+      "evidence_ids": [
+        "E07"
+      ]
+    },
+    {
+      "id": "tools.permission_mode",
+      "status": "observed",
+      "value": "auto (classifier-reviewed); app default_permission_mode=default; bypass and auto allowed by policy",
+      "scope": "desktop-session",
+      "limitations": "Classifier usage accounting unknown",
+      "evidence_ids": [
+        "E04",
+        "E11"
+      ]
+    },
+    {
+      "id": "tools.filesystem_scope",
+      "status": "inferred",
+      "value": "Ordinary user-level access on the Mac; no sandbox boundary observed",
+      "scope": "desktop-session",
+      "limitations": "Not probed beyond workspace",
+      "evidence_ids": [
+        "E01",
+        "E13"
+      ]
+    },
+    {
+      "id": "tools.editing",
+      "status": "observed",
+      "value": true,
+      "scope": "desktop-session",
+      "limitations": "Scratch file created and removed in report folder",
+      "evidence_ids": [
+        "E14"
+      ]
+    },
+    {
+      "id": "automation.desktop_programmatic_start",
+      "status": "documented",
+      "value": false,
+      "scope": "desktop-session",
+      "limitations": "Desktop docs describe no scripting interface; Projects/Remote Control can start sessions but interactively",
+      "evidence_ids": [
+        "D02",
+        "E16"
+      ]
+    },
+    {
+      "id": "automation.headless_start",
+      "status": "documented",
+      "value": "claude -p with --session-id, --no-session-persistence, --output-format json|stream-json",
+      "scope": "local-headless-cli",
+      "limitations": "Not exercised on this machine",
+      "evidence_ids": [
+        "D01",
+        "E12"
+      ]
+    },
+    {
+      "id": "automation.explicit_context",
+      "status": "documented",
+      "value": "--bare plus --append-system-prompt-file, --settings, --mcp-config --strict-mcp-config, --agents, --plugin-dir; --setting-sources, --safe-mode, --tools",
+      "scope": "local-headless-cli",
+      "limitations": "--bare requires API key or apiKeyHelper; Pro login has none",
+      "evidence_ids": [
+        "D01",
+        "E12",
+        "E03"
+      ]
+    },
+    {
+      "id": "automation.structured_events",
+      "status": "documented",
+      "value": "system/init (model, tools, mcp_servers, plugins, plugin_errors), system/api_retry, permission_denied, result",
+      "scope": "local-headless-cli",
+      "limitations": "Not exercised",
+      "evidence_ids": [
+        "D01"
+      ]
+    },
+    {
+      "id": "automation.stop",
+      "status": "documented",
+      "value": "SIGTERM exit 143, no result for in-flight turn; SIGINT/interrupt() ends turn",
+      "scope": "local-headless-cli",
+      "limitations": "Not exercised",
+      "evidence_ids": [
+        "D01"
+      ]
+    },
+    {
+      "id": "automation.limits",
+      "status": "documented",
+      "value": "--max-budget-usd (estimated, -p only), --permission-prompts none, --tools; --max-turns documented but absent from --help",
+      "scope": "local-headless-cli",
+      "limitations": "Budget may overshoot",
+      "evidence_ids": [
+        "D01",
+        "E12"
+      ]
+    },
+    {
+      "id": "automation.bare_auth_on_pro",
+      "status": "inferred",
+      "value": false,
+      "scope": "local-headless-cli",
+      "limitations": "Docs say bare never reads OAuth; no API key present; not run",
+      "evidence_ids": [
+        "D01",
+        "E03",
+        "E10"
+      ]
+    },
+    {
+      "id": "metrics.transcript_usage_schema",
+      "status": "observed",
+      "value": [
+        "input_tokens",
+        "output_tokens",
+        "cache_creation_input_tokens",
+        "cache_read_input_tokens",
+        "cache_creation.ephemeral_5m_input_tokens",
+        "cache_creation.ephemeral_1h_input_tokens",
+        "output_tokens_details.thinking_tokens",
+        "server_tool_use.web_search_requests",
+        "server_tool_use.web_fetch_requests",
+        "service_tier",
+        "speed",
+        "inference_geo",
+        "fallback_credit",
+        "iterations"
+      ],
+      "scope": "desktop-session",
+      "limitations": "Interactive transcript, not headless result",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "metrics.request_params_recorded",
+      "status": "observed",
+      "value": "api-request entries record model, max_tokens, thinking, effort, betas, context_management",
+      "scope": "desktop-session",
+      "limitations": "New entry type vs prior terminal tally; client-recorded",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "metrics.duplicate_entries",
+      "status": "observed",
+      "value": {
+        "assistant_entries": 22,
+        "distinct_message_ids": 12
+      },
+      "scope": "desktop-session",
+      "limitations": "Ratio varies by session; dedupe by message.id",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "metrics.child_accounting",
+      "status": "documented",
+      "value": "parent_tool_use_id on subagent messages in stream-json",
+      "scope": "local-headless-cli",
+      "limitations": "No subagent run here",
+      "evidence_ids": [
+        "D01"
+      ]
+    },
+    {
+      "id": "metrics.resume_cumulative",
+      "status": "documented",
+      "value": "Resumed -p runs report whole-conversation totals",
+      "scope": "local-headless-cli",
+      "limitations": "Not exercised",
+      "evidence_ids": [
+        "D01"
+      ]
+    },
+    {
+      "id": "metrics.hidden_calls",
+      "status": "unknown",
+      "value": null,
+      "scope": "desktop-session",
+      "limitations": "Auto-mode classifier, advisor and prompt-suggestion requests may not appear as usage records",
+      "evidence_ids": [
+        "E04",
+        "E11"
+      ]
+    },
+    {
+      "id": "metrics.context_composition",
+      "status": "observed",
+      "value": {
+        "messages": 38143,
+        "mcp_tools": 37634,
+        "system_tools": 27860,
+        "system_prompt": 25984,
+        "skills": 9534,
+        "mcp_instructions": 638,
+        "window": 1000000
+      },
+      "scope": "desktop-session",
+      "limitations": "Snapshot at capture",
+      "evidence_ids": [
+        "E09"
+      ]
+    },
+    {
+      "id": "cost.cost_field_in_transcript",
+      "status": "observed",
+      "value": false,
+      "scope": "desktop-session",
+      "limitations": "Single substring hit was command text",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "cost.client_estimate",
+      "status": "documented",
+      "value": "total_cost_usd and per-model breakdown on -p/SDK result; client-side estimate",
+      "scope": "local-headless-cli",
+      "limitations": "Not a billed charge",
+      "evidence_ids": [
+        "D01"
+      ]
+    },
+    {
+      "id": "cost.per_attempt_billed_usd",
+      "status": "unknown",
+      "value": null,
+      "scope": "account",
+      "limitations": "Pro exposes window percentages only",
+      "evidence_ids": [
+        "E10"
+      ]
+    },
+    {
+      "id": "artifacts.transcript_persistence",
+      "status": "observed",
+      "value": "Local .jsonl per session under ~/.claude/projects",
+      "scope": "desktop-session",
+      "limitations": "Retention/export policy not checked",
+      "evidence_ids": [
+        "E04"
+      ]
+    },
+    {
+      "id": "artifacts.stable_ids",
+      "status": "observed",
+      "value": [
+        "CLAUDE_CODE_SESSION_ID",
+        "message.id",
+        "requestId",
+        "uuid/parentUuid"
+      ],
+      "scope": "desktop-session",
+      "limitations": "",
+      "evidence_ids": [
+        "E03",
+        "E04"
+      ]
+    },
+    {
+      "id": "artifacts.interruption_survival",
+      "status": "documented",
+      "value": "SIGTERM leaves turn unfinished without result; files already written remain",
+      "scope": "local-headless-cli",
+      "limitations": "Not exercised",
+      "evidence_ids": [
+        "D01"
+      ]
+    },
+    {
+      "id": "harness.H0",
+      "status": "observed",
+      "value": false,
+      "scope": "desktop-session",
+      "limitations": "Account plugins, connectors and host prompt load regardless of user settings",
+      "evidence_ids": [
+        "E07",
+        "E08",
+        "E09"
+      ]
+    },
+    {
+      "id": "harness.H0_headless",
+      "status": "inferred",
+      "value": "Candidate via --bare with API key, or -p with strict MCP and empty tools; account skills may still load",
+      "scope": "local-headless-cli",
+      "limitations": "Untested",
+      "evidence_ids": [
+        "D01",
+        "D02"
+      ]
+    },
+    {
+      "id": "harness.H1",
+      "status": "inferred",
+      "value": "Possible via repo CLAUDE.md or --append-system-prompt-file; must match H0 launch mode",
+      "scope": "all",
+      "limitations": "Contaminated on desktop surface",
+      "evidence_ids": [
+        "D01",
+        "E07"
+      ]
+    },
+    {
+      "id": "harness.H2",
+      "status": "inferred",
+      "value": "Primitives exist (budget, tools, permission, subagent limits); workflow not built",
+      "scope": "all",
+      "limitations": "Desktop host adds its own workflow rules",
+      "evidence_ids": [
+        "D01",
+        "E12"
+      ]
+    },
+    {
+      "id": "harness.loom_context",
+      "status": "inferred",
+      "value": "Readable as context only; not native pipeline",
+      "scope": "all",
+      "limitations": "",
+      "evidence_ids": [
+        "D01"
+      ]
+    },
+    {
+      "id": "harness.loom_native",
+      "status": "unknown",
+      "value": null,
+      "scope": "all",
+      "limitations": "No loom on PATH per prior report; not re-checked",
+      "evidence_ids": [
+        "E17"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "kind": "command",
+      "reference": "evidence.md E01",
+      "description": "ps ancestry walk"
+    },
+    {
+      "id": "E02",
+      "kind": "command",
+      "reference": "evidence.md E02",
+      "description": "claude --version, $CLAUDE_CODE_EXECPATH --version, bundled dir listing, Info.plist"
+    },
+    {
+      "id": "E03",
+      "kind": "command",
+      "reference": "evidence.md E03",
+      "description": "selected env vars (sensitive values withheld)"
+    },
+    {
+      "id": "E04",
+      "kind": "file-analysis",
+      "reference": "evidence.md E04",
+      "description": "this session transcript schema tally"
+    },
+    {
+      "id": "E05",
+      "kind": "file",
+      "reference": "evidence.md E05",
+      "description": "~/.claude/settings.json keys, instruction files"
+    },
+    {
+      "id": "E06",
+      "kind": "command",
+      "reference": "evidence.md E06",
+      "description": "claude mcp list; claude plugin list"
+    },
+    {
+      "id": "E07",
+      "kind": "app-tool",
+      "reference": "evidence.md E07",
+      "description": "session_connectors_status"
+    },
+    {
+      "id": "E08",
+      "kind": "app-tool",
+      "reference": "evidence.md E08",
+      "description": "session skill listing; ListPlugins"
+    },
+    {
+      "id": "E09",
+      "kind": "app-tool",
+      "reference": "evidence.md E09",
+      "description": "get_usage context"
+    },
+    {
+      "id": "E10",
+      "kind": "app-tool",
+      "reference": "evidence.md E10",
+      "description": "get_usage plan"
+    },
+    {
+      "id": "E11",
+      "kind": "app-tool",
+      "reference": "evidence.md E11",
+      "description": "get_settings"
+    },
+    {
+      "id": "E12",
+      "kind": "command",
+      "reference": "evidence.md E12",
+      "description": "bundled claude --help grep"
+    },
+    {
+      "id": "E13",
+      "kind": "command",
+      "reference": "evidence.md E13",
+      "description": "git status/remote; project instruction listing"
+    },
+    {
+      "id": "E14",
+      "kind": "command",
+      "reference": "evidence.md E14",
+      "description": "scratch file create/read/remove"
+    },
+    {
+      "id": "E15",
+      "kind": "command",
+      "reference": "evidence.md E15",
+      "description": "memory dir check"
+    },
+    {
+      "id": "E16",
+      "kind": "project-timeline",
+      "reference": "evidence.md E16",
+      "description": "Remote Control proposal and active records"
+    },
+    {
+      "id": "E17",
+      "kind": "file",
+      "reference": "evidence.md E17",
+      "description": "prior reports in runtime-discovery"
+    },
+    {
+      "id": "D01",
+      "kind": "documentation",
+      "reference": "https://code.claude.com/docs/en/headless",
+      "description": "https://code.claude.com/docs/en/headless (retrieved 2026-10-21)"
+    },
+    {
+      "id": "D02",
+      "kind": "documentation",
+      "reference": "https://code.claude.com/docs/en/desktop",
+      "description": "https://code.claude.com/docs/en/desktop (retrieved 2026-10-21, first ~100k chars)"
+    },
+    {
+      "id": "D03",
+      "kind": "documentation",
+      "reference": "https://code.claude.com/docs/en/cli-reference",
+      "description": "https://code.claude.com/docs/en/cli-reference (linked, not re-fetched)"
+    },
+    {
+      "id": "D04",
+      "kind": "documentation",
+      "reference": "https://code.claude.com/docs/en/agent-sdk/cost-tracking",
+      "description": "https://code.claude.com/docs/en/agent-sdk/cost-tracking (linked, not re-fetched)"
+    }
+  ],
+  "open_questions": [
+    "Can account plugins and claude.ai connectors be excluded from desktop or terminal sessions without uninstalling them on claude.ai?",
+    "Does a terminal claude -p run load account skills/plugins despite enabledPlugins:false?",
+    "Does --bare authenticate on a Pro login with no API key?",
+    "Are auto-mode classifier, advisor and prompt-suggestion requests recorded in usage?",
+    "Is --max-turns supported in 2.1.304 despite absence from --help?",
+    "What does CLAUDE_CODE_CHILD_SESSION=1 mean on terminal sessions with no parent?",
+    "Which dated backend revision serves claude-opus-5-5 / claude-sonnet-5?"
+  ]
+}

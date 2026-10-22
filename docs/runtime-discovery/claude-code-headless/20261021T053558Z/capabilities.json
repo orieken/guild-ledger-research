@@ -1,0 +1,371 @@
+{
+  "schema_version": "guild-ledger.runtime-discovery/v1-draft",
+  "tool_id": "claude-code-headless",
+  "captured_at": "2026-10-21T05:37:00Z",
+  "surface": "Claude Code CLI running interactively in a local terminal (macOS Terminal.app) session, entrypoint=cli, process ancestry traced to Terminal.app/launchd with no cloud relay or coordinator. Same surface as the prior (pre-cleanup) claude-code-headless report, captured in a new independent session after the global cleanup in docs/research/15-local-agent-reset.md and the Loom removal in docs/research/14-global-loom-removal.md. Not a Claude Projects cloud thread, not a nested CLI inside one, and not itself a headless (-p) invocation.",
+  "version": "2.1.304",
+  "model_identity": {
+    "configured_label": "claude-sonnet-5",
+    "effort": "high",
+    "per_response_model_field": "claude-sonnet-5",
+    "dated_snapshot_pinned": null,
+    "backend_identity_verified": false,
+    "status": "observed",
+    "notes": "39/39 assistant transcript entries this session report model=claude-sonnet-5, matching this turn's own system reminder. Identical to the prior report's finding on a different session. --model/--effort select an alias or full id per session, not a pin to a dated backend revision.",
+    "evidence_ids": ["E04", "E11"]
+  },
+  "capabilities": [
+    {
+      "id": "identity.surface",
+      "status": "observed",
+      "value": "claude-code-cli/local-interactive",
+      "scope": "this session",
+      "limitations": "Confirmed by process-ancestry walk and CLAUDE_CODE_ENTRYPOINT=cli, same pattern as the prior report on a different PID/session. Ancestry beyond launchd (PID 1) not inspected.",
+      "evidence_ids": ["E01", "E02", "E04"]
+    },
+    {
+      "id": "identity.entrypoint_anomaly",
+      "status": "unknown",
+      "value": "CLAUDE_CODE_CHILD_SESSION=1, recurring in a second independently-launched session",
+      "scope": "this session's environment, and the prior report's",
+      "limitations": "Observed twice now across two separately started terminal sessions with identical plain-ancestry shapes. Weakens but does not resolve the hypothesis that it reflects true session parentage; meaning remains unestablished.",
+      "evidence_ids": ["E04"]
+    },
+    {
+      "id": "identity.runtime_version",
+      "status": "observed",
+      "value": "2.1.304",
+      "scope": "this machine's installed binary and this session's transcript",
+      "limitations": "Unchanged from the prior report; the cleanup affected configuration/state, not the installed binary version.",
+      "evidence_ids": ["E01", "E10", "E11"]
+    },
+    {
+      "id": "identity.environment",
+      "status": "observed",
+      "value": "macOS Darwin 25.6.0 arm64, user-level process (not root, no container observed), homebrew install",
+      "scope": "this machine",
+      "limitations": "Unchanged from the prior report. No sandbox/container boundary observed.",
+      "evidence_ids": ["E01", "E05", "E10"]
+    },
+    {
+      "id": "identity.model_pinning",
+      "status": "unknown",
+      "value": null,
+      "scope": "this session / this account",
+      "limitations": "Unchanged: no dated snapshot id is exposed to pin against.",
+      "evidence_ids": ["E04", "E09"]
+    },
+    {
+      "id": "identity.remote_control_surface",
+      "status": "observed",
+      "value": "claude doctor shows a 'Remote Control' line: 'Control this session from claude.ai/code or the Claude mobile app'",
+      "scope": "this session's doctor output",
+      "limitations": "Text observed only; not exercised. Unknown whether this is new behavior on this version or simply was not quoted in the prior report's evidence.md.",
+      "evidence_ids": ["E10"]
+    },
+    {
+      "id": "automation.start_fresh_task",
+      "status": "documented",
+      "value": "claude -p \"<prompt>\" [--session-id|-c/--continue|-r/--resume|--fork-session]; claude --bg for a named background agent managed by claude agents/attach/logs/stop/rm/respawn",
+      "scope": "this machine, same account",
+      "limitations": "Not executed this session (explicitly out of scope). Unchanged from the prior report, re-verified against this session's own --help capture.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.tool_removal_vs_approval",
+      "status": "documented",
+      "value": "--tools <list> (or \"\" to disable all) controls built-in tool CATALOG availability; --allowedTools/--disallowedTools control auto-APPROVAL only; --restricted strips code-running tools and WebFetch unless --tools names them",
+      "scope": "local CLI, per invocation",
+      "limitations": "Resolves the prior Codex review's F01 finding using this session's own verbatim --help text. Not executed; a prior metering probe proposal that relied on --allowedTools/permission-mode alone for tool removal would have been incorrect.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.max_turns_help_discrepancy",
+      "status": "observed",
+      "value": "--max-turns is documented in the official CLI reference but still absent from this exact version's --help output",
+      "scope": "this machine's installed binary, this version",
+      "limitations": "Same discrepancy the prior Codex review (F05) flagged; not re-resolved this session (would require executing the flag or reading source).",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.observe_progress",
+      "status": "documented",
+      "value": "--output-format stream-json --verbose --include-partial-messages; claude agents / claude logs <id> for background sessions",
+      "scope": "local CLI",
+      "limitations": "Not exercised this session.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.stop",
+      "status": "documented",
+      "value": "SIGTERM: exit 143, no result recorded, SessionEnd hooks still run. SIGINT/interrupt(): clean end. claude stop|kill <id> for background sessions.",
+      "scope": "local CLI",
+      "limitations": "Not exercised; documented behavior only.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "automation.retrieve_changes",
+      "status": "observed",
+      "value": "Direct local filesystem access -- this session's working tree already IS the local checkout.",
+      "scope": "this machine",
+      "limitations": "Unchanged from the prior report.",
+      "evidence_ids": ["E15"]
+    },
+    {
+      "id": "instructions.user_rules",
+      "status": "observed",
+      "value": "~/.claude/rules is now a real, empty directory (0 files); previously a symlink to ai-assistant-dot-files/shared/rules holding 17 files",
+      "scope": "every project on this machine, per account",
+      "limitations": "Directly confirms the rules-removal claimed in docs/research/15-local-agent-reset.md and docs/research/14-global-loom-removal.md's removed-paths list. This session's own system prompt carried no corresponding personal-rules section.",
+      "evidence_ids": ["E06"]
+    },
+    {
+      "id": "instructions.project_instructions_source",
+      "status": "observed",
+      "value": "No CLAUDE.md or AGENTS.md found anywhere in the project tree or at the home directory; the previously-loaded /Users/oscarrieken/AGENTS.md (76,630 bytes) no longer exists",
+      "scope": "this project tree, walked up to the home directory",
+      "limitations": "A complete reversal of the prior report's finding. Confirmed both by filesystem absence (E18) and by this session's own system prompt carrying no corresponding project-instructions section.",
+      "evidence_ids": ["E06", "E18"]
+    },
+    {
+      "id": "instructions.hooks",
+      "status": "observed",
+      "value": false,
+      "scope": "this session",
+      "limitations": "Unchanged from the prior report: no hooks key in the only active settings file; no project settings file; no managed-settings file.",
+      "evidence_ids": ["E06", "E07", "E17"]
+    },
+    {
+      "id": "instructions.skills_plugins_mcp",
+      "status": "observed",
+      "value": "~/.claude/skills reduced to only a synced/ subfolder (13 built-in/account skill dirs + manifest.json, matching this session's own anthropic-skills:* listing); zero MCP servers configured; all three previously-synced plugins (engineering, data, searchfit-seo) explicitly disabled in both settings.json and claude plugin list",
+      "scope": "account, every project on this machine",
+      "limitations": "A complete reversal of the prior report's 71-skill/~12-MCP-server finding. The on-disk plugin-directory cache file still exists but is inert per claude plugin list's own disabled status.",
+      "evidence_ids": ["E06", "E08"]
+    },
+    {
+      "id": "instructions.settings_cleanup_flags",
+      "status": "observed",
+      "value": "settings.json now explicitly declares autoMemoryEnabled:false, disableClaudeAiConnectors:true, enabledPlugins:{engineering@synced:false,data@synced:false,searchfit-seo@synced:false}",
+      "scope": "this account, this machine",
+      "limitations": "Directly confirms the settings-level claims in docs/research/15-local-agent-reset.md with this session's own file read, not secondhand.",
+      "evidence_ids": ["E06"]
+    },
+    {
+      "id": "instructions.exclusion_mechanisms",
+      "status": "documented",
+      "value": "--bare, --safe-mode, --restricted, --setting-sources, --strict-mcp-config each strip a documented subset of CLAUDE.md/AGENTS.md/skills/plugins/hooks/MCP/keychain discovery",
+      "scope": "local CLI, per invocation",
+      "limitations": "Not applied this session; now less necessary for this project directory since the account-level cleanup already produced an empty discovery chain (see instructions.project_instructions_source / instructions.user_rules). Still useful for a disposable future workspace that doesn't share this account's history.",
+      "evidence_ids": ["E09"]
+    },
+    {
+      "id": "tools.edit_shell_tests",
+      "status": "observed",
+      "value": true,
+      "scope": "this session",
+      "limitations": "Bash/Read/Write/Edit available and used for read-only inventory and file writes; no application tests run.",
+      "evidence_ids": ["E06", "E07"]
+    },
+    {
+      "id": "tools.subagents",
+      "status": "documented",
+      "value": "Agent tool available; default spawn depth 3, default concurrency 20, neither overridden in this session's environment",
+      "scope": "this session (defaults apply)",
+      "limitations": "Not exercised this session (task constraint, and the task explicitly forbids spawning subagents for this discovery).",
+      "evidence_ids": ["E19"]
+    },
+    {
+      "id": "tools.permissions",
+      "status": "observed",
+      "value": "14/14 permission-mode transcript entries this session read 'auto'; Auto Mode active per the system reminder",
+      "scope": "this session",
+      "limitations": "Classifier decision details are not exported into the transcript.",
+      "evidence_ids": ["E22"]
+    },
+    {
+      "id": "tools.loom_binary",
+      "status": "observed",
+      "value": "loom not found on PATH; previously /opt/homebrew/bin/loom v0.1.1 with install/health/tools subcommands but no run/pipeline subcommand",
+      "scope": "this machine",
+      "limitations": "Confirms the 55-path global Loom removal recorded in .local-backups/loom-global-20261021T034807Z/receipt.json (loom_on_path: null). Whether a pipeline-capable build exists anywhere else (e.g. rebuildable from the sibling ai-assistant-dot-files source checkout) is unknown; that checkout was out of scope to inspect.",
+      "evidence_ids": ["E14", "E20"]
+    },
+    {
+      "id": "metrics.per_call_usage",
+      "status": "observed",
+      "value": "Local transcript records the same per-assistant-entry usage schema as the prior report: input_tokens, output_tokens, cache_creation_input_tokens, cache_read_input_tokens, cache_creation.{5m,1h}, output_tokens_details.thinking_tokens, server_tool_use, service_tier, speed, inference_geo, fallback_credit, iterations[], plus message.id/requestId/timestamp",
+      "scope": "this session's local transcript file",
+      "limitations": "Schema unchanged by the cleanup. 39 assistant entries at time of inspection collapsed to 9 distinct message.id/requestId values.",
+      "evidence_ids": ["E11"]
+    },
+    {
+      "id": "metrics.duplication_ratio_not_fixed",
+      "status": "observed",
+      "value": "This session: 39 assistant entries -> 9 distinct ids (~4.3x). Prior report's session: 40 -> 17 (~2.35x).",
+      "scope": "cross-session comparison, this account",
+      "limitations": "New finding this session. Confirms the duplication multiplier varies by session and must be computed per session via dedup, not assumed from a single prior observation.",
+      "evidence_ids": ["E11"]
+    },
+    {
+      "id": "metrics.cost_field_presence",
+      "status": "observed",
+      "value": false,
+      "scope": "this session's interactive transcript",
+      "limitations": "No total_cost_usd/costUSD field exists anywhere in this transcript; the 4 raw substring matches were this session's own system-prompt prose about 'the cost of pausing to confirm,' confirmed false positives by context inspection. Matches the prior report's finding on an independent session.",
+      "evidence_ids": ["E12"]
+    },
+    {
+      "id": "metrics.usage_vs_modelusage",
+      "status": "documented",
+      "value": "usage excludes subagent tokens (main loop only); total_cost_usd and modelUsage include subagent requests",
+      "scope": "any -p/SDK call on this surface",
+      "limitations": "Unchanged; not exercised this session; carried from prior documentation citation, not re-fetched.",
+      "evidence_ids": ["D02"]
+    },
+    {
+      "id": "metrics.resume_accumulation",
+      "status": "documented",
+      "value": "A resumed/continued call's result reports the session's whole cumulative spend (since v2.1.277); independent calls must be summed by the caller",
+      "scope": "any -p/SDK call with --resume/--continue",
+      "limitations": "Unchanged; not exercised this session.",
+      "evidence_ids": ["D01"]
+    },
+    {
+      "id": "metrics.crash_zeroing",
+      "status": "documented",
+      "value": "error_during_execution on a session crash may carry usage, total_cost_usd, and modelUsage all zeroed; recovery uses the prior turn's result or, for input/cache tokens only, summed per-step usage",
+      "scope": "any -p/SDK call",
+      "limitations": "Unchanged; not exercised; no crash occurred in this session.",
+      "evidence_ids": ["D02"]
+    },
+    {
+      "id": "metrics.subagent_lineage",
+      "status": "documented",
+      "value": "parent_tool_use_id distinguishes subagent messages (null for main loop); each subagent gets its own transcript file at a documented path",
+      "scope": "any session using the Agent tool or forked skills",
+      "limitations": "Not exercised this session -- no subagents were spawned (E13), and the task explicitly forbids it for this discovery.",
+      "evidence_ids": ["E13"]
+    },
+    {
+      "id": "metrics.aggregate_local_usage",
+      "status": "documented",
+      "value": "/usage shows a local Session block plus, on Pro/Max/Team/Enterprise, a plan-usage breakdown attributing recent usage to skills/subagents/plugins/MCP servers, computed only from local session history on this machine",
+      "scope": "this machine, this account",
+      "limitations": "Not run this session, to avoid an extra request. Unchanged from the prior report.",
+      "evidence_ids": ["D04"]
+    },
+    {
+      "id": "cost.accounting_mode",
+      "status": "observed",
+      "value": "individual Pro/Max subscription (inferred from no ANTHROPIC_API_KEY, OAuth credentials file, and claude doctor's organization-policy/managed-settings messages)",
+      "scope": "this account",
+      "limitations": "Unchanged from the prior report; still an inference from indirect indicators, not a direct account-tier readout. The cleanup did not touch billing mode.",
+      "evidence_ids": ["E04", "E06", "E10"]
+    },
+    {
+      "id": "cost.per_attempt_usd",
+      "status": "inferred",
+      "value": false,
+      "scope": "this interactive session",
+      "limitations": "No cost field exists in this session's transcript. Unchanged conclusion from the prior report; the cleanup does not change where/when a cost field would appear.",
+      "evidence_ids": ["E12"]
+    },
+    {
+      "id": "artifacts.interruption_survival",
+      "status": "documented",
+      "value": "SIGTERM: exit 143, unfinished turn with no result recorded, SessionEnd hooks still run, Bash process tree killed. SIGINT/interrupt(): turn ends cleanly. Working-directory deletion mid-session: session keeps running, shell commands fail until restored.",
+      "scope": "local CLI / Agent SDK",
+      "limitations": "Not exercised this session (see proposed probe P2).",
+      "evidence_ids": ["D01"]
+    },
+    {
+      "id": "artifacts.stable_ids",
+      "status": "observed",
+      "value": "CLAUDE_CODE_SESSION_ID (36-char UUID) matches the transcript filename; per-response message.id (msg_) and requestId (req_); per-transcript-entry uuid/parentUuid",
+      "scope": "this session",
+      "limitations": "Session-id value itself not reproduced in evidence.md (only its length confirmed), consistent with the prior report's practice.",
+      "evidence_ids": ["E04", "E11"]
+    },
+    {
+      "id": "artifacts.local_file_durability",
+      "status": "observed",
+      "value": "This session's transcript and all written files are ordinary files on local disk, not container-ephemeral; guild-ledger-research is a local git working tree with origin set but no local commits yet",
+      "scope": "this machine",
+      "limitations": "Unchanged from the prior report; says nothing about export, backup, or retention policy beyond ordinary filesystem/git guarantees.",
+      "evidence_ids": ["E11", "E15", "E16"]
+    },
+    {
+      "id": "harness.H0",
+      "status": "observed",
+      "value": "materially closer to a clean baseline: this session's own instruction-discovery chain (rules, project AGENTS.md/CLAUDE.md, personal skills, MCP, synced plugins) is empty for this project directory, directly confirmed via this session's own system prompt and file listings, not merely inferred",
+      "scope": "local CLI, this account, this project directory",
+      "limitations": "Still account/filesystem-level state, not a sandboxed per-attempt isolation boundary -- the prior Codex review's F07 concern about the current directory not being an experimental isolation boundary stands unchanged. A fresh disposable workspace clone remains the stronger guarantee for an admitted H0 profile.",
+      "evidence_ids": ["E06", "E07", "E17", "E18"]
+    },
+    {
+      "id": "harness.H1",
+      "status": "documented",
+      "value": "feasible via a single CLAUDE.md or .claude/settings.json committed at a per-condition repo root, now starting from an empty competing-instruction floor",
+      "scope": "per-condition local checkout",
+      "limitations": "Depends on which condition repo is checked out as cwd; not exercised this session. Inferred from the settings-scope/discovery-rule documentation rather than from running a per-condition checkout.",
+      "evidence_ids": ["D03", "D06"]
+    },
+    {
+      "id": "harness.H2",
+      "status": "inferred",
+      "value": "instruction-level, with real local enforcement primitives (--max-budget-usd, --permission-mode/--permission-prompts none, --tools \"\" for genuine tool removal, subagent depth/concurrency/maxTurns) not documented as available on the cloud surface",
+      "scope": "local CLI",
+      "limitations": "No built workflow exists yet; these are primitives only, none exercised this session. --tools \"\" clarification is new this session (see automation.tool_removal_vs_approval).",
+      "evidence_ids": ["E09", "E19"]
+    },
+    {
+      "id": "harness.H3_loom",
+      "status": "observed",
+      "value": "differently blocked than before: no Loom binary found on PATH at all (previously an installed binary existed but lacked a run subcommand)",
+      "scope": "this machine's PATH",
+      "limitations": "Whether a pipeline-capable Loom build exists anywhere else (a different release, or rebuildable from the sibling ai-assistant-dot-files source checkout the prior Codex review F03 referenced) is unknown from this session; that checkout was out of scope to inspect.",
+      "evidence_ids": ["E14", "E20"]
+    }
+  ],
+  "evidence": [
+    {"id": "E01", "kind": "command", "reference": "which claude; claude --version"},
+    {"id": "E02", "kind": "command", "reference": "ps -p $PPID -o pid,ppid,comm; ppid-walk loop -- process ancestry to Terminal.app/launchd"},
+    {"id": "E03", "kind": "command", "reference": "env | cut -d= -f1 | grep -i claude (names only)"},
+    {"id": "E04", "kind": "command", "reference": "printenv per-variable (zsh-compatible, not bash ${!v} indirection); wc -c on session-id length only"},
+    {"id": "E05", "kind": "command", "reference": "whoami, hostname, uname -srm, node --version, date -u"},
+    {"id": "E06", "kind": "file_structure", "reference": "ls -la ~/.claude/; cat ~/.claude/settings.json; ls -la ~/.claude/CLAUDE.md; ls -la ~/.claude/rules + file; ls -la ~/.claude/skills + find synced; cat ~/.claude/framework-install.json (absent); ls -la ~/.claude/plugins/"},
+    {"id": "E07", "kind": "command", "reference": "ls/cat on guild-ledger/.claude and guild-ledger-research/.claude -- both absent"},
+    {"id": "E08", "kind": "command", "reference": "claude mcp list; claude plugin list; cat ~/.claude/mcp-needs-auth-cache.json"},
+    {"id": "E09", "kind": "command", "reference": "claude --help (full flag/subcommand text captured verbatim this session)"},
+    {"id": "E10", "kind": "command", "reference": "claude doctor"},
+    {"id": "E11", "kind": "file_schema", "reference": "~/.claude/projects/-Users-oscarrieken-Projects-Rieken-guild-ledger/0ce38a75-14d9-451d-ae7f-c49bce7d1eda.jsonl -- keys/types/counts via local python3 -I script"},
+    {"id": "E12", "kind": "command", "reference": "grep for cost field names/strings in the same transcript, plus context inspection -- all false positives"},
+    {"id": "E13", "kind": "command", "reference": "find on the project's transcript directory -- one other, unrelated sibling session present; no subagents/ subfolder under this session's own id"},
+    {"id": "E14", "kind": "command", "reference": "which loom; loom --version; loom --help -- loom not found"},
+    {"id": "E15", "kind": "command", "reference": "git status --short --branch; git remote -v; git log --oneline -5 (guild-ledger-research)"},
+    {"id": "E16", "kind": "command", "reference": "create/read/remove scratch-edit-probe file in the new report folder"},
+    {"id": "E17", "kind": "command", "reference": "ls on managed-settings.json candidate paths -- both absent"},
+    {"id": "E18", "kind": "command", "reference": "find for CLAUDE.md/AGENTS.md under the project tree; ls -la ~/AGENTS.md and ~/CLAUDE.md -- both absent"},
+    {"id": "E19", "kind": "command", "reference": "printenv for subagent-depth/concurrency/model override vars -- all unset"},
+    {"id": "E20", "kind": "file_structure", "reference": ".local-backups/agent-clean-state-20261021T035433Z/{manifest,receipt}.json and .local-backups/loom-global-20261021T034807Z/{receipt,removed-paths}.json -- operation records (paths, hashes, counts), no archived file content read"},
+    {"id": "E21", "kind": "file_structure", "reference": "docs/runtime-discovery/codex-headless/20261021T053548Z/report.md -- sibling Codex session's own discovery report, read for cross-reference only"},
+    {"id": "E22", "kind": "file_schema", "reference": "same transcript as E11 -- permission-mode entry tally (type=='permission-mode', mode field) via local python3 -I script"},
+    {"id": "D01", "kind": "documentation", "reference": "https://code.claude.com/docs/en/headless", "retrieved": "2026-10-21 (prior session; reused, not re-fetched this session)"},
+    {"id": "D02", "kind": "documentation", "reference": "https://code.claude.com/docs/en/agent-sdk/cost-tracking", "retrieved": "2026-10-21 (prior session; reused, not re-fetched this session)"},
+    {"id": "D03", "kind": "documentation", "reference": "https://code.claude.com/docs/en/settings", "retrieved": "2026-10-21 (prior session; reused, not re-fetched this session)"},
+    {"id": "D04", "kind": "documentation", "reference": "https://code.claude.com/docs/en/costs", "retrieved": "2026-10-21 (prior session; reused, not re-fetched this session)"},
+    {"id": "D05", "kind": "documentation", "reference": "https://code.claude.com/docs/en/sub-agents", "retrieved": "2026-10-21 (prior session; reused, not re-fetched this session)"},
+    {"id": "D06", "kind": "documentation", "reference": "https://code.claude.com/docs/en/memory", "retrieved": "2026-10-21 (prior session; reused, not re-fetched this session)"}
+  ],
+  "open_questions": [
+    "What does CLAUDE_CODE_CHILD_SESSION=1 mean, now observed in two independently-launched plain local terminal sessions with no parent Claude/cloud process in their ancestry?",
+    "Does --bare authenticate at all under this account's current OAuth-only setup, now that the instruction/plugin/MCP chain is already empty without it?",
+    "Does a -p/--output-format json call on this account actually emit total_cost_usd/modelUsage/session_id as documented, and do the figures look reasonable against /usage, on this post-cleanup state?",
+    "Does the documented SIGTERM behavior (exit 143, no result recorded) hold on this exact installed version and OS?",
+    "Does a pipeline-capable Loom build exist anywhere on this machine or in the sibling ai-assistant-dot-files source checkout, now that the global installation has been removed entirely?",
+    "Is the 'Remote Control' line in claude doctor's output new on this version, or was it simply not quoted in the prior report's evidence.md?",
+    "Why does the duplication ratio between assistant transcript entries and distinct message/request ids differ so much between sessions (2.35x vs 4.3x), and is there a predictable driver (turn count, tool-call density, thinking-block count)?",
+    "Is --max-turns genuinely unsupported on this version despite being documented, or just omitted from --help text?"
+  ]
+}
