@@ -34,7 +34,7 @@ The envelope contains the mechanical stack, paths, invocation commands, interfac
 | P2 | Main rules, common failures, persistence and interaction expectations | Some edge semantics unspecified |
 | P3 | Numbered rules, explicit boundaries, error mapping, examples, exclusions | Implementation choices remain, behavior is well defined |
 
-The [T02 prompt folder](prompts/T02/) contains one complete worked set. Task-specific starter paths and commands are proposed contracts until the starter is implemented and verified.
+The [T01 task package](../../benchmarks/T01/README.md) now has a runnable starter, visible tests and draft P1–P3 prompts. It remains unfrozen pending independent full-target evaluation and input disclosure review. The [T02 prompt folder](prompts/T02/) contains one complete worked set. Task-specific starter paths and commands are proposed contracts until the starter is implemented and verified.
 
 ## Information disclosure and scoring
 

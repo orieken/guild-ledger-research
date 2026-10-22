@@ -1,0 +1,29 @@
+services:
+  guild:
+    build: {context: ., dockerfile: services/guild/Dockerfile}
+    ports: ["127.0.0.1:18000:8000"]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+  armory:
+    build: {context: services/armory}
+    ports: ["127.0.0.1:18001:8001"]
+    healthcheck:
+      test: [CMD, /armory, --healthcheck]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+  web:
+    build: {context: web}
+    ports: ["127.0.0.1:15173:5173"]
+    environment:
+      GUILD_PROXY_TARGET: http://guild:8000
+    depends_on:
+      guild: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://localhost:5173').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 2s
+      timeout: 2s
+      retries: 30

@@ -1,0 +1,2 @@
+# Common T01 envelope
+Use the supplied Guild Ledger workspace and README for stack, commands, editable paths, fixtures, API shapes and visible tests. Change only `web/src/` and `services/guild/app.py`. Dependencies, infrastructure, fixtures and tests are fixed. Do not deploy, publish, commit or access external services. No live clarifications are available. If blocked on required human input, stop and report needs_human. Attempt limits are supplied by the external supervisor.

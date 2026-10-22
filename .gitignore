@@ -1,1 +1,4 @@
 /ci-offline-results/
+
+**/__pycache__/
+/ci-benchmark-results/

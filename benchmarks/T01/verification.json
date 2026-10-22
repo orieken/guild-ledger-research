@@ -1,0 +1,183 @@
+{
+  "schema": "guild-ledger.visible-validation/v1",
+  "live_model_calls_enabled": false,
+  "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+  "checks": [
+    {
+      "check": "starter-build",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 5.85
+    },
+    {
+      "check": "starter-startup",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 0.11
+    },
+    {
+      "check": "starter-api-red",
+      "returncode": 1,
+      "expected": "fail",
+      "passed": true,
+      "seconds": 0.07
+    },
+    {
+      "check": "starter-ui-red",
+      "returncode": 2,
+      "expected": "fail",
+      "passed": true,
+      "seconds": 3.05
+    },
+    {
+      "check": "starter-web-build",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 1.52
+    },
+    {
+      "check": "witness-build",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 6.82
+    },
+    {
+      "check": "witness-visible",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 1.1
+    },
+    {
+      "check": "witness-web-build",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 1.58
+    },
+    {
+      "check": "ordering-build",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 3.28
+    },
+    {
+      "check": "ordering-detected",
+      "returncode": 1,
+      "expected": "fail",
+      "passed": true,
+      "seconds": 0.08
+    },
+    {
+      "check": "filter-build",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 3.23
+    },
+    {
+      "check": "filter-detected",
+      "returncode": 1,
+      "expected": "fail",
+      "passed": true,
+      "seconds": 0.1
+    },
+    {
+      "check": "missing-status-build",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 3.2
+    },
+    {
+      "check": "missing-status-detected",
+      "returncode": 1,
+      "expected": "fail",
+      "passed": true,
+      "seconds": 0.08
+    },
+    {
+      "check": "alert-build",
+      "returncode": 0,
+      "expected": "pass",
+      "passed": true,
+      "seconds": 0.29
+    },
+    {
+      "check": "alert-detected",
+      "returncode": 2,
+      "expected": "fail",
+      "passed": true,
+      "seconds": 2.02
+    }
+  ],
+  "verification_passed": true,
+  "scope": "Visible checks only. Witness intentionally does not implement the full target.",
+  "source_sha256": {
+    "benchmarks/T01/starter/.dockerignore": "a12c1cb998998cb698bc7fdc80e08a3950ae59f83b266e3c746483bf29a0d1f0",
+    "benchmarks/T01/starter/.gitignore": "04293cc2563cc5ab2e5407b9210bbaa1ae98862bda9c0a12c4bfff54018cdc8e",
+    "benchmarks/T01/starter/Makefile": "2ae4260af6b7901d05769f627814f33cad5c0cd5ca937cae859cc4edfa3d8837",
+    "benchmarks/T01/starter/README.md": "c03bf02f273840b42ba3b1d05b186afcb1748795c69256da7dc456823d337df3",
+    "benchmarks/T01/starter/compose.yaml": "5b152fc81f9e45a02484587485c42c98cb7ac70db73011e6120cc257b9ddbbc1",
+    "benchmarks/T01/starter/fixtures/quests.json": "9178370f7872d02c806970a34c96d047551bac369f78146f7be89f8cae79ca67",
+    "benchmarks/T01/starter/services/armory/Dockerfile": "78c6c9fb9366634a246022c40d444113a5551f463ca33c1deb8cca3601b4dded",
+    "benchmarks/T01/starter/services/armory/go.mod": "9934aaf92828888739bc3136652c574cee41d7206f4449df5f714a3d8c48527c",
+    "benchmarks/T01/starter/services/armory/main.go": "26edbf33daa2fa1e86555c415f617e1e8b95a83aadc48bdd0bde88dfc99599e1",
+    "benchmarks/T01/starter/services/guild/Dockerfile": "486209e374d828ea26dba475c2ebd23ec9f538a5f416018a497d3ad9401e7c28",
+    "benchmarks/T01/starter/services/guild/app.py": "4a65ff8cdfe2f3a0545aa6eb9bec5b8ac3226e3930c13a316df328f63ffad077",
+    "benchmarks/T01/starter/services/guild/requirements.txt": "de5e2f252b497a536e36a2f863d7d46f47c2e9febfb52289a2c7c7d0a1e4f698",
+    "benchmarks/T01/starter/tests/test_quests.py": "7d94d9b07dedbd0efa22b9cbe6d2b4021316461c4f651eca1fe855a90849caec",
+    "benchmarks/T01/starter/tests/test_startup.py": "ff23f0f71fd1002a55b0dffba22b479e2808aa2386a46653d85855f3dbd44fb3",
+    "benchmarks/T01/starter/web/.dockerignore": "a12c1cb998998cb698bc7fdc80e08a3950ae59f83b266e3c746483bf29a0d1f0",
+    "benchmarks/T01/starter/web/Dockerfile": "c849c75f259ad63673f1b4d16b95a9f04d16257859f848b6573f1b94a5b33899",
+    "benchmarks/T01/starter/web/index.html": "081ff1bfb24a8fefb3b3f6897014221714004c5dd582f76ecf38d44c1bde3b73",
+    "benchmarks/T01/starter/web/package-lock.json": "47e95d29bb08174c79fb52964e9fe691890ef5bef66161b3f208321a96e4a707",
+    "benchmarks/T01/starter/web/package.json": "b88be01311c2b7c59a03bc6a05a4f4040e85a762596730eb4fffe9426a38e144",
+    "benchmarks/T01/starter/web/src/App.vue": "c6c528d56ec32933116bc1cb2b9efc60618b69575fd8148452871c54f15b88b6",
+    "benchmarks/T01/starter/web/src/main.ts": "8cce7eb400795e8089a5922391a90f5148ec373c6dedcc727c8c2a3dc978e0ba",
+    "benchmarks/T01/starter/web/tests/quests.test.ts": "133df5e29d7a87da5f611ad3a6601ebbbbb1ea52a79a9953a09487be29d8c1ba",
+    "benchmarks/T01/starter/web/tests/setup.ts": "84a14bf69a37e2050bd1f67ca646118c67cb96f7d7142f97417ea46d54ff45ab",
+    "benchmarks/T01/starter/web/tsconfig.json": "a14bef6d2826547e57a3f79cc14ebe672ea3b638972762eb6d204d2fa524a385",
+    "benchmarks/T01/starter/web/vite.config.ts": "be62236ddd3619bcde98af153d354185f1e255a87dd835798e2f06deb3ae190c",
+    "benchmarks/T01/prompts/P1.md": "1bbf484b18c7efbed17ba41b9abac648caeff6a7bbda2ecdf33cedad64839e79",
+    "benchmarks/T01/prompts/P2.md": "6b6a8b30db3fabcad3ff253679f3521f4f119f6633aac81352091c1729507d23",
+    "benchmarks/T01/prompts/P3.md": "f53229f9998fef39e72487449f241d59b274650b5152af5c1e402003155fa28c",
+    "benchmarks/T01/prompts/envelope.md": "c8425fd1ddeb7cce904c512829907b8110f5d9f8121b6e512dd1fd297138dbcb",
+    "benchmarks/T01/validation/visible-reference.py": "7798b3a95bf1c09821e1ef138e43bd434f62057f6b6f2c8eb83dd0ee8581086a",
+    "benchmarks/T01/validation/visible-reference.vue": "32d1e6ad9a3756a46109d05d975a5a3c5d769fb36acfd52d9ff1909414bfd9e8",
+    "scripts/package_benchmark.py": "ef2c631cc7d0216843e1e1ffef190a0b2b4ee5c0282e693113a7c6b8fef41724",
+    "scripts/verify_t01.py": "960574fdf21b21385c6bbbed702f649a020cefd81d74f89d8457e86ec8cb0518",
+    "scripts/tests/test_benchmark_package.py": "d3b31afeb44e3ac977bb7b2e6cebc8d10d39e794927cfb7c2d957944f9603428"
+  },
+  "harness_smokes": {
+    "H0": {
+      "completed": true,
+      "synthetic": true,
+      "image_id": "sha256:047010df27105b1e89c0d9a48d77125035ef04756cdd45653fdae04ad27f3f71",
+      "task_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d"
+    },
+    "H1": {
+      "completed": true,
+      "synthetic": true,
+      "image_id": "sha256:047010df27105b1e89c0d9a48d77125035ef04756cdd45653fdae04ad27f3f71",
+      "task_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d"
+    },
+    "H2": {
+      "completed": true,
+      "synthetic": true,
+      "image_id": "sha256:047010df27105b1e89c0d9a48d77125035ef04756cdd45653fdae04ad27f3f71",
+      "task_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d"
+    }
+  },
+  "limitations": [
+    "Visible-check validation only; no independent full-target evaluator.",
+    "H3 uses a fixed mock spec; H4 uses its upstream demo; neither is a T01 attempt.",
+    "No isolated application-test tool integration in agent workers yet.",
+    "GitHub workflow added locally, not dispatched."
+  ]
+}

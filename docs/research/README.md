@@ -89,3 +89,5 @@ Current runtime recommendation and treatment definitions: [runtime comparison](1
 15. [H4 Harness² adaptive comparison](19-harness2-adaptive-comparison.md): native learning versus frozen optimization, stream isolation, full optimization cost and offline demo setup.
 
 16. [Offline CI verification](20-offline-ci-verification.md): all container builds and offline suites, retained evidence, and the approved Loom source snapshot.
+
+17. [Canonical T01 starter and visible checks](../../benchmarks/T01/README.md): reproducible task bundles, P1–P3 prompts, disclosure inventory and zero-model red/green/mutation verification.

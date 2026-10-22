@@ -1,0 +1,46 @@
+[
+  {
+    "id": "q-delta",
+    "title": "Delta Watch",
+    "description": "Watch the river crossing.",
+    "difficulty": "easy",
+    "status": "closed",
+    "min_party_size": 1,
+    "max_party_size": 4,
+    "min_level": 1,
+    "reward_gold": 30
+  },
+  {
+    "id": "q-beacon",
+    "title": "Beacon Road",
+    "description": "Relight the mountain beacon.",
+    "difficulty": "medium",
+    "status": "open",
+    "min_party_size": 1,
+    "max_party_size": 4,
+    "min_level": 3,
+    "reward_gold": 30
+  },
+  {
+    "id": "q-ash",
+    "title": "Ash Orchard",
+    "description": "Recover the orchard bells.",
+    "difficulty": "easy",
+    "status": "open",
+    "min_party_size": 1,
+    "max_party_size": 4,
+    "min_level": 1,
+    "reward_gold": 30
+  },
+  {
+    "id": "q-cairn",
+    "title": "Cairn Echo",
+    "description": "Survey the silent cairn.",
+    "difficulty": "hard",
+    "status": "open",
+    "min_party_size": 1,
+    "max_party_size": 4,
+    "min_level": 5,
+    "reward_gold": 30
+  }
+]

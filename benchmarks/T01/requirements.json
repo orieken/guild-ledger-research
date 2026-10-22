@@ -1,0 +1,80 @@
+{
+  "schema": "guild-ledger.task-requirements/v1",
+  "task": "T01",
+  "status": "draft-unfrozen",
+  "requirements": [
+    {
+      "id": "R01",
+      "behavior": "list endpoint and fixture objects",
+      "exposure": "common"
+    },
+    {
+      "id": "R02",
+      "behavior": "detail endpoint and description",
+      "exposure": "common"
+    },
+    {
+      "id": "R03",
+      "behavior": "title and ID ordering",
+      "exposure": "common-example; P2; P3"
+    },
+    {
+      "id": "R04",
+      "behavior": "difficulty filter",
+      "exposure": "common-example; P2; P3"
+    },
+    {
+      "id": "R05",
+      "behavior": "trimmed case-insensitive title query",
+      "exposure": "P3; P2 partial"
+    },
+    {
+      "id": "R06",
+      "behavior": "status filter and AND composition",
+      "exposure": "P2 partial; P3"
+    },
+    {
+      "id": "R07",
+      "behavior": "400 invalid/empty/repeated known query keys; unknown keys ignored",
+      "exposure": "P3; P2 partial"
+    },
+    {
+      "id": "R08",
+      "behavior": "404 NOT_FOUND for unknown quest",
+      "exposure": "common"
+    },
+    {
+      "id": "R09",
+      "behavior": "UI list/detail button and alert semantics",
+      "exposure": "common"
+    },
+    {
+      "id": "R10",
+      "behavior": "loading and empty states",
+      "exposure": "P2; P3"
+    },
+    {
+      "id": "R11",
+      "behavior": "labeled keyboard controls and field coverage",
+      "exposure": "P2; P3"
+    },
+    {
+      "id": "R12",
+      "behavior": "preserve filters/list and resist stale responses",
+      "exposure": "P3; P2 partial"
+    },
+    {
+      "id": "R13",
+      "behavior": "health and engineering constraints",
+      "exposure": "common"
+    }
+  ],
+  "common_sources": [
+    "starter/README.md",
+    "starter/fixtures/quests.json",
+    "starter/tests/",
+    "starter/web/tests/",
+    "prompts/envelope.md"
+  ],
+  "warning": "Common-example exposure is partial, not full requirement disclosure. Final per-criterion input mapping and independent evaluator are still required."
+}

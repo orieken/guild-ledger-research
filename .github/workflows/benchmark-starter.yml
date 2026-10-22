@@ -1,0 +1,30 @@
+name: Canonical benchmark starter
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ['benchmarks/**', 'scripts/package_benchmark.py', 'scripts/verify_t01.py', 'scripts/tests/test_benchmark_package.py', '.github/workflows/benchmark-starter.yml']
+  push:
+    branches: [main]
+    paths: ['benchmarks/**', 'scripts/package_benchmark.py', 'scripts/verify_t01.py', 'scripts/tests/test_benchmark_package.py', '.github/workflows/benchmark-starter.yml']
+permissions:
+  contents: read
+jobs:
+  t01:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Check deterministic packaging and clean worker inputs
+        run: python3 -B scripts/tests/test_benchmark_package.py
+      - name: Verify startup, intentional failures, visible witness and mutations
+        run: python3 -B scripts/verify_t01.py --output ci-benchmark-results
+      - name: Retain zero-model verification evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: t01-starter-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-benchmark-results/
+          if-no-files-found: error
+          retention-days: 30
