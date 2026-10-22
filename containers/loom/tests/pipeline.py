@@ -79,7 +79,8 @@ with tempfile.TemporaryDirectory(prefix='guild-ledger-loom-tests-') as temp:
     inputs=temp/'resume-inputs';shutil.copytree(package,inputs)
     (inputs/'request.json').write_text(json.dumps({'resume':True,'approve':None,'fixture_approval':False,'hang':None}))
     rejected=subprocess.run(['docker','run','--rm','--network','none','--read-only','--cap-drop','ALL',
-        '--security-opt','no-new-privileges','--tmpfs','/home/runner:rw,uid=10001,gid=10001,mode=0700',
+        '--security-opt','no-new-privileges','--user',f"{halt['worker_uid']}:{halt['worker_gid']}",
+        '--tmpfs',f"/home/runner:rw,uid={halt['worker_uid']},gid={halt['worker_gid']},mode=0700",
         '--mount',f'type=bind,src={workspace},dst=/workspace',
         '--mount',f'type=bind,src={inputs},dst=/inputs,readonly','guild-ledger-loom-mock:local'],capture_output=True,text=True)
     assert rejected.returncode==2 and 'non-mock provider' in rejected.stderr

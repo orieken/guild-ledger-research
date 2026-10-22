@@ -12,7 +12,7 @@ with tempfile.TemporaryDirectory(prefix='guild-ledger-harness2-tests-') as temp:
     for index in range(2):
         out=temp/f'repeat-{index}'
         result=execute('guild-ledger-harness2-demo:local',out)
-        assert result['stop_reason']=='completed' and result['model_calls']==0
+        assert result['stop_reason']=='completed' and result['model_calls']==0, (result,(out/'stderr.log').read_text())
         assert result['model_usage'] is None and result['cost_usd'] is None
         summary=result['demo_summary']
         assert summary['n_tasks']==2 and summary['done']==2 and summary['failed']==0

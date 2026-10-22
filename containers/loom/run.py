@@ -26,6 +26,8 @@ def save(path,value):
 
 def execute(image,task,package,manifest_digest,output,fixture_approvals=False,
             hang=False,resume_after_interrupt=False,wall_seconds=60):
+    uid=os.getuid() if sys.platform.startswith('linux') and os.getuid()>0 else 10001
+    gid=os.getgid() if sys.platform.startswith('linux') and os.getgid()>0 else 10001
     if not 1<=wall_seconds<=120:raise ValueError('Wall limit must be 1–120 seconds')
     if task.is_symlink() or not task.is_dir() or output.exists() or output.resolve().is_relative_to(task.resolve()):
         raise ValueError('New output and standalone regular task directory required')
@@ -45,7 +47,7 @@ def execute(image,task,package,manifest_digest,output,fixture_approvals=False,
     image=info['Id'];started=time.monotonic();deadline=started+wall_seconds
     output.mkdir(parents=True)
     record={'schema_version':'guild-ledger.loom-mock-attempt/v1','synthetic':True,'profile':'H3-native-mock',
-            'source_commit':profile['source']['commit'],'profile_manifest_sha256':manifest_digest,'image_id':image,
+            'worker_uid':uid,'worker_gid':gid,'source_commit':profile['source']['commit'],'profile_manifest_sha256':manifest_digest,'image_id':image,
             'network':'none','model_calls':0,'cost_usd':None,'model_usage':None,'evaluation_performed':False,
             'fixture_approvals_enabled':fixture_approvals,'synthetic_approvals':[], 'invocations':[],
             'wall_seconds':wall_seconds,'stop_reason':'running'}
@@ -67,7 +69,7 @@ def execute(image,task,package,manifest_digest,output,fixture_approvals=False,
                 record['invocations'].append(item)
                 create=['docker','create','--name',name,'--network','none','--read-only','--cap-drop','ALL',
                         '--security-opt','no-new-privileges','--pids-limit','128','--memory','2g','--cpus','2',
-                        '--user','10001:10001','--tmpfs','/home/runner:rw,nosuid,nodev,uid=10001,gid=10001,mode=0700',
+                        '--user',f'{uid}:{gid}','--tmpfs',f'/home/runner:rw,nosuid,nodev,uid={uid},gid={gid},mode=0700',
                         '--tmpfs','/tmp:rw,nosuid,nodev,mode=1777',
                         '--mount',f'type=bind,src={workspace},dst=/workspace',
                         '--mount',f'type=bind,src={inputs},dst=/inputs,readonly',image]

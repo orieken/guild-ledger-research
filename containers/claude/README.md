@@ -35,7 +35,7 @@ The launcher resolves the image tag to its local image ID before creating the co
 ## Isolation policy
 
 - Fresh tmpfs home and temporary directory per container; no host home, credentials, configuration cache, sibling checkout, Docker socket, or evaluator mount.
-- UID/GID 10001, read-only root filesystem, all Linux capabilities dropped, no privilege escalation, bounded memory/CPU/process count, and Docker init for child reaping.
+- non-root UID/GID, read-only root filesystem, all Linux capabilities dropped, no privilege escalation, bounded memory/CPU/process count, and Docker init for child reaping.
 - Network disabled for every currently supported mode. No environment variables from the host are forwarded into the container.
 - Startup checks reject known instruction filenames, agent configuration directories, MCP configuration, dependency caches, symlinks and special files in inputs. The host performs the same input check before copying. Task inputs remain strict. H1/H2 packages now use a separate explicit, hash-verified read-only input; they do not bypass task auditing. Loom and starter exceptions remain unsupported.
 - Input audits are a bounded filesystem/environment check, not proof of effective model context. Native runtime tools and instructions still exist. Arbitrarily named instruction prose cannot be detected by filename checks; campaign input hashes and exposure review remain necessary.
@@ -56,3 +56,5 @@ Checked 21 October 2026: [Claude development containers](https://code.claude.com
 ## H1/H2 package loading
 
 See [treatment definitions](../../docs/research/16-h1-h2-treatment-definitions.md) for package hashes and commands. Pass `--harness-id`, `--harness` (the package directory only), and `--harness-digest` together. H0 is the default. Both host and container validate the exact payload; no directory discovery is enabled. The original `run.py` command confirms single-stage assembly. The separate [H2 controller](../../docs/research/17-h2-fake-stage-controller.md) now exercises the complete graph with synthetic fixtures; real-agent compliance remains untested.
+
+On Linux, the supervisor uses the non-root host UID/GID for bind-mounted attempt files, preserving private file modes while allowing host evidence collection. Docker Desktop uses UID/GID 10001. Root hosts still use the non-root fallback. Each attempt records its effective worker IDs; this does not mount host configuration or grant extra container capabilities.

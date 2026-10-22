@@ -47,3 +47,7 @@ python3 -B scripts/offline_harness_ci.py report
 ```
 
 Preparation uses public remotes and refuses mismatched or dirty checkouts. Results go to ignored `ci-offline-results/`. The workflow verifies the committed source snapshot before building; an existing local image is not enough to pass preparation. Full setup verification and suite success are reported separately.
+
+## Linux ownership verification
+
+The first hosted run exposed private output files owned by container UID 10001 that the CI user could not read. Supervisors now use the non-root host UID/GID on Linux, retaining private modes and the existing container restrictions. Effective IDs are recorded in attempt manifests; Docker Desktop retains the original fallback. This addresses evidence collection without root workers or broad permission changes.

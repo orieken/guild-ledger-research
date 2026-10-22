@@ -61,16 +61,16 @@
     "H3-context treatment remains undefined"
   ],
   "source_sha256": {
-    "run.py": "8471fa9d678ece8f4e4ac55f77e608b0cb9bda3114c173bb8d16aa823656489e",
+    "run.py": "21fde09569aaee5dc9abbfb3224523f4c4578ae76866c420a7accd5b1974f9ca",
     "Dockerfile": "61a58ca4462585dec359722f1c2263b0d6cf9a62db8cc42ceea6694d0d914973",
     "Makefile": "90c2da81b9e8ed4c06f1b87e515454172d1a54238a720e562723e7fd6075add5",
     "entrypoint.py": "28fd25a3f629fc94d9120c1670a5e99cc52269a90de34e74d6712aa2c4b467d7",
-    "README.md": "d056dcc325b22388a6088bf09318a1b1b847be58c29fb8617f13c02ef8796ffa",
+    "README.md": "c65ee68e882f589d11e86bce89457574e0db873a510919ce851018582cb0d135",
     ".dockerignore": "a2f9015b45f8294bfeea28cc8ea7daac401887848ce248b42a84fb4995c42899",
     ".gitignore": "020c2606e8ed484089c2083e0be438b9d0736bee1558a6b76af0d58bd23f69cf",
     "prepare.py": "3723143a35122d68d182d0b0b567d126f5898da5abcd104f753a220a1e5a1ebf",
     "tests/source_snapshot.py": "e5701ac333c53eca956858c83ba5089d5b0cb663d6fd5ed15d7e2b05ee432290",
-    "tests/pipeline.py": "be6633c128bfeba56bb7d5b540b92f81015897cd659a67e0e8570ca4aa9dd602"
+    "tests/pipeline.py": "674242bb7a27ae9bdf226ca489d04137dab365464b7bf53e34633b8a8552924e"
   },
   "wrapper_repository": "orieken/guild-ledger-loom",
   "wrapper_source_commit": "3542be18e1d608d3fca57df871156c2aa147cfff",

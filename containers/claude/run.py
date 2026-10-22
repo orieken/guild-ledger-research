@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import uuid
 import time
@@ -20,6 +21,8 @@ def digest_tree(root):
 
 
 def run(image, task, prompt, output, mode='fake', timeout=30, harness=None, harness_digest=None, harness_id='H0', stage_id=None, handoff=None, fixture=None, deadline=None):
+    uid=os.getuid() if sys.platform.startswith('linux') and os.getuid()>0 else 10001
+    gid=os.getgid() if sys.platform.startswith('linux') and os.getgid()>0 else 10001
     deadline = deadline if deadline is not None else time.monotonic() + timeout
     def remaining():
         return max(0.001, deadline - time.monotonic())
@@ -49,7 +52,7 @@ def run(image, task, prompt, output, mode='fake', timeout=30, harness=None, harn
     name='guild-ledger-'+uuid.uuid4().hex
     output.mkdir(parents=True)
     manifest={'schema_version':'guild-ledger.container-smoke/v1','synthetic':mode=='fake',
-              'harness_id':harness_id,'harness_manifest_sha256':harness_digest,
+              'worker_uid':uid,'worker_gid':gid,'harness_id':harness_id,'harness_manifest_sha256':harness_digest,
               'assembly_only':stage_id is None,'stage_execution_implemented':stage_id is not None,
               'stage_id':stage_id,'session_id':name,
               'mode':mode,'image_id':image_id,'image_repo_digests':image_info.get('RepoDigests',[]),
@@ -82,8 +85,8 @@ def run(image, task, prompt, output, mode='fake', timeout=30, harness=None, harn
                 p.chmod(0o777 if p.is_dir() else (0o777 if p.stat().st_mode & 0o111 else 0o666))
             create=['docker','create','--name',name,'--network','none','--read-only',
                     '--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','128',
-                    '--memory','2g','--cpus','2','--user','10001:10001',
-                    '--tmpfs','/home/runner:rw,nosuid,nodev,uid=10001,gid=10001,mode=0700',
+                    '--memory','2g','--cpus','2','--user',f'{uid}:{gid}',
+                    '--tmpfs',f'/home/runner:rw,nosuid,nodev,uid={uid},gid={gid},mode=0700',
                     '--tmpfs','/tmp:rw,nosuid,nodev,mode=1777',
                     '--mount',f'type=bind,src={workspace},dst=/workspace',
                     '--mount',f'type=bind,src={inputs},dst=/inputs,readonly',image_id,mode]

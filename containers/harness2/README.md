@@ -26,3 +26,5 @@ Outputs include the upstream demo's source tasks, reference/probe/composition ou
 The verified demo processed two tasks in both modes with 28 Python executions and 32 scripted editor calls, and corrected synthetic signed-ledger totals. This establishes mechanics only: it is not Guild Ledger coding performance, a model improvement result or proof of real executor compatibility. The [verification receipt](verification.json) records the image/profile/source identities and offline checks.
 
 [Comparison protocol and remaining admission work](../../docs/research/19-harness2-adaptive-comparison.md). Upstream source and notices are preserved under `/opt/harness2`, including Apache-2.0 licensing and third-party notices.
+
+On Linux, the supervisor uses the non-root host UID/GID for bind-mounted attempt files, preserving private file modes while allowing host evidence collection. Docker Desktop uses UID/GID 10001. Root hosts still use the non-root fallback. Each attempt records its effective worker IDs; this does not mount host configuration or grant extra container capabilities.

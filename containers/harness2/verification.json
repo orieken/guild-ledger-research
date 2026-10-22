@@ -44,14 +44,14 @@
     "live runtime and optimizer metering/limits unvalidated"
   ],
   "source_sha256": {
-    "run.py": "08c96349a90120800aecc4dba3f823a64de8ddcf0c55ebfcf3b82ef45a0a71ab",
+    "run.py": "d05dc1c5b6c8a111392ba3cdd91864bc16f838aeb02c9caab7b31496585cc840",
     "Dockerfile": "a7f9b910cdf5b0134f27eb200ce4d1ac7b20630e16c32932c6ad279fa6bae168",
     "entrypoint.py": "a1ee67e761d3256bd191af89307f32f6a2d604840354c0fd01be9b5af5c70204",
-    "README.md": "ccc025ccd16a814dae711ee6f59c7b1e128ef4bac4c6558f0a36f4d98160d615",
+    "README.md": "4a0fb3da575a7c38ff4d67441734d22dca7f7bfa42de92ccdb16a7ccbf866efb",
     ".dockerignore": "2b59194b0bea3f4cc30db57a4dfba220c26aa0c1b6a1ccf9e5f39d6ff862b0b4",
     ".gitignore": "020c2606e8ed484089c2083e0be438b9d0736bee1558a6b76af0d58bd23f69cf",
     "prepare.py": "23c719fcbc99d6bf80c30f6de3e0b1b16248a155ff9bf3134915687e1f9ff7bb",
-    "tests/demo.py": "6b8bb620a16fbda5edc1bd39e81141dd23314f9c5191636170d8eb20468873ed"
+    "tests/demo.py": "83833c1b1d44b4f851c345ab77a85c3452f0141f3b2631e0bb41c059f4e86c40"
   },
   "wrapper_repository": "orieken/guild-ledger-harness2",
   "wrapper_source_commit": "7eff3829a0c39eb050490cbafc205f3218147c20"

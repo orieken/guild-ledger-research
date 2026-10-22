@@ -45,7 +45,7 @@ Add `--fixture-approvals` only for a synthetic integration run. It explicitly ap
 
 ## Isolation and artifacts
 
-Each invocation has a fresh container and tmpfs home, non-root UID 10001, read-only root, dropped capabilities, resource limits and no network. Only an isolated copy of task files and explicit profile/request inputs are mounted. It creates a **disposable synthetic Git baseline inside the container** so Loom's native posture/diff checks operate; no host repo, Git identity, hooks, global settings or credentials are copied. No user repository commits are created.
+Each invocation has a fresh container and tmpfs home, non-root UID, read-only root, dropped capabilities, resource limits and no network. Only an isolated copy of task files and explicit profile/request inputs are mounted. It creates a **disposable synthetic Git baseline inside the container** so Loom's native posture/diff checks operate; no host repo, Git identity, hooks, global settings or credentials are copied. No user repository commits are created.
 
 The source lock binds the requested profile manifest to the binary's source. The host validates profile and spec hashes before launch; container preflight verifies them again. Inputs can select only mock execution and explicit test controls. The runner does not load global skills or invoke the Loom installer.
 
@@ -60,3 +60,5 @@ The mock produced posture and post-review-edit warnings for its synthetic writes
 No live Claude provider, paid usage calibration, real benchmark task, context-only Loom treatment, independent evaluator or native model routing has been admitted. The underlying binary also implements other CLI commands, but this container entrypoint exposes only the fixed mock pipeline boundary. Future real execution needs a separately reviewed profile, explicit auth/tools/context controls, aggregate model/child usage and cost accounting, and genuine human gates.
 
 Attribution: [Loom by Oscar Rieken](https://github.com/orieken/loom), code MIT; embedded instructional content CC BY 4.0. Upstream LICENSE and LICENSE-CONTENT.md are retained in `/opt/loom/`.
+
+On Linux, the supervisor uses the non-root host UID/GID for bind-mounted attempt files, preserving private file modes while allowing host evidence collection. Docker Desktop uses UID/GID 10001. Root hosts still use the non-root fallback. Each attempt records its effective worker IDs; this does not mount host configuration or grant extra container capabilities.
