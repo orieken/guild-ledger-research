@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!entrypoint.py
+!build/
+!build/source.tar.gz
+!build/manifest.json

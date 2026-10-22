@@ -62,3 +62,11 @@ Record requested and response-reported model labels separately. Pin runtime bina
 Admission requires: a frozen task and input exposure manifest; fresh isolated workspace/state; verified tool/network policy; common task mechanics; correct source snapshot capture; structured usage and completeness flags; timeout/needs-human/error handling; evaluator separation; and zero-model lifecycle fixtures. Separately authorized calibration must then confirm the actual emitted events and accounting. Missing usage is unknown, never zero. Do not omit failed attempts from denominators or infer invoice cost from subscription percentages.
 
 Next implementation and harness decisions are in [harness alignment](13-harness-alignment.md).
+
+## Native Loom mock integration — 22 October 2026
+
+A separate [H3-native-mock profile](18-loom-native-mock-integration.md) is now built and verified from upstream commit `3f2817818c68f42520229aab9342ce91533cef2f` using Go 1.26.5. It preserves native gates and explicitly distinguishes synthetic fixture approvals from autonomous execution. This validates mock mechanics only; the controlled H3-context slot and live Loom admission remain unresolved.
+
+## H4 Harness² addition — 22 October 2026
+
+[Google Research Harness²](19-harness2-adaptive-comparison.md) is registered as an optimizer/treatment family, not a new model or Antigravity runtime. The inspected release has OpenCode/Codex substrates; our implementation currently permits only its deterministic offline demo. Native adaptive streams and a proposed frozen-optimized profile need separate study designs. No additional controlled cells or paid runs are admitted.

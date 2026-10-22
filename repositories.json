@@ -36,6 +36,15 @@
       "repository": "orieken/guild-ledger-loom",
       "clone_url": "https://github.com/orieken/guild-ledger-loom.git",
       "local_directory": "guild-ledger-loom"
+    },
+    {
+      "role": "harness",
+      "harness_id": "H4",
+      "repository": "orieken/guild-ledger-harness2",
+      "clone_url": "https://github.com/orieken/guild-ledger-harness2.git",
+      "local_directory": "guild-ledger-harness2",
+      "upstream_repository": "google-research/harness2",
+      "status": "public wrapper repository created; package published on main"
     }
   ]
 }

@@ -83,3 +83,7 @@ Current runtime recommendation and treatment definitions: [runtime comparison](1
 12. [H1/H2 treatment definitions](16-h1-h2-treatment-definitions.md): exact package boundaries, stage contracts, digest registry and offline container loading.
 
 13. [H2 fake-stage controller](17-h2-fake-stage-controller.md): implementation/review/repair orchestration, shared limits, partial evidence and offline flow tests.
+
+14. [Loom native/mock integration](18-loom-native-mock-integration.md): pinned source build, preserved gates, fixture approvals and mock-only pipeline verification.
+
+15. [H4 Harness² adaptive comparison](19-harness2-adaptive-comparison.md): native learning versus frozen optimization, stream isolation, full optimization cost and offline demo setup.

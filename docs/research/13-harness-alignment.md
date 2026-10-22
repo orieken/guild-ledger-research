@@ -114,3 +114,11 @@ Draft package version 0.1.0 is defined in the guidelines and harness repositorie
 ## Fake H2 controller update — 22 October 2026
 
 The [fake stage controller](17-h2-fake-stage-controller.md) now runs implementation, fresh review and conditional single repair in separate disposable containers. It validates review transitions, preserves partial source, rejects reviewer mutations, and shares one execution deadline and synthetic token allowance. Real provider accounting, paid limits, runtime context validation and evaluator execution remain unimplemented. The frozen H1/H2 treatment package bytes are unchanged.
+
+## Native Loom mock integration — 22 October 2026
+
+The [H3-native-mock container](18-loom-native-mock-integration.md) executes a pinned real Loom binary with its mock provider. Ten integration cases cover gates, complete fixture execution, interruption/resume, artifact integrity and rejection of mismatched or real-provider inputs. Native code/content assets are embedded, but model exposure is not exercised. Keep this profile in campaign C integration work; it does not fill the controlled H3-context cell.
+
+## H4 Harness² addition — 22 October 2026
+
+[H4](19-harness2-adaptive-comparison.md) has its own local package and deterministic-demo container. Its adaptive surface must not be loaded into H0/H1/H2 homes or reused across independent replicates. Native libraries persist only inside a declared ordered stream; frozen optimized exports are a separate future profile. Probes and optimization calls count against the same aggregate allowance as solving. Claude substrate support and controlled admission remain unestablished.

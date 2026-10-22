@@ -12,6 +12,8 @@ Research comparing prompt completeness and coding-agent harnesses using Guild Le
 - [Harness treatment definitions and implementation order](docs/research/13-harness-alignment.md)
 - [H1 guidelines, H2 stage contracts and container assembly](docs/research/16-h1-h2-treatment-definitions.md)
 - [H2 fake-runtime stage controller](docs/research/17-h2-fake-stage-controller.md)
+- [Loom native/mock container and pipeline checks](containers/loom/README.md)
+- [H4 Harness² adaptive comparison and deterministic container](docs/research/19-harness2-adaptive-comparison.md)
 - [Review of Claude’s Projects cloud discovery](docs/runtime-discovery/claude-code/review-codex.md)
 - [Review of local Claude CLI/headless discovery](docs/runtime-discovery/claude-code-headless/review-codex.md)
 - [Global Loom removal and experiment implications](docs/research/14-global-loom-removal.md)
@@ -32,6 +34,7 @@ Research comparing prompt completeness and coding-agent harnesses using Guild Le
 | H1: guidelines | [guild-ledger-guidelines](https://github.com/orieken/guild-ledger-guidelines) |
 | H2: custom harness | [guild-ledger-harness](https://github.com/orieken/guild-ledger-harness) |
 | H3: Loom | [guild-ledger-loom](https://github.com/orieken/guild-ledger-loom) |
+| H4: Harness² adaptive framework | [guild-ledger-harness2](https://github.com/orieken/guild-ledger-harness2) |
 
 Each repository is a sibling checkout beneath the local `guild-ledger/` workspace parent. Each experiment uses a clean, isolated task workspace rather than access to all siblings.
 

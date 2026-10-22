@@ -1,0 +1,6 @@
+*
+!Dockerfile
+!entrypoint.py
+!build/
+!build/loom-source.tar.gz
+!build/source-lock.json

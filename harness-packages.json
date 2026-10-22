@@ -20,6 +20,29 @@
       "guidelines_sha256": "fdf8e1e4d8abd311b2864ec54b51ecd640dcedd61c9587f8dcc46dad26344567",
       "package_version": "0.1.0-draft",
       "status": "published draft; offline assembly verified, execution not admitted"
+    },
+    {
+      "harness_id": "H3",
+      "profile_id": "native-mock",
+      "repository": "orieken/guild-ledger-loom",
+      "local_package": "../guild-ledger-loom/package",
+      "source_commit": "3542be18e1d608d3fca57df871156c2aa147cfff",
+      "upstream_source_commit": "3f2817818c68f42520229aab9342ce91533cef2f",
+      "manifest_sha256": "a85d54356d04fbdcfd3caf90a12ff6de48571e7188d8e49093ab0697561212af",
+      "package_version": "0.1.0-draft",
+      "status": "published draft; offline native integration verified; live/controlled admission pending"
+    },
+    {
+      "harness_id": "H4",
+      "profile_id": "native-deterministic-demo",
+      "repository": "orieken/guild-ledger-harness2",
+      "upstream_repository": "google-research/harness2",
+      "local_package": "../guild-ledger-harness2/package",
+      "source_commit": "7eff3829a0c39eb050490cbafc205f3218147c20",
+      "upstream_source_commit": "1cfe254e8d25b15f37048c3730134686abe60335",
+      "manifest_sha256": "98ea2f392df4140dd18cceeecc6b09c442aafa090b50ef62ceba43b5f71f0af0",
+      "package_version": "0.1.0-draft",
+      "status": "published draft; offline native integration verified; live/controlled admission pending"
     }
   ]
 }

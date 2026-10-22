@@ -1,0 +1,58 @@
+{
+  "schema_version": "guild-ledger.harness2-verification/v1",
+  "verified_date": "2026-10-22",
+  "harness_id": "H4",
+  "profile": "native-deterministic-demo",
+  "source": {
+    "repository": "https://github.com/google-research/harness2.git",
+    "commit": "1cfe254e8d25b15f37048c3730134686abe60335",
+    "tree": "edc756a4d03a2826a248115482084a176e60e751",
+    "archive_sha256": "82737084dc4f975ebaf1c34a3b1e5d7613a1fd6f87ca348572bcdf11e5bc3d57",
+    "archive_format": "git archive --format=tar.gz"
+  },
+  "manifest_sha256": "98ea2f392df4140dd18cceeecc6b09c442aafa090b50ef62ceba43b5f71f0af0",
+  "image_id": "sha256:d40b28cd0a77d000f5ee7e39dcd518c0367f198d1b1cef325c7e9c9b4c4af0a3",
+  "python_base": "python:3.12-slim-bookworm@sha256:6a0e06f5ba0b373d051aabd3fffb9b873f27f9a2a3a14bcbe37dee6f0e3bbc70",
+  "platform": "linux/arm64",
+  "k": 2,
+  "modes": [
+    "parallel",
+    "sequential"
+  ],
+  "synthetic_tasks": 2,
+  "python_executions": 28,
+  "scripted_editor_calls": 32,
+  "model_calls": 0,
+  "model_usage": null,
+  "cost_usd": null,
+  "network": "none",
+  "verified_cases": 7,
+  "checks": [
+    "two fresh deterministic runs",
+    "parallel/sequential final compositions",
+    "empty library at each experiment start",
+    "native library carries one entry from task1 to task2 per mode",
+    "wrong image/profile rejected",
+    "external auth key rejected without value disclosure",
+    "dirty workspace rejected",
+    "timeout evidence retained"
+  ],
+  "limitations": [
+    "no model-backed Guild Ledger adapter",
+    "scripted demo does not measure model improvement or coding quality",
+    "native library tasks are dependent, not independent attempts",
+    "live runtime and optimizer metering/limits unvalidated"
+  ],
+  "source_sha256": {
+    "run.py": "08c96349a90120800aecc4dba3f823a64de8ddcf0c55ebfcf3b82ef45a0a71ab",
+    "Dockerfile": "a7f9b910cdf5b0134f27eb200ce4d1ac7b20630e16c32932c6ad279fa6bae168",
+    "entrypoint.py": "a1ee67e761d3256bd191af89307f32f6a2d604840354c0fd01be9b5af5c70204",
+    "README.md": "ccc025ccd16a814dae711ee6f59c7b1e128ef4bac4c6558f0a36f4d98160d615",
+    ".dockerignore": "2b59194b0bea3f4cc30db57a4dfba220c26aa0c1b6a1ccf9e5f39d6ff862b0b4",
+    ".gitignore": "020c2606e8ed484089c2083e0be438b9d0736bee1558a6b76af0d58bd23f69cf",
+    "prepare.py": "23c719fcbc99d6bf80c30f6de3e0b1b16248a155ff9bf3134915687e1f9ff7bb",
+    "tests/demo.py": "6b8bb620a16fbda5edc1bd39e81141dd23314f9c5191636170d8eb20468873ed"
+  },
+  "wrapper_repository": "orieken/guild-ledger-harness2",
+  "wrapper_source_commit": "7eff3829a0c39eb050490cbafc205f3218147c20"
+}

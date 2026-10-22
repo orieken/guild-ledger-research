@@ -1,0 +1,73 @@
+{
+  "schema_version": "guild-ledger.loom-verification/v1",
+  "verified_date": "2026-10-22",
+  "profile": "H3-native-mock",
+  "source_lock": {
+    "repository": "https://github.com/orieken/loom.git",
+    "commit": "3f2817818c68f42520229aab9342ce91533cef2f",
+    "tree": "7095c1ceb8c167b30acd4821b0890162290309c4",
+    "archive_format": "git archive --format=tar.gz",
+    "archive_sha256": "99a12e8c129457b3c291d6efbc07e5998a18be098f416e1a595ccc189a555d63",
+    "profile_manifest_sha256": "a85d54356d04fbdcfd3caf90a12ff6de48571e7188d8e49093ab0697561212af",
+    "profile": "native-mock",
+    "provider": "mock"
+  },
+  "compiler_image": "golang:1.26.5-bookworm@sha256:53eeac89074db483fdf0ab3be1df32bf6e47562263d2d0d6baa7f26acb4957dd",
+  "runtime_base_image_id": "sha256:047010df27105b1e89c0d9a48d77125035ef04756cdd45653fdae04ad27f3f71",
+  "image_id": "sha256:83e44a0127b3be7aed1cd2361e61b84d12a85afd37a55fff80ba1f69b764e404",
+  "platform": "linux/arm64",
+  "binary_sha256": "94ad31ee747597a7d4b909d36f90a2eb70d573b36cb16c61a5896e2d2ece464d",
+  "provider": "mock",
+  "native_plan": "deliver-feature",
+  "stages_total": 16,
+  "fixture_completed_stages": 9,
+  "fixture_skipped_stages": 7,
+  "fixture_synthetic_approvals": [
+    "confirm-design",
+    "confirm-security",
+    "confirm-ship"
+  ],
+  "default_stop_reason": "needs-human",
+  "verified_cases": 10,
+  "model_calls": 0,
+  "model_usage": null,
+  "cost_usd": null,
+  "network": "none",
+  "claude_binary_present": false,
+  "source_checkout_modified": false,
+  "global_installation_performed": false,
+  "checks": [
+    "default native gate halt without approvals",
+    "full native pipeline via explicit synthetic fixture approvals",
+    "native interruption checkpoint",
+    "resume remains mock",
+    "artifact SHA-256 integrity",
+    "source task unchanged",
+    "profile digest/asset/provider/image/source binding",
+    "refuse non-mock resume state",
+    "native posture and post-review warnings preserved",
+    "untracked source content excluded from archive",
+    "built image retains expected shared runtime layers"
+  ],
+  "limitations": [
+    "mock output does not measure code quality or effective model context",
+    "live model/auth/usage/limits unvalidated",
+    "fixture approvals are not real human decisions or autonomous success",
+    "shared runtime base tag mutable; image IDs recorded",
+    "host failure can interrupt local export",
+    "H3-context treatment remains undefined"
+  ],
+  "source_sha256": {
+    "run.py": "8471fa9d678ece8f4e4ac55f77e608b0cb9bda3114c173bb8d16aa823656489e",
+    "Dockerfile": "61a58ca4462585dec359722f1c2263b0d6cf9a62db8cc42ceea6694d0d914973",
+    "Makefile": "6a192c06a8be57441806312253d0085b3c3cfa9686ecb6bf6ec2b03f4a8f68c5",
+    "entrypoint.py": "28fd25a3f629fc94d9120c1670a5e99cc52269a90de34e74d6712aa2c4b467d7",
+    "README.md": "fb8b11ba48d6a2b88a98c265c1e9dd91bf1e6d0e25288c5638ea34d15a3f1d5c",
+    ".dockerignore": "a2f9015b45f8294bfeea28cc8ea7daac401887848ce248b42a84fb4995c42899",
+    ".gitignore": "020c2606e8ed484089c2083e0be438b9d0736bee1558a6b76af0d58bd23f69cf",
+    "prepare.py": "e9783f26e0ec66038aa1dd56aec258dcbcdf0488b6251be9f3291ea43b43a052",
+    "tests/pipeline.py": "be6633c128bfeba56bb7d5b540b92f81015897cd659a67e0e8570ca4aa9dd602"
+  },
+  "wrapper_repository": "orieken/guild-ledger-loom",
+  "wrapper_source_commit": "3542be18e1d608d3fca57df871156c2aa147cfff"
+}
