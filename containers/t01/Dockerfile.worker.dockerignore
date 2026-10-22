@@ -1,0 +1,16 @@
+**
+!containers/
+!containers/t01/
+!containers/t01/visible_checks.py
+!containers/t01/harness2_adapter.py
+!benchmarks/
+!benchmarks/T01/
+!benchmarks/T01/starter/
+!benchmarks/T01/starter/services/
+!benchmarks/T01/starter/services/guild/
+!benchmarks/T01/starter/services/guild/requirements.txt
+!benchmarks/T01/starter/fixtures/
+!benchmarks/T01/starter/fixtures/**
+!benchmarks/T01/starter/tests/
+!benchmarks/T01/starter/tests/**
+!containers/t01/profile.json

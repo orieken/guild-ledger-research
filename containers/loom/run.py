@@ -25,12 +25,14 @@ def save(path,value):
 
 
 def execute(image,task,package,manifest_digest,output,fixture_approvals=False,
-            hang=False,resume_after_interrupt=False,wall_seconds=60):
+            hang=False,resume_after_interrupt=False,wall_seconds=60,prompt=None):
     uid=os.getuid() if sys.platform.startswith('linux') and os.getuid()>0 else 10001
     gid=os.getgid() if sys.platform.startswith('linux') and os.getgid()>0 else 10001
     if not 1<=wall_seconds<=120:raise ValueError('Wall limit must be 1–120 seconds')
     if task.is_symlink() or not task.is_dir() or output.exists() or output.resolve().is_relative_to(task.resolve()):
         raise ValueError('New output and standalone regular task directory required')
+    if prompt is not None and (prompt.is_symlink() or not prompt.is_file()):
+        raise ValueError("Regular task prompt required")
     audit_tree(task);audit_tree(package)
     raw=(package/'manifest.json').read_bytes()
     if hashlib.sha256(raw).hexdigest()!=manifest_digest:raise ValueError('Profile manifest digest mismatch')
@@ -51,12 +53,18 @@ def execute(image,task,package,manifest_digest,output,fixture_approvals=False,
             'network':'none','model_calls':0,'cost_usd':None,'model_usage':None,'evaluation_performed':False,
             'fixture_approvals_enabled':fixture_approvals,'synthetic_approvals':[], 'invocations':[],
             'wall_seconds':wall_seconds,'stop_reason':'running'}
+    if prompt is not None:
+        record['task_prompt_sha256']=hashlib.sha256(prompt.read_bytes()).hexdigest()
+    record['task_sha256']=digest_tree(task)
     save(output/'attempt.json',record)
     with tempfile.TemporaryDirectory(prefix='guild-ledger-loom-') as temp:
         staging=Path(temp);workspace=staging/'workspace';shutil.copytree(task,workspace)
         for p in [workspace,*workspace.rglob('*')]:p.chmod(0o777 if p.is_dir() else 0o666)
         inputs=staging/'inputs';shutil.copytree(package,inputs)
         shutil.copytree(package,output/'profile')
+        if prompt is not None:
+            shutil.copyfile(prompt,inputs/'task-prompt.txt')
+            shutil.copyfile(prompt,output/'task-prompt.txt')
         request={'resume':False,'approve':None,'fixture_approval':False,'hang':'context-engineer' if hang else None}
         try:
             for index in range(5): # Initial call, optional interrupt-resume, at most three fixture gates.
@@ -74,6 +82,8 @@ def execute(image,task,package,manifest_digest,output,fixture_approvals=False,
                         '--mount',f'type=bind,src={workspace},dst=/workspace',
                         '--mount',f'type=bind,src={inputs},dst=/inputs,readonly',image]
                 try:
+                    if 'T01_OFFLINE_TOOLS=1' in info['Config'].get('Env',[]):
+                        create[-1:-1]=['--tmpfs',f'/opt/t01-run:rw,exec,nosuid,nodev,uid={uid},gid={gid},mode=0700']
                     subprocess.run(create,check=True,stdout=subprocess.DEVNULL,timeout=max(.001,deadline-time.monotonic()))
                     with (call_dir/'stdout.log').open('wb') as stdout,(call_dir/'stderr.log').open('wb') as stderr:
                         process=subprocess.Popen(['docker','start','--attach',name],stdout=stdout,stderr=stderr)
@@ -124,6 +134,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--image',default='guild-ledger-loom-mock:local')
     for name in ('task','package','output'):p.add_argument('--'+name,type=Path,required=True)
+    p.add_argument('--prompt',type=Path,help='Optional assigned task bytes, appended to the fixed mock spec')
     p.add_argument('--manifest-digest',required=True);p.add_argument('--fixture-approvals',action='store_true')
     p.add_argument('--hang',action='store_true');p.add_argument('--resume-after-interrupt',action='store_true')
     p.add_argument('--wall-seconds',type=float,default=60)

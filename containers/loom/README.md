@@ -62,3 +62,7 @@ No live Claude provider, paid usage calibration, real benchmark task, context-on
 Attribution: [Loom by Oscar Rieken](https://github.com/orieken/loom), code MIT; embedded instructional content CC BY 4.0. Upstream LICENSE and LICENSE-CONTENT.md are retained in `/opt/loom/`.
 
 On Linux, the supervisor uses the non-root host UID/GID for bind-mounted attempt files, preserving private file modes while allowing host evidence collection. Docker Desktop uses UID/GID 10001. Root hosts still use the non-root fallback. Each attempt records its effective worker IDs; this does not mount host configuration or grant extra container capabilities.
+
+## Optional T01 task transport
+
+`run.py --prompt /path/to/assigned-prompt.txt` appends the exact assigned task bytes to a temporary copy of the fixed mock spec, preserves the native mock-spec slug/gates, and records the prompt hash. The pinned profile and original asset remain unchanged. The mock provider ignores product requirements. Dedicated [T01 worker images](../t01/README.md) also run the common offline visible-test tool before the initial native invocation. The ordinary native mock regression behavior remains the default.

@@ -16,7 +16,9 @@ def main():
         if key.startswith(('ANTHROPIC_','AWS_','GOOGLE_','GH_','GITHUB_','OTEL_')):
             raise ValueError('Unexpected external configuration key: '+key)
     inputs=Path('/inputs')
-    if {p.name for p in inputs.iterdir()}!={'manifest.json','mock-spec.md','request.json'}:
+    expected={'manifest.json','mock-spec.md','request.json'}
+    if (inputs/'task-prompt.txt').exists():expected.add('task-prompt.txt')
+    if {p.name for p in inputs.iterdir()}!=expected:
         raise ValueError('Unexpected input set')
     if any(p.is_symlink() or not p.is_file() for p in inputs.iterdir()):
         raise ValueError('Only regular inputs allowed')
@@ -41,6 +43,8 @@ def main():
     state=Path('/workspace/.claude/feature-workspace/mock-spec/run-state.json')
     if state.exists() and json.loads(state.read_text()).get('provider')!='mock':
         raise ValueError('Refuse resume state with non-mock provider')
+    if os.environ.get('T01_OFFLINE_TOOLS')=='1' and not request['resume']:
+        subprocess.run(['python3','/opt/t01/visible_checks.py','--expect-starter-red'],check=True)
     # A disposable synthetic baseline lets native posture/diff checks run.
     # No host repository, identity, hooks or Git configuration is copied.
     os.environ.update(GIT_CONFIG_NOSYSTEM='1',GIT_CONFIG_GLOBAL='/dev/null',
@@ -51,7 +55,15 @@ def main():
         subprocess.run(['git','-C','/workspace','-c','core.hooksPath=/dev/null',
                         '-c','user.name=Synthetic fixture','-c','user.email=fixture@example.invalid',
                         'commit','--quiet','--allow-empty','-m','Synthetic mock baseline'],check=True)
-    args=['/usr/local/bin/loom','run','--spec','/inputs/mock-spec.md','--provider','mock']
+    spec='/inputs/mock-spec.md'
+    task_prompt=inputs/'task-prompt.txt'
+    if task_prompt.exists():
+        # Keep the native mock-spec slug and all gates; only carry task data.
+        combined=Path('/tmp/mock-spec.md')
+        combined.write_bytes((inputs/'mock-spec.md').read_bytes()+b'\n\nAssigned task (mock transport only):\n'+task_prompt.read_bytes())
+        spec=str(combined)
+        print(json.dumps({'type':'loom_task_input','sha256':hashlib.sha256(task_prompt.read_bytes()).hexdigest(),'mock_ignores_product_requirements':True}),flush=True)
+    args=['/usr/local/bin/loom','run','--spec',spec,'--provider','mock']
     if request['resume']:args+=['--resume']
     if gate:args+=['--approve',gate]
     if request['hang']:args+=['--mock-hang-stage',request['hang']]

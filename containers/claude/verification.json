@@ -7,7 +7,7 @@
       "tags": [
         "guild-ledger-claude-smoke:local"
       ],
-      "id": "sha256:047010df27105b1e89c0d9a48d77125035ef04756cdd45653fdae04ad27f3f71"
+      "id": "sha256:6f90ca03c57cc2f4571af159e9c1358116500a93d56354a28442d8eeafe9ac60"
     },
     {
       "tags": [
@@ -56,14 +56,14 @@
     "host crash recovery and durable out-of-worker evidence not implemented"
   ],
   "source_sha256": {
-    "run.py": "dfbd7ee9dc333c64c9aaba16fc2484f9dce05a23a5b4c9b7c45ddc8de7cfcdf5",
+    "run.py": "0f9487d694d8d089c3e2b09b70cc4e74d89a761681b3467c30a4ec151eca63f9",
     "h2.py": "4dc24556262fd1acdc926df50b88ae5d6c5c418786cd93dc0d93633e89a0b35a",
     "treatment.py": "6b2e8c26678d96f212c9c26b674ff91bb873d30ade382f71f30ee98ddc3788fd",
     "Dockerfile": "65ee00f1b5af55f306621988c6e4f7e610aa0639c32305534cfd365150557655",
     "Makefile": "e42d50034897716cca7860c4891c2e0110c4418f83b876f671b5cb3868a1330b",
     "entrypoint.py": "a3fd36a84a82533be8bcae7a7d82aa0045d878e2d00bdf3654e21887ddf8f318",
-    "fake-claude.py": "bc0afd9c0b23bd007e3befd9c51714891d4a0452532433fa2d2a81869bdba401",
-    "README.md": "80fdd511f1b6fc2c516847ba5fe4636aa3e566296e9d7eeb993d50e920d7060b",
+    "fake-claude.py": "f84c9fbd27f8cd90c2c33f1a807f0f5c4ca05fe193f7dc1e7ac4a1eb0d635025",
+    "README.md": "6ac0a34b41f4826867e84ba43a5c2b1e63052043b06be8ca3cb9f95a44ece9b4",
     ".dockerignore": "9bb14901056fb8c5b81fba164dfb66582bf26e77b2f8c0b1354079391242dcf4",
     "tests/h2.py": "06f9298cc2e21be0c46b919a3944b7861a34508bde1606d4061393333af9a321",
     "tests/treatments.py": "b0405cc40776d69f5f833aaf2767c1c14f9e8ab14869ceeb7dbc660a519f424c",
@@ -100,5 +100,21 @@
     "inference_calls": 0,
     "result": "passed",
     "network": "none"
-  }
+  },
+  "previous_source_sha256": {
+    "run.py": "dfbd7ee9dc333c64c9aaba16fc2484f9dce05a23a5b4c9b7c45ddc8de7cfcdf5",
+    "h2.py": "4dc24556262fd1acdc926df50b88ae5d6c5c418786cd93dc0d93633e89a0b35a",
+    "treatment.py": "6b2e8c26678d96f212c9c26b674ff91bb873d30ade382f71f30ee98ddc3788fd",
+    "Dockerfile": "65ee00f1b5af55f306621988c6e4f7e610aa0639c32305534cfd365150557655",
+    "Makefile": "e42d50034897716cca7860c4891c2e0110c4418f83b876f671b5cb3868a1330b",
+    "entrypoint.py": "a3fd36a84a82533be8bcae7a7d82aa0045d878e2d00bdf3654e21887ddf8f318",
+    "fake-claude.py": "bc0afd9c0b23bd007e3befd9c51714891d4a0452532433fa2d2a81869bdba401",
+    "README.md": "80fdd511f1b6fc2c516847ba5fe4636aa3e566296e9d7eeb993d50e920d7060b",
+    ".dockerignore": "9bb14901056fb8c5b81fba164dfb66582bf26e77b2f8c0b1354079391242dcf4",
+    "tests/h2.py": "06f9298cc2e21be0c46b919a3944b7861a34508bde1606d4061393333af9a321",
+    "tests/treatments.py": "b0405cc40776d69f5f833aaf2767c1c14f9e8ab14869ceeb7dbc660a519f424c",
+    "tests/smoke.py": "f4819056711f4b376a0a573343b4e917e99946555bb891cf308bec4a01937a62"
+  },
+  "t01_integration_receipt": "../t01/verification.json",
+  "t01_integration_note": "Current host supervisors/base mock regressions and all 15 T01 overlay combinations passed; original real Claude binary remains version/help only."
 }

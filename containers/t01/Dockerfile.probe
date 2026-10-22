@@ -1,0 +1,3 @@
+FROM guild-ledger-t01-guild:local
+COPY tests /tests
+ENTRYPOINT ["python", "-m", "unittest", "discover", "-s", "/tests"]

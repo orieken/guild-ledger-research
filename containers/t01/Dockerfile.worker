@@ -1,0 +1,40 @@
+FROM guild-ledger-claude-smoke:local AS tools
+USER root
+ARG T01_PROFILE_SHA256
+LABEL io.guild-ledger.t01-profile-sha256=$T01_PROFILE_SHA256
+COPY containers/t01/profile.json /opt/t01/profile.json
+RUN test -n "$T01_PROFILE_SHA256" && printf '%s  /opt/t01/profile.json\n' "$T01_PROFILE_SHA256" | sha256sum -c -
+COPY --from=guild-ledger-t01-web:local /usr/local/bin/node /usr/local/bin/node
+COPY --from=guild-ledger-t01-web:local /app /opt/t01/web
+COPY --from=guild-ledger-t01-armory:local /armory /opt/t01/armory
+COPY benchmarks/T01/starter/services/guild/requirements.txt /opt/t01/requirements.txt
+RUN python3 -m venv /opt/t01/venv && /opt/t01/venv/bin/pip install --no-cache-dir -r /opt/t01/requirements.txt
+COPY benchmarks/T01/starter/fixtures /fixtures
+COPY benchmarks/T01/starter/tests /opt/t01/tests
+COPY containers/t01/visible_checks.py /opt/t01/visible_checks.py
+RUN python3 -c 'import hashlib,json; p=json.load(open("/opt/t01/profile.json")); assert not p["model_backed_execution_enabled"]; assert hashlib.sha256(open("/opt/t01/visible_checks.py","rb").read()).hexdigest()==p["assets"]["visible_checks.py"]'
+ENV T01_OFFLINE_TOOLS=1
+USER 10001:10001
+
+FROM tools AS claude
+
+FROM tools AS loom
+USER root
+COPY --from=guild-ledger-loom-mock:local /usr/local/bin/loom /usr/local/bin/loom
+COPY --from=guild-ledger-loom-mock:local /opt/loom /opt/loom
+ENV RUNNER_KIND=loom-mock
+USER 10001:10001
+ENTRYPOINT ["/usr/bin/tini", "--", "python3", "/opt/loom/entrypoint.py"]
+CMD []
+
+FROM tools AS harness2
+USER root
+COPY --from=guild-ledger-harness2-demo:local /opt/harness2 /opt/harness2
+COPY --from=guild-ledger-harness2-demo:local /opt/profile.json /opt/profile.json
+COPY containers/t01/harness2_adapter.py /opt/t01/harness2_adapter.py
+RUN python3 -c 'import hashlib,json; p=json.load(open("/opt/t01/profile.json")); assert hashlib.sha256(open("/opt/t01/harness2_adapter.py","rb").read()).hexdigest()==p["assets"]["harness2_adapter.py"]'
+ENV PYTHONPATH=/opt/harness2 RUNNER_KIND=harness2-deterministic
+LABEL io.guild-ledger.profile-sha256=98ea2f392df4140dd18cceeecc6b09c442aafa090b50ef62ceba43b5f71f0af0
+USER 10001:10001
+ENTRYPOINT ["/usr/bin/tini", "--", "python3", "/opt/t01/harness2_adapter.py"]
+CMD []

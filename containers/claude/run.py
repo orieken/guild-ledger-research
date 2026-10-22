@@ -90,6 +90,8 @@ def run(image, task, prompt, output, mode='fake', timeout=30, harness=None, harn
                     '--tmpfs','/tmp:rw,nosuid,nodev,mode=1777',
                     '--mount',f'type=bind,src={workspace},dst=/workspace',
                     '--mount',f'type=bind,src={inputs},dst=/inputs,readonly',image_id,mode]
+            if 'T01_OFFLINE_TOOLS=1' in image_info['Config'].get('Env',[]):
+                create[-2:-2]=['--tmpfs',f'/opt/t01-run:rw,exec,nosuid,nodev,uid={uid},gid={gid},mode=0700']
             subprocess.run(create,check=True,stdout=subprocess.DEVNULL,timeout=remaining());created=True
             with (output/'stdout.jsonl').open('wb') as stdout,(output/'stderr.log').open('wb') as stderr:
                 process=subprocess.Popen(['docker','start','--attach',name],stdout=stdout,stderr=stderr)

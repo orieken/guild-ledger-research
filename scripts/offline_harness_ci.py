@@ -22,9 +22,12 @@ SUITES = [('claude-startup','containers/claude/tests/smoke.py'),
           ('h2-controller','containers/claude/tests/h2.py'),
           ('loom-source-snapshot','containers/loom/tests/source_snapshot.py'),
           ('loom-native-mock','containers/loom/tests/pipeline.py'),
-          ('harness2-deterministic','containers/harness2/tests/demo.py')]
+          ('harness2-deterministic','containers/harness2/tests/demo.py'),
+          ('t01-packaging','scripts/tests/test_benchmark_package.py'),
+          ('t01-supervisor-boundaries','scripts/tests/test_t01_supervisor.py')]
 IMAGES = ['guild-ledger-claude-smoke:local','guild-ledger-claude:2.1.304',
-          'guild-ledger-loom-mock:local','guild-ledger-harness2-demo:local']
+          'guild-ledger-loom-mock:local','guild-ledger-harness2-demo:local'] + [
+          'guild-ledger-t01-'+name+':local' for name in ('guild','armory','web','probe','claude','loom','harness2')]
 
 
 def write(name,value):
@@ -137,6 +140,8 @@ def build():
 def test():
     # Deliberately run every suite even after an assertion failure.
     passed=[step(name,[sys.executable,'-B',script],timeout=240) for name,script in SUITES]
+    passed.append(step('t01-harness-integration',[sys.executable,'-B','scripts/t01_harness_smoke.py',
+                       '--build','--output',str(RESULTS/'t01')],timeout=1200))
     if not all(passed):raise RuntimeError('One or more offline suites failed; see artifacts')
 
 
@@ -151,7 +156,7 @@ def report():
     write('image-identities.json',identities)
     results=[json.loads(p.read_text()) for p in sorted(RESULTS.glob('*.json'))
              if p.name not in {'image-identities.json','package-identities.json','report.json'}]
-    expected={name for name,_ in SUITES}
+    expected={name for name,_ in SUITES}|{'t01-harness-integration'}
     suites={r['name']:r for r in results if r.get('name') in expected}
     suites_passed=set(suites)==expected and all(r['status']=='passed' for r in suites.values())
     required=expected|{'prepare','prepare-h3','prepare-h4','build-claude-smoke','build-claude','build-loom','build-harness2'}
@@ -168,7 +173,7 @@ def report():
     for name in sorted(expected-set(suites)):lines.append(f'| {name} | not run | — |')
     lines+=['','Offline suites passed: **'+str(suites_passed)+'**. Full setup verified: **'+str(complete)+'**.',
             'Tests use fake/mock/deterministic execution only.',
-            'Claude is invoked only for version/help. Builds require downloads; test containers have no network.',
+            'Claude is invoked only for version/help. Builds require downloads; agent workers have no external network and service probes use internal-only networks.',
             'Model credentials are not supplied. CI compute and model-call costs are distinct.']
     summary='\n'.join(lines)+'\n';(RESULTS/'summary.md').write_text(summary)
     if os.environ.get('GITHUB_STEP_SUMMARY'):

@@ -91,3 +91,5 @@ Current runtime recommendation and treatment definitions: [runtime comparison](1
 16. [Offline CI verification](20-offline-ci-verification.md): all container builds and offline suites, retained evidence, and the approved Loom source snapshot.
 
 17. [Canonical T01 starter and visible checks](../../benchmarks/T01/README.md): reproducible task bundles, P1–P3 prompts, disclosure inventory and zero-model red/green/mutation verification.
+
+18. [T01 harness/container integration](21-t01-harness-integration.md): shared in-worker visible tests, native mock adapters, isolated post-run services and all 15 prompt/harness checks.

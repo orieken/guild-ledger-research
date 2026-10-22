@@ -58,3 +58,7 @@ Checked 21 October 2026: [Claude development containers](https://code.claude.com
 See [treatment definitions](../../docs/research/16-h1-h2-treatment-definitions.md) for package hashes and commands. Pass `--harness-id`, `--harness` (the package directory only), and `--harness-digest` together. H0 is the default. Both host and container validate the exact payload; no directory discovery is enabled. The original `run.py` command confirms single-stage assembly. The separate [H2 controller](../../docs/research/17-h2-fake-stage-controller.md) now exercises the complete graph with synthetic fixtures; real-agent compliance remains untested.
 
 On Linux, the supervisor uses the non-root host UID/GID for bind-mounted attempt files, preserving private file modes while allowing host evidence collection. Docker Desktop uses UID/GID 10001. Root hosts still use the non-root fallback. Each attempt records its effective worker IDs; this does not mount host configuration or grant extra container capabilities.
+
+## Shared T01 offline checks
+
+Dedicated [T01 worker overlays](../t01/README.md) preinstall the canonical public test tool and application dependencies. H0/H1 and each H2 stage run the same offline checks without Docker or external network access. The base smoke image retains its original behavior unless the T01 overlay explicitly enables these fixtures. This does not enable model inference.

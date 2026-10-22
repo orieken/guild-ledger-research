@@ -1,0 +1,24 @@
+{
+  "schema": "guild-ledger.t01-mock-overlay/v1",
+  "task": "T01",
+  "status": "offline integration only; not admitted",
+  "model_backed_execution_enabled": false,
+  "model_calls": 0,
+  "h3_source_profile_sha256": "a85d54356d04fbdcfd3caf90a12ff6de48571e7188d8e49093ab0697561212af",
+  "h4_source_profile_sha256": "98ea2f392df4140dd18cceeecc6b09c442aafa090b50ef62ceba43b5f71f0af0",
+  "harness2": {
+    "entrypoint": "/opt/t01/harness2_adapter.py",
+    "solver": "deterministic no-op",
+    "k": 2,
+    "modes": [
+      "agg",
+      "seq"
+    ],
+    "experience": "NO_ENTRY; transfer not exercised"
+  },
+  "visible_command": "python3 /opt/t01/visible_checks.py",
+  "assets": {
+    "visible_checks.py": "ddf76d4dc94fd1ba380bbfb579f877c33629402cd06c046c7b78414a3cc558f6",
+    "harness2_adapter.py": "1032510c5a85a522c69f58383d80bb52eee64a8159a8cbe0e4f5531697f08e2a"
+  }
+}

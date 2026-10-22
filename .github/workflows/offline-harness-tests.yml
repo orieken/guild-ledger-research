@@ -6,6 +6,10 @@ on:
     paths:
       - '.github/workflows/offline-harness-tests.yml'
       - 'scripts/offline_harness_ci.py'
+      - 'scripts/t01_harness_smoke.py'
+      - 'scripts/package_benchmark.py'
+      - 'scripts/tests/**'
+      - 'benchmarks/T01/**'
       - 'containers/**'
       - 'harness-packages.json'
       - 'vendor/loom/**'
@@ -13,6 +17,10 @@ on:
     paths:
       - '.github/workflows/offline-harness-tests.yml'
       - 'scripts/offline_harness_ci.py'
+      - 'scripts/t01_harness_smoke.py'
+      - 'scripts/package_benchmark.py'
+      - 'scripts/tests/**'
+      - 'benchmarks/T01/**'
       - 'containers/**'
       - 'harness-packages.json'
       - 'vendor/loom/**'

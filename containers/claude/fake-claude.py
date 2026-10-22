@@ -1,8 +1,12 @@
 """Synthetic fixtures, never provider usage or code-quality measurements."""
 import json
+import os
+import subprocess
 import time
 import sys
 from pathlib import Path
+if os.environ.get('T01_OFFLINE_TOOLS')=='1':
+    subprocess.run(['python3','/opt/t01/visible_checks.py','--expect-starter-red'],check=True)
 prompt=Path('/inputs/assembled-prompt.txt').read_text()
 config_path=Path('/inputs/stage.json')
 if config_path.exists():

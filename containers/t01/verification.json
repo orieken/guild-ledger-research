@@ -1,0 +1,1424 @@
+{
+  "schema": "guild-ledger.t01-harness-smoke/v1",
+  "verification_passed": true,
+  "model_calls": 0,
+  "model_usage": null,
+  "cost_usd": null,
+  "live_model_calls_enabled": false,
+  "levels": [
+    "P1",
+    "P2",
+    "P3"
+  ],
+  "overlay_profile_sha256": "516f43750ad6c96139ea228cda6557c8dcf72032a0462c1f35d2360ddd00ce44",
+  "images": {
+    "guild": "sha256:883955c71309814812dbb7fe78095d5a51710a7001b95b2d7f23a561b1b5a5f4",
+    "armory": "sha256:56166cd9dc3805dc21e115bc5822aae8e129893c2106f31f9a7d49a8723c6c42",
+    "web": "sha256:047145f9f62310eb0f53aec8710957a26409cfc64221a88e7bd559defd8e8c03",
+    "probe": "sha256:cc74811b765f07df299d4eb8d92573ac5786c6f05873d615c58c80448a17b564",
+    "harness2": "sha256:38ccc916793cd0895b215c247162e51ad3f5fcc1b28891e186fdec2ae280e5cd",
+    "claude": "sha256:6e92e76becc8691c1c0872fcced24d150a6d3b862313c52b51d7bdf9f70c5961",
+    "loom": "sha256:cad813e7bde64f3bc223535ca5c9a4fd3ca1c857e5e439fbacf551fe52ff4e29"
+  },
+  "controls": {
+    "positive": {
+      "checks": [
+        {
+          "check": "startup",
+          "passed": true,
+          "exit_code": 0
+        },
+        {
+          "check": "visible-api",
+          "passed": true,
+          "exit_code": 0,
+          "expected": "green"
+        },
+        {
+          "check": "ui",
+          "passed": true,
+          "exit_code": 0,
+          "expected": "green"
+        },
+        {
+          "check": "build",
+          "passed": true,
+          "exit_code": 0,
+          "expected": "green"
+        }
+      ],
+      "passed": true,
+      "agent_network": "none",
+      "test_network_internal": true,
+      "ports_published": false,
+      "test_inputs": "fixed image tests and infrastructure; candidate source only"
+    },
+    "worker-positive": {
+      "passed": true,
+      "checks": [
+        {
+          "check": "startup",
+          "exit_code": 0
+        },
+        {
+          "check": "api",
+          "exit_code": 0
+        },
+        {
+          "check": "ui",
+          "exit_code": 0
+        },
+        {
+          "check": "build",
+          "exit_code": 0
+        }
+      ],
+      "network": "none",
+      "image_id": "sha256:6e92e76becc8691c1c0872fcced24d150a6d3b862313c52b51d7bdf9f70c5961"
+    },
+    "protected-test": {
+      "passed": true
+    },
+    "source-symlink": {
+      "passed": true
+    }
+  },
+  "cells": [
+    {
+      "level": "P1",
+      "harness": "H0",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "a40abb63369dd3dca7c7e36bf9bd1c7601c56ced2735036b10daaa327c6c8202",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 13.13
+    },
+    {
+      "level": "P1",
+      "harness": "H1",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "a40abb63369dd3dca7c7e36bf9bd1c7601c56ced2735036b10daaa327c6c8202",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 13.01
+    },
+    {
+      "level": "P1",
+      "harness": "H2",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "a40abb63369dd3dca7c7e36bf9bd1c7601c56ced2735036b10daaa327c6c8202",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        },
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        },
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 24.22
+    },
+    {
+      "level": "P1",
+      "harness": "H3",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "a40abb63369dd3dca7c7e36bf9bd1c7601c56ced2735036b10daaa327c6c8202",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 15.15
+    },
+    {
+      "level": "P1",
+      "harness": "H4",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "a40abb63369dd3dca7c7e36bf9bd1c7601c56ced2735036b10daaa327c6c8202",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 14.71
+    },
+    {
+      "level": "P2",
+      "harness": "H0",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "7d8c755568497b9764ed96153110bba6437a4ceafe5dbd21a7def0484e1e9001",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 13.12
+    },
+    {
+      "level": "P2",
+      "harness": "H1",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "7d8c755568497b9764ed96153110bba6437a4ceafe5dbd21a7def0484e1e9001",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 13.15
+    },
+    {
+      "level": "P2",
+      "harness": "H2",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "7d8c755568497b9764ed96153110bba6437a4ceafe5dbd21a7def0484e1e9001",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        },
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        },
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 23.94
+    },
+    {
+      "level": "P2",
+      "harness": "H3",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "7d8c755568497b9764ed96153110bba6437a4ceafe5dbd21a7def0484e1e9001",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 14.49
+    },
+    {
+      "level": "P2",
+      "harness": "H4",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "7d8c755568497b9764ed96153110bba6437a4ceafe5dbd21a7def0484e1e9001",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 14.93
+    },
+    {
+      "level": "P3",
+      "harness": "H0",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "bf9763b73c15937c03fe4eb41eb2dff70d00d63ac985ddcf4f574a23e4a7f3cb",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 13.09
+    },
+    {
+      "level": "P3",
+      "harness": "H1",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "bf9763b73c15937c03fe4eb41eb2dff70d00d63ac985ddcf4f574a23e4a7f3cb",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 12.97
+    },
+    {
+      "level": "P3",
+      "harness": "H2",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "bf9763b73c15937c03fe4eb41eb2dff70d00d63ac985ddcf4f574a23e4a7f3cb",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        },
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        },
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 24.37
+    },
+    {
+      "level": "P3",
+      "harness": "H3",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "bf9763b73c15937c03fe4eb41eb2dff70d00d63ac985ddcf4f574a23e4a7f3cb",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 14.79
+    },
+    {
+      "level": "P3",
+      "harness": "H4",
+      "starter_sha256": "342c720df0f481e5588205c2ab730537f496861f3272693be3fc8cd7a43c277d",
+      "prompt_sha256": "bf9763b73c15937c03fe4eb41eb2dff70d00d63ac985ddcf4f574a23e4a7f3cb",
+      "synthetic": true,
+      "model_calls": 0,
+      "passed": true,
+      "worker_visible_checks": [
+        {
+          "type": "t01_visible_checks",
+          "schema": "guild-ledger.worker-visible/v1",
+          "synthetic_attempt": true,
+          "model_calls": 0,
+          "checks": [
+            {
+              "check": "startup",
+              "exit_code": 0
+            },
+            {
+              "check": "api",
+              "exit_code": 1
+            },
+            {
+              "check": "ui",
+              "exit_code": 1
+            },
+            {
+              "check": "build",
+              "exit_code": 0
+            }
+          ],
+          "all_visible_passed": false,
+          "expected_starter_red": true,
+          "network": "none; ephemeral localhost only"
+        }
+      ],
+      "tests": {
+        "checks": [
+          {
+            "check": "startup",
+            "passed": true,
+            "exit_code": 0
+          },
+          {
+            "check": "visible-api",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "4 assertion failures"
+          },
+          {
+            "check": "ui",
+            "passed": true,
+            "exit_code": 1,
+            "expected": "2 assertion failures"
+          },
+          {
+            "check": "build",
+            "passed": true,
+            "exit_code": 0,
+            "expected": "green"
+          }
+        ],
+        "passed": true,
+        "agent_network": "none",
+        "test_network_internal": true,
+        "ports_published": false,
+        "test_inputs": "fixed image tests and infrastructure; candidate source only"
+      },
+      "application_unchanged": true,
+      "elapsed_seconds": 14.94
+    }
+  ],
+  "scope": "Infrastructure and input transport; native mocks return unchanged starter with expected visible-feature failures. No quality score or live admission.",
+  "verified_at": "2026-10-22T20:19:12.983751+00:00",
+  "research_revision": "3f9d9d2994cf1d381f9576d800776b0540e26fb3",
+  "uncommitted_changes_at_verification": true,
+  "raw_evidence_directory": "ci-offline-results/t01-local-20261022",
+  "github_workflow_status": "updated locally; not pushed or dispatched",
+  "results_summary": {
+    "prompt_harness_combinations": 15,
+    "worker_tool_invocations": 21,
+    "exported_candidates_retested": 15,
+    "green_controls": 2,
+    "rejection_controls": 2
+  },
+  "package_identities": [
+    {
+      "harness_id": "H1",
+      "source_commit": "3810224a1ea86499661bc6fdec6d11ac18b5eac6",
+      "manifest_sha256": "3c680bfcbe92527377016175cd08d4bc649bad968a5bd160bda798432562c8e4"
+    },
+    {
+      "harness_id": "H2",
+      "source_commit": "2f2a8edd9968fb6895e714bb021bb31746b54651",
+      "manifest_sha256": "f5b160533d307fcd627080d4dc5555b71d2fdc53453ea56de2b3de644d18c5a6"
+    },
+    {
+      "harness_id": "H3",
+      "source_commit": "3542be18e1d608d3fca57df871156c2aa147cfff",
+      "manifest_sha256": "a85d54356d04fbdcfd3caf90a12ff6de48571e7188d8e49093ab0697561212af"
+    },
+    {
+      "harness_id": "H4",
+      "source_commit": "7eff3829a0c39eb050490cbafc205f3218147c20",
+      "manifest_sha256": "98ea2f392df4140dd18cceeecc6b09c442aafa090b50ef62ceba43b5f71f0af0"
+    }
+  ],
+  "regressions": [
+    {
+      "suite": "claude-startup",
+      "passed": true
+    },
+    {
+      "suite": "h1-h2-packages",
+      "passed": true
+    },
+    {
+      "suite": "h2-controller (24 cases)",
+      "passed": true
+    },
+    {
+      "suite": "loom-source-snapshot (4 cases)",
+      "passed": true
+    },
+    {
+      "suite": "loom-native-mock (10 cases)",
+      "passed": true
+    },
+    {
+      "suite": "harness2-deterministic (7 cases)",
+      "passed": true
+    },
+    {
+      "suite": "t01-packaging (2 tests)",
+      "passed": true
+    },
+    {
+      "suite": "t01-supervisor-boundaries (8 tests)",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    ".github/workflows/offline-harness-tests.yml": "df7ef63f0361dc5b8e69b2775f622a54a9a79714107e37fff8b326c6e3b767a5",
+    "benchmarks/T01/README.md": "1a3a1daf5884611b23a932d0d9d86efad65cd65ba4e17576f743bbb8d7bb1826",
+    "benchmarks/T01/harness-alignment.md": "4fb820072c19235758d9ab1cb7799d6ba02ebdf2036718b18307dc4e7f251211",
+    "benchmarks/T01/prompts/envelope.md": "3afb55091f8d1c0fbea4f0e5dfefd9073050e1685c428d31fb3d74d47df20385",
+    "containers/claude/README.md": "6ac0a34b41f4826867e84ba43a5c2b1e63052043b06be8ca3cb9f95a44ece9b4",
+    "containers/claude/fake-claude.py": "f84c9fbd27f8cd90c2c33f1a807f0f5c4ca05fe193f7dc1e7ac4a1eb0d635025",
+    "containers/claude/run.py": "0f9487d694d8d089c3e2b09b70cc4e74d89a761681b3467c30a4ec151eca63f9",
+    "containers/loom/README.md": "8257b24117641997b55615f2c4961a35a0d84afa2b1264b4847883ee5e5be780",
+    "containers/loom/entrypoint.py": "0bcb7af058cd67cc412ae1ad5e591adfebe1807cf9c2a7ac50672ef0aa1919a8",
+    "containers/loom/run.py": "ee47114fdb1256994dcf5f34732439369330fc45b638c2aa80648374f0adade4",
+    "containers/t01/Dockerfile.probe": "8b1cb36848c089ba01c88515e05879ed20fd11cb97a2e89e80e6f15ca70cee86",
+    "containers/t01/Dockerfile.worker": "e229ae598663ed5f7057f58d38f2b05caf7b24698a353c3a8032d393233e44ff",
+    "containers/t01/Dockerfile.worker.dockerignore": "057d64a23e14ac4cdc58dfc777b6151a5fc86837dda7c506aba9e81c8db14e54",
+    "containers/t01/README.md": "b0fc1e972e3977d713880bbd72a3581bdbabd95bea6879d0313bbc482b68d814",
+    "containers/t01/harness2_adapter.py": "1032510c5a85a522c69f58383d80bb52eee64a8159a8cbe0e4f5531697f08e2a",
+    "containers/t01/profile.json": "516f43750ad6c96139ea228cda6557c8dcf72032a0462c1f35d2360ddd00ce44",
+    "containers/t01/visible_checks.py": "ddf76d4dc94fd1ba380bbfb579f877c33629402cd06c046c7b78414a3cc558f6",
+    "docs/research/20-offline-ci-verification.md": "fbfe4ca54f400124eb7f5a231b149498a45de8575a3ba4fd070e159b0c28802a",
+    "docs/research/21-t01-harness-integration.md": "56cb7ac8eac61c9be1d0e9141e7edecaec6f5ff0678add143695a6ff3bc36945",
+    "docs/research/README.md": "d3483334c843fb31ad9fe7cacb6eb7bf30a9a4a5a7e1ee81ef0c897bd3150acc",
+    "scripts/offline_harness_ci.py": "cc249dd922418ef5fe5fbd2d7c44a8d5a64094acf9963288eca835b20dec80ab",
+    "scripts/t01_harness_smoke.py": "2f2940711fc949ff12c68475e010dd511a04d930d0cce09bd48964a2a29e178c",
+    "scripts/tests/test_t01_supervisor.py": "4c77b7540464f4341e93f5f8e4e08762da2b601ebc3fd2a58c5a20da33e47f6f"
+  }
+}
