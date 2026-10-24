@@ -49,4 +49,77 @@ class Boundaries(unittest.TestCase):
  def test_h4_model_image_rejected_before_launch(self):
   with patch.object(runner,'identity',return_value={'Config':{'Env':['RUNNER_KIND=claude']}}):
    with self.assertRaisesRegex(ValueError,'deterministic'):runner.worker('model-image',self.source,self.root/'prompt',self.root/'output')
+class AcceptanceReportBoundaries(unittest.TestCase):
+ def setUp(self):
+  import json
+  self.evaluator=runner.module('t01_report_test_evaluator',ROOT/'evaluators/T01/evaluate.py')
+  inventory=json.loads((ROOT/'evaluators/T01/criteria.json').read_text())['criteria']
+  results=[{'id':c['id'],'requirements':c['requirements'],'status':'fail' if c['id'] in ('A01','U01') else 'pass'} for c in inventory]
+  self.files={'web/src/App.vue':'candidate-digest'}
+  self.report={'schema':'guild-ledger.t01-acceptance/v1','status':'completed',
+   'evaluator_sha256':self.evaluator.version(),'application_sha256':self.files.copy(),
+   'model_calls':0,'live_model_calls_enabled':False,'cleanup_passed':True,'selected_criteria':[],
+   'required_input_gate_passed':True,'required_build_gate_passed':True,
+   **self.evaluator.aggregate({'status':'completed','results':results},[])}
+ def validate(self):return runner.validate_acceptance(self.report,self.evaluator,self.files)
+ def test_expected_product_rejection_can_pass_mock_verification(self):
+  self.assertTrue(self.validate());self.assertIs(self.report['full_target_acceptance'],False)
+ def test_evaluator_error_is_unknown_and_fails_verification(self):
+  self.report.update(status='evaluator_error',full_target_acceptance=None)
+  with self.assertRaisesRegex(ValueError,'did not complete'):self.validate()
+  self.assertIsNone(self.report['full_target_acceptance'])
+ def test_different_candidate_or_evaluator_rejected(self):
+  import copy
+  original=copy.deepcopy(self.report)
+  for key in ('application_sha256','evaluator_sha256'):
+   self.report=copy.deepcopy(original);self.report[key]='wrong'
+   with self.assertRaisesRegex(ValueError,'identity mismatch'):self.validate()
+ def test_partial_or_duplicate_criteria_rejected(self):
+  import copy
+  original=copy.deepcopy(self.report)
+  for duplicate in (False,True):
+   self.report=copy.deepcopy(original)
+   if duplicate:self.report['results'][-1]=self.report['results'][0]
+   else:self.report['results'].pop()
+   with self.assertRaises(ValueError):self.validate()
+ def test_forged_success_count_rejected(self):
+  self.report['passed_criteria']=23
+  with self.assertRaisesRegex(ValueError,'score mismatch'):self.validate()
+ def test_cleanup_failure_and_subset_cannot_pass(self):
+  for key,value in [('cleanup_passed',False),('selected_criteria',['A01']),('model_calls',1)]:
+   with self.subTest(key=key):
+    old=self.report[key];self.report[key]=value
+    with self.assertRaises(ValueError):self.validate()
+    self.report[key]=old
+ def test_unexpected_mock_product_success_rejected(self):
+  for item in self.report['results']:item['status']='pass'
+  self.report.update(self.evaluator.aggregate({'status':'completed','results':self.report['results']},[]))
+  with self.assertRaisesRegex(ValueError,'unfinished mock'):self.validate()
+
+class AcceptanceCICollection(unittest.TestCase):
+ def test_ci_report_retains_matrix_results_and_digest_even_if_another_suite_failed(self):
+  import hashlib,json,subprocess
+  import offline_harness_ci as ci
+  with tempfile.TemporaryDirectory() as temp:
+   results=Path(temp);matrix=results/'t01/summary.json';matrix.parent.mkdir()
+   acceptance={'completed':15,'expected_cells':15,'accepted':0,'rejected':15,'unknown':0,
+    'cells':[{'level':'P1','harness':'H0','full_target_acceptance':False}]}
+   matrix.write_text(json.dumps({'independent_acceptance':acceptance}))
+   with patch.object(ci,'RESULTS',results),patch.object(ci,'git',return_value='test-revision'),patch.object(ci.subprocess,'run',return_value=subprocess.CompletedProcess([],1,stdout='')):
+    with self.assertRaisesRegex(RuntimeError,'incomplete'):ci.report()
+   report=json.loads((results/'report.json').read_text())
+   self.assertFalse(report['verification_passed'])
+   self.assertEqual(report['t01_independent_acceptance'],acceptance)
+   self.assertEqual(report['t01_report'],{'path':'t01/summary.json','sha256':hashlib.sha256(matrix.read_bytes()).hexdigest()})
+   self.assertIn('15/15 completed; 0 accepted, 15 rejected, 0 unknown',(results/'summary.md').read_text())
+ def test_missing_matrix_does_not_invent_acceptance_results(self):
+  import json,subprocess
+  import offline_harness_ci as ci
+  with tempfile.TemporaryDirectory() as temp:
+   results=Path(temp)
+   with patch.object(ci,'RESULTS',results),patch.object(ci,'git',return_value='test-revision'),patch.object(ci.subprocess,'run',return_value=subprocess.CompletedProcess([],1,stdout='')):
+    with self.assertRaises(RuntimeError):ci.report()
+   report=json.loads((results/'report.json').read_text())
+   self.assertNotIn('t01_independent_acceptance',report);self.assertFalse(report['verification_passed'])
+
 if __name__=='__main__':unittest.main(verbosity=2)

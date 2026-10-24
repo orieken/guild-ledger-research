@@ -24,10 +24,11 @@ SUITES = [('claude-startup','containers/claude/tests/smoke.py'),
           ('loom-native-mock','containers/loom/tests/pipeline.py'),
           ('harness2-deterministic','containers/harness2/tests/demo.py'),
           ('t01-packaging','scripts/tests/test_benchmark_package.py'),
-          ('t01-supervisor-boundaries','scripts/tests/test_t01_supervisor.py')]
+          ('t01-supervisor-boundaries','scripts/tests/test_t01_supervisor.py'),
+          ('t01-acceptance-integrity','scripts/tests/test_t01_acceptance_evaluator.py')]
 IMAGES = ['guild-ledger-claude-smoke:local','guild-ledger-claude:2.1.304',
           'guild-ledger-loom-mock:local','guild-ledger-harness2-demo:local'] + [
-          'guild-ledger-t01-'+name+':local' for name in ('guild','armory','web','probe','claude','loom','harness2')]
+          'guild-ledger-t01-'+name+':local' for name in ('guild','armory','web','probe','claude','loom','harness2','acceptance')]
 
 
 def write(name,value):
@@ -141,7 +142,7 @@ def test():
     # Deliberately run every suite even after an assertion failure.
     passed=[step(name,[sys.executable,'-B',script],timeout=240) for name,script in SUITES]
     passed.append(step('t01-harness-integration',[sys.executable,'-B','scripts/t01_harness_smoke.py',
-                       '--build','--output',str(RESULTS/'t01')],timeout=1200))
+                       '--build','--output',str(RESULTS/'t01')],timeout=1800))
     if not all(passed):raise RuntimeError('One or more offline suites failed; see artifacts')
 
 
@@ -167,6 +168,11 @@ def report():
             'research_commit':git('rev-parse','HEAD',cwd=RESEARCH),'run_id':os.environ.get('GITHUB_RUN_ID'),
             'run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),'runner_image':os.environ.get('ImageVersion'),
             'all_suites_passed':suites_passed,'verification_passed':complete,'live_model_calls_enabled':False,'results':results}
+    t01=RESULTS/'t01/summary.json'
+    if t01.exists():
+        integration=json.loads(t01.read_text())
+        result['t01_independent_acceptance']=integration.get('independent_acceptance')
+        result['t01_report']={'path':'t01/summary.json','sha256':hashlib.sha256(t01.read_bytes()).hexdigest()}
     write('report.json',result)
     lines=['## Offline harness setup','', '| Check | Result | Seconds |','|---|---|---|']
     for r in results:lines.append(f"| {r['name']} | {r['status']} | {r['elapsed_seconds']:.1f} |")
@@ -175,6 +181,11 @@ def report():
             'Tests use fake/mock/deterministic execution only.',
             'Claude is invoked only for version/help. Builds require downloads; agent workers have no external network and service probes use internal-only networks.',
             'Model credentials are not supplied. CI compute and model-call costs are distinct.']
+    if result.get('t01_independent_acceptance'):
+        acceptance=result['t01_independent_acceptance']
+        lines+=['',f"Independent T01 acceptance: {acceptance['completed']}/{acceptance['expected_cells']} completed; "
+                f"{acceptance['accepted']} accepted, {acceptance['rejected']} rejected, {acceptance['unknown']} unknown.",
+                'Unchanged mock candidates are expected to be rejected; these are synthetic observations, not model-quality measurements.']
     summary='\n'.join(lines)+'\n';(RESULTS/'summary.md').write_text(summary)
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as stream:stream.write(summary)

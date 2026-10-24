@@ -6,7 +6,7 @@ This closes the earlier gap where T01 bundles were accepted by H0–H2 but their
 
 The offline Actions workflow now runs packaging/projection checks, original harness regressions and all 15 prompt/harness combinations. An unchanged mock candidate must have green startup/build checks and exactly the expected red feature checks, inside the worker and again after export. A separate positive witness must pass the visible suite. `verification_passed` describes infrastructure only.
 
-Remaining admission work: independent full-target evaluator; criterion-level disclosure freeze; live tool/runtime/model configuration and accounting; model usage calibration; budget and authorization. No paid execution is enabled by this integration.
+Remaining admission work: evaluator and criterion-level disclosure freeze; live tool/runtime/model configuration and accounting; model usage calibration; budget and authorization. No paid execution is enabled by this integration.
 
 The mechanical T01 envelope now names the shared test command for all prompt levels. The starter application archive is unchanged. The explicit overlay profile binds mock adapter/tool bytes and is recorded separately from the original H3/H4 package manifests. Local results and source hashes are recorded in `containers/t01/verification.json`; that receipt describes the pre-publication local run.
 
@@ -19,3 +19,5 @@ The separate [canonical starter action](https://github.com/orieken/guild-ledger-
 GitHub retains the run artifacts for 30 days. A local copy of the full hosted harness artifact is archived under ignored `ci-offline-results/hosted-39847929663/`. The committed local verification receipt remains historical evidence and has not been rewritten as a hosted run.
 
 The subsequent [independent evaluator work](22-t01-independent-evaluator.md) implements the missing full-target automated checks. Its acceptance score remains distinct from the infrastructure-only results recorded above.
+
+The [acceptance-report integration](23-t01-acceptance-run-reports.md) adds independent observations to every mock run while preserving the distinction between infrastructure success and product rejection. Earlier hosted results above retain their original scope.

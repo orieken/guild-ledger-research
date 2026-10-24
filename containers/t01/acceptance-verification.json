@@ -1,0 +1,46 @@
+{
+  "schema": "guild-ledger.t01-acceptance-integration-verification/v1",
+  "verified_date": "2026-10-24",
+  "verification_passed": true,
+  "research_revision": "87c36c58a02eb34d81fc3656bc236288acd46725",
+  "uncommitted_changes_at_verification": true,
+  "github_workflow_status": "updated locally; not pushed or dispatched",
+  "evaluator_sha256": "507d36c28ac4bb03431db08d07a6c2da422d5aaf24fb074b378ba1c88da18649",
+  "matrix_schema": "guild-ledger.t01-harness-smoke/v2",
+  "raw_evidence_directory": "ci-offline-results/t01-acceptance-integration-20261024",
+  "matrix_summary_sha256": "fbb38995cf3c01addd41630e5bebaa1654c4edd02f0417dfbc0d143e5b2b82c2",
+  "reference_report_sha256": "9528d8d0857498cdf136f1b31922f2844a808c9efcd21725711d0be7d7cca209",
+  "results_summary": {
+    "matrix_cells": 15,
+    "criteria_per_cell": 23,
+    "criterion_observations": 345,
+    "completed": 15,
+    "accepted": 0,
+    "expected_rejections": 15,
+    "unknown": 0,
+    "mock_passed_criteria": [
+      "A11",
+      "A12"
+    ],
+    "mock_failed_criteria_per_cell": 21,
+    "full_reference_passed_criteria": 23,
+    "worker_visible_invocations": 21,
+    "supervisor_and_collection_tests": 19,
+    "score_integrity_tests": 8,
+    "packaging_tests": 2
+  },
+  "model_calls": 0,
+  "live_model_calls_enabled": false,
+  "scope": "Local reporting and offline integration verification with unchanged synthetic candidates, not model/harness quality or live admission.",
+  "source_sha256": {
+    ".github/workflows/offline-harness-tests.yml": "4506611ae1af7a87537c1e33c1334f08bdd1246b212195865dda909d4cf9ebbd",
+    "benchmarks/T01/harness-alignment.md": "cff682f8d3cc2fc13c313eb3a6eb649955246f50db3640788cf0048c482efcd1",
+    "containers/t01/README.md": "c88d79f759a3a06507e12659052f404429806ee26fd534f250f9f0049e3a5fa5",
+    "docs/research/21-t01-harness-integration.md": "d4ccb5fc91c7b2609eda83828dd6edbcc460252893b88cc60f4c3891d85b4696",
+    "docs/research/23-t01-acceptance-run-reports.md": "34d2a0114fdfd52359456c620ffd6d2b6feda215d68ee2055fcc60ebc4f045b2",
+    "docs/research/README.md": "1a179442b1ed86155c10d4e42f277cc1aa81463d0fdb70bd675af78e14fb369c",
+    "scripts/offline_harness_ci.py": "7e4034d0f5ff2b142833d9ad68ec2ad97463cc3bb22eab8c43a9e5660009ffa4",
+    "scripts/t01_harness_smoke.py": "106379651160b6fea148ff1bc86b04433f7aee63d59dd9b7c9aacebfafa84ff2",
+    "scripts/tests/test_t01_supervisor.py": "fe57b5edc2afe50fca87b77afd91d3fce518fea3a8328e73eb7766c9d7ad334f"
+  }
+}

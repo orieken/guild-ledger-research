@@ -88,6 +88,29 @@ def project_candidate(source,canonical,target):
             destination=target/path.relative_to(source);destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(path.read_bytes())
     return {p.relative_to(target).as_posix():sha(p) for p in sorted(target.rglob('*')) if p.is_file()}
 
+def validate_acceptance(report,evaluator,files):
+    """Fail closed on judge errors, missing criteria, or a different candidate.
+
+    These no-op fixtures must reject the unfinished product while completing all
+    acceptance observations. This expectation is not a live-run scoring rule.
+    """
+    if report.get('schema')!='guild-ledger.t01-acceptance/v1' or report.get('status')!='completed':
+        raise ValueError('Independent acceptance evaluation did not complete')
+    if report.get('evaluator_sha256')!=evaluator.version() or report.get('application_sha256')!=files:
+        raise ValueError('Acceptance evaluator/candidate identity mismatch')
+    if (report.get('model_calls')!=0 or report.get('live_model_calls_enabled') is not False
+            or report.get('cleanup_passed') is not True or report.get('selected_criteria')!=[]
+            or report.get('required_input_gate_passed') is not True
+            or report.get('required_build_gate_passed') is not True):
+        raise ValueError('Acceptance isolation, gates, or cleanup not verified')
+    score=evaluator.aggregate({'status':'completed','results':report.get('results',[])},[])
+    for key,value in score.items():
+        if report.get(key)!=value:raise ValueError('Acceptance score mismatch: '+key)
+    failed={item['id'] for item in score['results'] if item['status']=='fail'}
+    if score['full_target_acceptance'] is not False or not {'A01','U01'}<=failed:
+        raise ValueError('Expected unfinished mock candidate acceptance rejection')
+    return True
+
 def test_candidate(candidate,output,expect_features):
     """Only trusted fixed images/tests, source read-only; private internal network."""
     output.mkdir();token='t01-test-'+uuid.uuid4().hex;network=token+'-net';containers=[];checks=[]
@@ -156,6 +179,7 @@ def build(output):
     for name,args in commands:
         if name.startswith('tools-'):args=['--build-arg','T01_PROFILE_SHA256='+sha(ROOT/'containers/t01/profile.json'),*args]
         print('Build '+name,flush=True);execute(['docker','build',*args],output/(name+'.log'),600)
+    module('t01_acceptance_build',ROOT/'evaluators/T01/evaluate.py').build(output/'acceptance')
 
 def run(output,levels,build_images=False):
     if output.exists():raise ValueError('Output directory must be new')
@@ -169,6 +193,7 @@ def run(output,levels,build_images=False):
         if identity(IMAGES[role])['Config'].get('Labels',{}).get('io.guild-ledger.t01-profile-sha256')!=overlay_digest:
             raise ValueError('T01 overlay profile/image mismatch: '+role)
     IMAGES.update(images)  # Resolve tags once; every worker/service uses recorded image IDs.
+    evaluator=module('t01_acceptance',ROOT/'evaluators/T01/evaluate.py')
     cells=[];controls={};starter_hashes=set()
     try:
         for level in levels:
@@ -222,14 +247,31 @@ def run(output,levels,build_images=False):
                     projected=cell/'application';files=project_candidate(candidate,task,projected)
                     if files!=manifest['files']:raise ValueError('Expected no-op mock changed application source')
                     record['tests']=test_candidate(projected,cell/'tests',False)
-                    record['passed']=record['tests']['passed'];record['application_unchanged']=True
+                    record['application_unchanged']=True
+                    # Worker has exited. Judge inputs/evidence are never mounted into it.
+                    record['acceptance']=evaluator.evaluate(projected,cell/'acceptance')
+                    record['acceptance_artifact']={'path':'acceptance/report.json','sha256':sha(cell/'acceptance/report.json')}
+                    record['mock_acceptance_expectation_passed']=validate_acceptance(record['acceptance'],evaluator,files)
+                    record['passed']=record['tests']['passed'] and record['mock_acceptance_expectation_passed']
                 except Exception as exc:
                     record['error']=str(exc);(cell/'error.log').write_text(traceback.format_exc())
                 record['elapsed_seconds']=round(time.monotonic()-started,2)
                 cells.append(record);(cell/'summary.json').write_text(json.dumps(record,indent=2)+'\n')
     finally:
         passed=len(cells)==len(levels)*5 and len(starter_hashes)==1 and all(c['passed'] for c in cells) and len(controls)==4 and all(c['passed'] for c in controls.values())
-        report={'schema':'guild-ledger.t01-harness-smoke/v1','verification_passed':passed,'model_calls':0,'model_usage':None,'cost_usd':None,'live_model_calls_enabled':False,'levels':levels,'overlay_profile_sha256':overlay_digest,'images':images,'controls':controls,'cells':cells,'scope':'Infrastructure and input transport; native mocks return unchanged starter with expected visible-feature failures. No quality score or live admission.'}
+        acceptance_summary={'evaluator_sha256':evaluator.version(),'expected_cells':len(levels)*5,
+            'completed':sum(c.get('acceptance',{}).get('status')=='completed' for c in cells),
+            'accepted':sum(c.get('acceptance',{}).get('full_target_acceptance') is True for c in cells),
+            'rejected':sum(c.get('acceptance',{}).get('full_target_acceptance') is False for c in cells),
+            'unknown':sum(c.get('acceptance',{}).get('full_target_acceptance') is None for c in cells),
+            'cells':[{'level':c['level'],'harness':c['harness'],
+                'status':c.get('acceptance',{}).get('status','not_run'),
+                'full_target_acceptance':c.get('acceptance',{}).get('full_target_acceptance'),
+                'passed_criteria':c.get('acceptance',{}).get('passed_criteria'),
+                'full_target_denominator':c.get('acceptance',{}).get('full_target_denominator'),
+                'report_path':c['level']+'/'+c['harness']+'/acceptance/report.json',
+                'report_sha256':c.get('acceptance_artifact',{}).get('sha256')} for c in cells]}
+        report={'schema':'guild-ledger.t01-harness-smoke/v2','independent_acceptance':acceptance_summary,'verification_passed':passed,'model_calls':0,'model_usage':None,'cost_usd':None,'live_model_calls_enabled':False,'levels':levels,'overlay_profile_sha256':overlay_digest,'images':images,'controls':controls,'cells':cells,'scope':'Infrastructure and input transport plus independent full-target observations; unchanged mock candidates must be rejected. Synthetic acceptance observations are not model/harness quality measurements or live admission.'}
         (output/'summary.json').write_text(json.dumps(report,indent=2)+'\n')
     if not passed:raise RuntimeError('T01 harness smoke failed; see '+str(output/'summary.json'))
     print(json.dumps({'verification_passed':passed,'cells':len(cells),'model_calls':0}))

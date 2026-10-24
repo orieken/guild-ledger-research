@@ -29,13 +29,13 @@ The tool starts Python, Go and Vue servers inside that worker's isolated localho
 | H3 | Assigned prompt appended to the fixed mock spec with hash attestation; pinned native 16-stage pipeline; first invocation runs in-worker checks; three **synthetic fixture approvals** resume gates |
 | H4 | Dedicated T01 adapter calls pinned native `run_task(k=2)` in parallel and sequential modes, scripted proposer/selector and no-op solver; in-worker checks before adaptation; selected exports are asserted unchanged |
 
-The H4 mock deliberately produces `NO_ENTRY` rather than inventing optimization evidence: this single-task no-op run does not test experience-library transfer. Original upstream ledger demo tests still cover persistent library mechanics. H3's fixed mock provider ignores task requirements; prompt transport is not proof of real solver behavior. All mocks preserve the unfinished application. They are not scored implementations.
+The H4 mock deliberately produces `NO_ENTRY` rather than inventing optimization evidence: this single-task no-op run does not test experience-library transfer. Original upstream ledger demo tests still cover persistent library mechanics. H3's fixed mock provider ignores task requirements; prompt transport is not proof of real solver behavior. All mocks preserve the unfinished application. Independent acceptance observations are now collected for those synthetic candidates; they are not measurements of model or harness quality.
 
 ## Independent post-run checks
 
-The trusted host supervisor exports only application files. It rejects changed fixed tests, fixtures, locks and infrastructure, missing canonical files, symlinks and special source files. Native state such as Loom's `.git`/`.claude` output and fake marker files remains runtime evidence and is excluded from the runnable application projection.
+The trusted host supervisor exports only application files. It rejects changed fixed tests, fixtures, locks and infrastructure, missing protected inputs, symlinks and special source files. Native state such as Loom's `.git`/`.claude` output and fake marker files remains runtime evidence and is excluded from the runnable application projection.
 
-Each exported candidate is tested again with trusted, fixed test/service images on a fresh Docker **internal-only** network, without host ports. Only editable source is mounted read-only; candidate Compose files, Dockerfiles, test code and dependencies never execute. The UI component/build containers need no network. A separate visible-test witness must pass all checks both inside the worker tool and through the external supervisor, and deliberate protected-test edits and source symlinks must be rejected. Every cell reports infrastructure success separately from its expected red feature tests. Summary JSON and detailed per-stage/test logs are retained.
+Each exported candidate is tested again with trusted, fixed test/service images on a fresh Docker **internal-only** network, without host ports. Only editable source is mounted read-only; candidate Compose files, Dockerfiles, test code and dependencies never execute. The UI component/build containers need no network. A separate visible-test witness must pass all checks both inside the worker tool and through the external supervisor, and deliberate protected-test edits and source symlinks must be rejected. Every cell reports infrastructure success separately from its expected red feature tests. After worker exit, the trusted supervisor runs the complete independent API/Chromium evaluator against the same projected application bytes. Each cell retains the full acceptance record, its candidate/evaluator identities, all criterion observations and a digest-linked `acceptance/report.json`. A completed full-target rejection is expected for every unchanged mock; an evaluator error, missing criterion, changed candidate identity or failed cleanup fails the integration check. No acceptance feedback is passed to a worker or repair stage. Summary JSON and detailed per-stage/test/evaluator logs are retained.
 
 ```mermaid
 flowchart TD
@@ -49,9 +49,21 @@ flowchart TD
   N --> R[Startup / API / UI / build evidence]
   I --> S[Per-cell summary]
   R --> S
+  P --> E[Separate independent API / Chromium evaluator]
+  E --> A[Full-target acceptance + criterion evidence]
+  A --> S
+  S --> J[Aggregate report + digest-linked artifacts]
   PC[Separate positive witness] --> N
 ```
 
 ## Limits
 
-These are offline plumbing checks, not full-target acceptance, model-quality scores or runtime admission. A paid run still requires the independent evaluator, final exposure map, an admitted live provider configuration, usage/cost calibration, budget and authorization. The current mocks do not request tests after generated edits; a future live runtime's tool use must be recorded separately. Infrastructure and model costs remain distinct; unknown provider usage/cost stays null in native records.
+These are offline integration checks with real full-target observations of synthetic unchanged candidates, not model-quality measurements or runtime admission. A paid run still requires evaluator/exposure freeze, an admitted live provider configuration, usage/cost calibration, budget and authorization. The current mocks do not request tests after generated edits; a future live runtime's tool use must be recorded separately. Infrastructure and model costs remain distinct; unknown provider usage/cost stays null in native records.
+
+## Report contract
+
+The matrix summary is `guild-ledger.t01-harness-smoke/v2`; the independent evaluator retains `guild-ledger.t01-acceptance/v1`. Per-cell `passed` means the mock integration assertions held, while `acceptance.full_target_acceptance` describes the exported product. `mock_acceptance_expectation_passed` asserts the completed unfinished-starter rejection (including A01/U01 failures) and is specific to these fixtures. It must not become a live candidate success rule.
+
+The aggregate `independent_acceptance` includes completed/accepted/rejected/unknown counts and one compact result per prompt/harness cell. Artifact paths are relative to the matrix summary directory. Each cell also stores `acceptance_artifact.path` relative to its own directory. Both paths refer to the same SHA-256-linked report. Missing/error evaluations remain unknown, never an invented zero score. `communicated_conformance` remains null pending the exposure audit.
+
+Offline CI builds the digest-labeled judge image, runs score-integrity tests, captures its image identity, uploads all acceptance artifacts and exposes the compact matrix under `t01_independent_acceptance` in `guild-ledger.offline-ci/v1`. Its `t01_report` path is relative to the CI artifact root. Historical v1 matrix artifacts have no acceptance section; consumers must not infer missing results as rejection.
