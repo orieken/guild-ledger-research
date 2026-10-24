@@ -1,0 +1,298 @@
+{
+  "schema": "guild-ledger.t01-criteria/v1",
+  "status": "implemented; validation and independent exposure audit required",
+  "criteria": [
+    {
+      "id": "A01",
+      "requirements": [
+        "R01"
+      ],
+      "critical": true,
+      "description": "List contains complete canonical objects",
+      "explicit_input_channels_draft": [
+        "common"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A02",
+      "requirements": [
+        "R03"
+      ],
+      "critical": true,
+      "description": "Stable title ordering on canonical fixture",
+      "explicit_input_channels_draft": [
+        "common"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A03",
+      "requirements": [
+        "R04"
+      ],
+      "critical": true,
+      "description": "Every difficulty enum filters correctly",
+      "explicit_input_channels_draft": [
+        "P2",
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A04",
+      "requirements": [
+        "R05"
+      ],
+      "critical": true,
+      "description": "Trimmed case-insensitive literal title search and empty query",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A05",
+      "requirements": [
+        "R06"
+      ],
+      "critical": true,
+      "description": "Status and combined filters use AND",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A06",
+      "requirements": [
+        "R07"
+      ],
+      "critical": true,
+      "description": "Invalid and explicitly empty enums return exact domain errors",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A07",
+      "requirements": [
+        "R07"
+      ],
+      "critical": true,
+      "description": "Repeated supported keys are rejected even if values agree",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A08",
+      "requirements": [
+        "R07"
+      ],
+      "critical": true,
+      "description": "Unknown query keys are ignored",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A09",
+      "requirements": [
+        "R02"
+      ],
+      "critical": true,
+      "description": "All details equal complete canonical objects",
+      "explicit_input_channels_draft": [
+        "common"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A10",
+      "requirements": [
+        "R08"
+      ],
+      "critical": true,
+      "description": "Unknown ID returns NOT_FOUND with message",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A11",
+      "requirements": [
+        "R13"
+      ],
+      "critical": true,
+      "description": "Both service health endpoints preserved",
+      "explicit_input_channels_draft": [
+        "common"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A12",
+      "requirements": [
+        "R13"
+      ],
+      "critical": true,
+      "description": "Documented quest routes are read-only",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "A13",
+      "requirements": [
+        "R01"
+      ],
+      "critical": true,
+      "description": "Filters, errors and details do not change list data",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U01",
+      "requirements": [
+        "R09"
+      ],
+      "critical": true,
+      "description": "Initial browser list contains all canonical quests",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U02",
+      "requirements": [
+        "R11",
+        "R06"
+      ],
+      "critical": true,
+      "description": "Labeled native controls and keyboard Apply filter through real API",
+      "explicit_input_channels_draft": [
+        "P2",
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U03",
+      "requirements": [
+        "R11",
+        "R12"
+      ],
+      "critical": true,
+      "description": "Details show all field values and preserve filters/list",
+      "explicit_input_channels_draft": [
+        "P2",
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U04",
+      "requirements": [
+        "R10"
+      ],
+      "critical": true,
+      "description": "Pending list request exposes nonempty live status",
+      "explicit_input_channels_draft": [
+        "P2",
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U05",
+      "requirements": [
+        "R10"
+      ],
+      "critical": true,
+      "description": "Successful empty list has nonempty status and no quest controls",
+      "explicit_input_channels_draft": [
+        "P2",
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U06",
+      "requirements": [
+        "R09"
+      ],
+      "critical": true,
+      "description": "List network failure exposes nonempty alert",
+      "explicit_input_channels_draft": [
+        "common"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U07",
+      "requirements": [
+        "R09"
+      ],
+      "critical": true,
+      "description": "List HTTP failure exposes nonempty alert",
+      "explicit_input_channels_draft": [
+        "P2",
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U08",
+      "requirements": [
+        "R12"
+      ],
+      "critical": true,
+      "description": "Detail failure preserves list and reports accessible error",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U09",
+      "requirements": [
+        "R12"
+      ],
+      "critical": true,
+      "description": "An older list response cannot overwrite a newer result",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    },
+    {
+      "id": "U10",
+      "requirements": [
+        "R12"
+      ],
+      "critical": true,
+      "description": "An older detail response cannot replace the newer selection",
+      "explicit_input_channels_draft": [
+        "P3"
+      ],
+      "exposure_note": "Conservative whole-criterion mapping; partial disclosure is not treated as fully communicated. Requires separate audit."
+    }
+  ],
+  "coverage_limits": [
+    "Canonical fixture has no case-colliding or duplicate titles; case-fold/tie ordering cannot be discriminated on those data.",
+    "Feedback checks validate nonempty accessible status/alert semantics, not the linguistic quality of every message.",
+    "Keyboard checks cover focus reachability, Apply and quest activation; custom widget keyboard internals and broader accessibility need review.",
+    "Read-only HTTP behavior and immutable inputs are checked; absence of dormant authentication, database or other out-of-scope code needs source review.",
+    "Finite tests are acceptance evidence, not proof for all possible programs. Criterion-level disclosure audit and live-runtime admission remain separate."
+  ],
+  "scoring": "All 23 critical automated criteria, plus protected-input gate; full denominator is fixed across prompt levels. Subset diagnostics never yield full-target acceptance."
+}

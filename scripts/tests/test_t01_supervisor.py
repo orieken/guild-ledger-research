@@ -28,7 +28,14 @@ class Boundaries(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'symlink'):self.project()
  def test_rejects_directory_symlink(self):
   path=self.source/'web/src';shutil.rmtree(path);path.symlink_to(self.canonical/'web/src',target_is_directory=True)
-  with self.assertRaisesRegex(ValueError,'symlink'):self.project()
+  with self.assertRaisesRegex(ValueError,'source directory'):self.project()
+ def test_empty_frontend_keeps_mount_directory(self):
+  shutil.rmtree(self.source/'web/src');(self.source/'web/src').mkdir()
+  self.project();self.assertTrue((self.root/'projected/web/src').is_dir())
+ def test_allows_frontend_component_rename(self):
+  (self.source/'web/src/App.vue').rename(self.source/'web/src/QuestBrowser.vue')
+  p=self.source/'web/src/main.ts';p.write_text(p.read_text().replace('./App.vue','./QuestBrowser.vue'))
+  files=self.project();self.assertNotIn('web/src/App.vue',files);self.assertIn('web/src/QuestBrowser.vue',files)
  def test_rejects_workspace_symlink(self):
   path=self.root/'link';path.symlink_to(self.source,target_is_directory=True)
   with self.assertRaisesRegex(ValueError,'root'):runner.project_candidate(path,self.canonical,self.root/'projected')

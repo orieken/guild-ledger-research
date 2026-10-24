@@ -93,3 +93,5 @@ Current runtime recommendation and treatment definitions: [runtime comparison](1
 17. [Canonical T01 starter and visible checks](../../benchmarks/T01/README.md): reproducible task bundles, P1–P3 prompts, disclosure inventory and zero-model red/green/mutation verification.
 
 18. [T01 harness/container integration](21-t01-harness-integration.md): shared in-worker visible tests, native mock adapters, isolated post-run services and all 15 prompt/harness checks.
+
+19. [Independent T01 acceptance evaluator](22-t01-independent-evaluator.md): supervisor-only API/Chromium criteria, full reference, defect sensitivity, score integrity and coverage limits.

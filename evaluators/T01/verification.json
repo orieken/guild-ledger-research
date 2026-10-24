@@ -1,0 +1,494 @@
+{
+  "schema": "guild-ledger.t01-evaluator-verification/v1",
+  "verification_passed": true,
+  "evaluator_sha256": "a5bebe1324961c2e85b954843c167838ade4a22e6f426d29c7181c446c30f898",
+  "checks": [
+    {
+      "case": "reference-1",
+      "passed": true,
+      "failed": []
+    },
+    {
+      "case": "reference-2",
+      "passed": true,
+      "failed": []
+    },
+    {
+      "case": "valid-component-rename",
+      "passed": true
+    },
+    {
+      "case": "valid-accessible-labels",
+      "passed": true
+    },
+    {
+      "case": "valid-serialized-list",
+      "passed": true
+    },
+    {
+      "case": "visible-witness",
+      "passed": true
+    },
+    {
+      "case": "type-error",
+      "passed": true
+    },
+    {
+      "case": "empty-frontend",
+      "passed": true
+    },
+    {
+      "case": "wrong-evaluator-image",
+      "passed": true
+    },
+    {
+      "case": "unfinished-starter",
+      "passed": true
+    },
+    {
+      "case": "shared-data-mutated",
+      "expected_failed_criterion": "A13",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "initial-load-missing",
+      "expected_failed_criterion": "U01",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "network-error-swallowed",
+      "expected_failed_criterion": "U06",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "quest-write-added",
+      "expected_failed_criterion": "A12",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "or-filters",
+      "expected_failed_criterion": "A05",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "regex-search",
+      "expected_failed_criterion": "A04",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "http-status-ignored",
+      "expected_failed_criterion": "U07",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "list-payload",
+      "expected_failed_criterion": "A01",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "unsorted",
+      "expected_failed_criterion": "A02",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "difficulty-ignored",
+      "expected_failed_criterion": "A03",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "search-not-trimmed",
+      "expected_failed_criterion": "A04",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "search-case-sensitive",
+      "expected_failed_criterion": "A04",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "status-ignored",
+      "expected_failed_criterion": "A05",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "empty-enum-accepted",
+      "expected_failed_criterion": "A06",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "duplicates-accepted",
+      "expected_failed_criterion": "A07",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "unknown-rejected",
+      "expected_failed_criterion": "A08",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "detail-incomplete",
+      "expected_failed_criterion": "A09",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "missing-id-200",
+      "expected_failed_criterion": "A10",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "health-broken",
+      "expected_failed_criterion": "A11",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "loading-missing",
+      "expected_failed_criterion": "U04",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "empty-missing",
+      "expected_failed_criterion": "U05",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "alert-missing",
+      "expected_failed_criterion": "U07",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "detail-reward-missing",
+      "expected_failed_criterion": "U03",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "filters-reset",
+      "expected_failed_criterion": "U03",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "detail-error-clears-list",
+      "expected_failed_criterion": "U08",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "stale-list",
+      "expected_failed_criterion": "U09",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "stale-detail",
+      "expected_failed_criterion": "U10",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "apply-inaccessible",
+      "expected_failed_criterion": "U02",
+      "passed": true,
+      "status": "completed"
+    },
+    {
+      "case": "protected-test-tamper",
+      "passed": true
+    }
+  ],
+  "model_calls": 0,
+  "live_model_calls_enabled": false,
+  "scope": "Independent API/Chromium acceptance checks validated against hand-written reference and separate mutation catalog; no model or harness quality measurement.",
+  "verified_date": "2026-10-23",
+  "research_revision": "c9e890e635cce51a4f9bdedc2c654e30b9927b56",
+  "uncommitted_changes_at_verification": true,
+  "raw_evidence_directory": "ci-acceptance-results",
+  "github_workflow_status": "added locally; not pushed or dispatched",
+  "results_summary": {
+    "validation_cases": 39,
+    "critical_automated_criteria": 23,
+    "deliberate_defects_detected": 28,
+    "complete_reference_passes": 3,
+    "score_integrity_tests": 8,
+    "source_projection_tests": 10,
+    "packaging_tests": 2
+  },
+  "reference_evidence": {
+    "reference-1": {
+      "status": "completed",
+      "full_target_acceptance": true,
+      "evaluated_criteria": 23,
+      "browser": "141.0.7390.37",
+      "fixture_sha256": "9178370f7872d02c806970a34c96d047551bac369f78146f7be89f8cae79ca67",
+      "images": {
+        "guild": {
+          "id": "sha256:883955c71309814812dbb7fe78095d5a51710a7001b95b2d7f23a561b1b5a5f4",
+          "platform": "linux/arm64"
+        },
+        "armory": {
+          "id": "sha256:56166cd9dc3805dc21e115bc5822aae8e129893c2106f31f9a7d49a8723c6c42",
+          "platform": "linux/arm64"
+        },
+        "web": {
+          "id": "sha256:047145f9f62310eb0f53aec8710957a26409cfc64221a88e7bd559defd8e8c03",
+          "platform": "linux/arm64"
+        },
+        "judge": {
+          "id": "sha256:f129e9276e7937a5d2547e5385afabb2da6e29dd536adbbdd635a7c8152f7fd3",
+          "platform": "linux/arm64"
+        }
+      }
+    },
+    "reference-2": {
+      "status": "completed",
+      "full_target_acceptance": true,
+      "evaluated_criteria": 23,
+      "browser": "141.0.7390.37",
+      "fixture_sha256": "9178370f7872d02c806970a34c96d047551bac369f78146f7be89f8cae79ca67",
+      "images": {
+        "guild": {
+          "id": "sha256:883955c71309814812dbb7fe78095d5a51710a7001b95b2d7f23a561b1b5a5f4",
+          "platform": "linux/arm64"
+        },
+        "armory": {
+          "id": "sha256:56166cd9dc3805dc21e115bc5822aae8e129893c2106f31f9a7d49a8723c6c42",
+          "platform": "linux/arm64"
+        },
+        "web": {
+          "id": "sha256:047145f9f62310eb0f53aec8710957a26409cfc64221a88e7bd559defd8e8c03",
+          "platform": "linux/arm64"
+        },
+        "judge": {
+          "id": "sha256:f129e9276e7937a5d2547e5385afabb2da6e29dd536adbbdd635a7c8152f7fd3",
+          "platform": "linux/arm64"
+        }
+      }
+    },
+    "renamed-component": {
+      "status": "completed",
+      "full_target_acceptance": true,
+      "evaluated_criteria": 23,
+      "browser": "141.0.7390.37",
+      "fixture_sha256": "9178370f7872d02c806970a34c96d047551bac369f78146f7be89f8cae79ca67",
+      "images": {
+        "guild": {
+          "id": "sha256:883955c71309814812dbb7fe78095d5a51710a7001b95b2d7f23a561b1b5a5f4",
+          "platform": "linux/arm64"
+        },
+        "armory": {
+          "id": "sha256:56166cd9dc3805dc21e115bc5822aae8e129893c2106f31f9a7d49a8723c6c42",
+          "platform": "linux/arm64"
+        },
+        "web": {
+          "id": "sha256:047145f9f62310eb0f53aec8710957a26409cfc64221a88e7bd559defd8e8c03",
+          "platform": "linux/arm64"
+        },
+        "judge": {
+          "id": "sha256:f129e9276e7937a5d2547e5385afabb2da6e29dd536adbbdd635a7c8152f7fd3",
+          "platform": "linux/arm64"
+        }
+      }
+    }
+  },
+  "mutant_coverage": {
+    "shared-data-mutated": {
+      "expected_criterion": "A13",
+      "observed_criterion": "A13",
+      "observed_status": "fail"
+    },
+    "initial-load-missing": {
+      "expected_criterion": "U01",
+      "observed_criterion": "U01",
+      "observed_status": "fail"
+    },
+    "network-error-swallowed": {
+      "expected_criterion": "U06",
+      "observed_criterion": "U06",
+      "observed_status": "fail"
+    },
+    "quest-write-added": {
+      "expected_criterion": "A12",
+      "observed_criterion": "A12",
+      "observed_status": "fail"
+    },
+    "or-filters": {
+      "expected_criterion": "A05",
+      "observed_criterion": "A05",
+      "observed_status": "fail"
+    },
+    "regex-search": {
+      "expected_criterion": "A04",
+      "observed_criterion": "A04",
+      "observed_status": "fail"
+    },
+    "http-status-ignored": {
+      "expected_criterion": "U07",
+      "observed_criterion": "U07",
+      "observed_status": "fail"
+    },
+    "list-payload": {
+      "expected_criterion": "A01",
+      "observed_criterion": "A01",
+      "observed_status": "fail"
+    },
+    "unsorted": {
+      "expected_criterion": "A02",
+      "observed_criterion": "A02",
+      "observed_status": "fail"
+    },
+    "difficulty-ignored": {
+      "expected_criterion": "A03",
+      "observed_criterion": "A03",
+      "observed_status": "fail"
+    },
+    "search-not-trimmed": {
+      "expected_criterion": "A04",
+      "observed_criterion": "A04",
+      "observed_status": "fail"
+    },
+    "search-case-sensitive": {
+      "expected_criterion": "A04",
+      "observed_criterion": "A04",
+      "observed_status": "fail"
+    },
+    "status-ignored": {
+      "expected_criterion": "A05",
+      "observed_criterion": "A05",
+      "observed_status": "fail"
+    },
+    "empty-enum-accepted": {
+      "expected_criterion": "A06",
+      "observed_criterion": "A06",
+      "observed_status": "fail"
+    },
+    "duplicates-accepted": {
+      "expected_criterion": "A07",
+      "observed_criterion": "A07",
+      "observed_status": "fail"
+    },
+    "unknown-rejected": {
+      "expected_criterion": "A08",
+      "observed_criterion": "A08",
+      "observed_status": "fail"
+    },
+    "detail-incomplete": {
+      "expected_criterion": "A09",
+      "observed_criterion": "A09",
+      "observed_status": "fail"
+    },
+    "missing-id-200": {
+      "expected_criterion": "A10",
+      "observed_criterion": "A10",
+      "observed_status": "fail"
+    },
+    "health-broken": {
+      "expected_criterion": "A11",
+      "observed_criterion": "A11",
+      "observed_status": "fail"
+    },
+    "loading-missing": {
+      "expected_criterion": "U04",
+      "observed_criterion": "U04",
+      "observed_status": "fail"
+    },
+    "empty-missing": {
+      "expected_criterion": "U05",
+      "observed_criterion": "U05",
+      "observed_status": "fail"
+    },
+    "alert-missing": {
+      "expected_criterion": "U07",
+      "observed_criterion": "U07",
+      "observed_status": "fail"
+    },
+    "detail-reward-missing": {
+      "expected_criterion": "U03",
+      "observed_criterion": "U03",
+      "observed_status": "fail"
+    },
+    "filters-reset": {
+      "expected_criterion": "U03",
+      "observed_criterion": "U03",
+      "observed_status": "fail"
+    },
+    "detail-error-clears-list": {
+      "expected_criterion": "U08",
+      "observed_criterion": "U08",
+      "observed_status": "fail"
+    },
+    "stale-list": {
+      "expected_criterion": "U09",
+      "observed_criterion": "U09",
+      "observed_status": "fail"
+    },
+    "stale-detail": {
+      "expected_criterion": "U10",
+      "observed_criterion": "U10",
+      "observed_status": "fail"
+    },
+    "apply-inaccessible": {
+      "expected_criterion": "U02",
+      "observed_criterion": "U02",
+      "observed_status": "fail"
+    }
+  },
+  "mock_harness_regression": {
+    "passed": true,
+    "prompt_level": "P1",
+    "harnesses": [
+      "H0",
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "model_calls": 0
+  },
+  "known_limits": [
+    "Canonical fixture has no case-colliding or duplicate titles; case-fold/tie ordering cannot be discriminated on those data.",
+    "Feedback checks validate nonempty accessible status/alert semantics, not the linguistic quality of every message.",
+    "Keyboard checks cover focus reachability, Apply and quest activation; custom widget keyboard internals and broader accessibility need review.",
+    "Read-only HTTP behavior and immutable inputs are checked; absence of dormant authentication, database or other out-of-scope code needs source review.",
+    "Finite tests are acceptance evidence, not proof for all possible programs. Criterion-level disclosure audit and live-runtime admission remain separate."
+  ],
+  "source_sha256": {
+    ".github/workflows/t01-acceptance-evaluator.yml": "a369b040f7b3b305106b2ed18a0dd1727a98f93adef7b1b55ad03aecea37243b",
+    "evaluators/T01/README.md": "8592c504998f379f5389555e829de6a3f6ae1b10916d6449d1caa7e75a7dde03",
+    "evaluators/T01/criteria.json": "15c5b46b22d20bd92bdb56f1f0ee57928fae45bc3c29730aaed4501774fc5620",
+    "evaluators/T01/evaluate.py": "6db64a14b315611c827df282613dafe6450141baa39e38fe2906e5a12431061b",
+    "evaluators/T01/mutations.py": "e7b624e0a3525dd420dbb562db49156cbd7b79b1fd6425ca024d4c3ecef28485",
+    "evaluators/T01/reference/App.vue": "647d5270a0246395c7e22aafccbb222707489a4203486328472c29ba8f292884",
+    "evaluators/T01/reference/app.py": "576986b35f4cd24611b7d3eb32c507db41d4a9270ff0fd18c1c6c67d36d3c354",
+    "evaluators/T01/runner/Dockerfile": "db25a31f49841c7b7e80b6f0c67daa63318bfd4e474c2258d75dc08db0440597",
+    "evaluators/T01/runner/acceptance.mjs": "31e4f308871bf6e4ff58cce9e16415d537a896d9605d0899b06f2b2d6712352f",
+    "evaluators/T01/runner/package-lock.json": "f5fe76ca9578b4bb9232f3c552e5b9feffbf80b3390b9538fd2d237694bca3f5",
+    "evaluators/T01/runner/package.json": "8bee52f07b92eec657dffbc4cf330d9a02732a1040006b0351fcd699708fef1e",
+    "evaluators/T01/verify.py": "e8dcdfb6329bee31e2cccfedcc5426bf306a46dbedea14fc7a7ee36d9700f9af",
+    "scripts/package_benchmark.py": "ef2c631cc7d0216843e1e1ffef190a0b2b4ee5c0282e693113a7c6b8fef41724",
+    "scripts/t01_harness_smoke.py": "415596f7ed1ab3252af31304da292d22ce4e03abc538298a06ce754cec1c8390",
+    "scripts/tests/test_t01_acceptance_evaluator.py": "121eb8cae3675fcd0f9e76d06ca6fd313799389491b640c5128f47fe41ce6349",
+    "scripts/tests/test_t01_supervisor.py": "e4f0ecdb885222da42c5c461ecc0f6c3496df970e6214dfc0719d0c19eba34c0"
+  }
+}

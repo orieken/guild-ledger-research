@@ -21,7 +21,7 @@ Builds have network access for image/release/module downloads. Every agent worke
 | Loom native mock | 10 gate, completion, interruption/resume and integrity cases |
 | Harness² demo | 7 deterministic recursion/library, isolation and timeout cases |
 | T01 packaging | Deterministic archives, prompt separation and clean-input audit |
-| T01 supervisor boundaries | 8 fixed-input, missing-lock, symlink, editable-source and wrong-image cases |
+| T01 supervisor boundaries | 10 fixed-input, missing-lock, symlink, source-refactor/empty-source and wrong-image cases |
 | T01 harness integration | All 15 P1–P3 × H0–H4 mock combinations, in-worker and post-export checks, green controls and rejection controls |
 
 The base build driver attempts all four original images. The T01 integration additionally builds fixed application/probe images and three worker overlays with preinstalled visible-test tools. The test driver runs all eight regression/unit suites and the full T01 integration even if another fails; the workflow also continues unaffected build/test/report steps after preparation failures. The job remains failed when any required source, build or suite is missing or unsuccessful. No `continue-on-error` hides a failing check.

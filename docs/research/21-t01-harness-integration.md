@@ -17,3 +17,5 @@ The [offline harness action](https://github.com/orieken/guild-ledger-research/ac
 The separate [canonical starter action](https://github.com/orieken/guild-ledger-research/actions/runs/39847929709) also passed all 16 verification checks for the same commit. Model calls remained disabled; these results establish offline infrastructure and expected-result assertions, not product quality or live runtime admission. Quest feature tests remain intentionally red for the unchanged mock candidates.
 
 GitHub retains the run artifacts for 30 days. A local copy of the full hosted harness artifact is archived under ignored `ci-offline-results/hosted-39847929663/`. The committed local verification receipt remains historical evidence and has not been rewritten as a hosted run.
+
+The subsequent [independent evaluator work](22-t01-independent-evaluator.md) implements the missing full-target automated checks. Its acceptance score remains distinct from the infrastructure-only results recorded above.

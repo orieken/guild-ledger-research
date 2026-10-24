@@ -65,6 +65,8 @@ def worker(image,task,prompt,output):
 def project_candidate(source,canonical,target):
     """Export application bytes only; never execute candidate test/infra changes."""
     if source.is_symlink():raise ValueError('Candidate root must be regular')
+    frontend=source/'web/src'
+    if frontend.is_symlink() or not frontend.is_dir():raise ValueError('Regular frontend source directory required')
     target.mkdir()
     files={p.relative_to(canonical).as_posix() for p in canonical.rglob('*') if p.is_file()}
     def read(relative):
@@ -73,10 +75,13 @@ def project_candidate(source,canonical,target):
         if not path.is_file():raise ValueError('Missing canonical input: '+relative)
         return path.read_bytes()
     for relative in sorted(files):
+        path=source/relative
+        if relative.startswith('web/src/') and not path.exists() and not path.is_symlink():continue
         data=read(relative)
         editable=any(relative==p or relative.startswith(p) for p in EDITABLE)
         if not editable and data!=(canonical/relative).read_bytes():raise ValueError('Protected input changed: '+relative)
         destination=target/relative;destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(data)
+    (target/'web/src').mkdir(parents=True,exist_ok=True)
     for path in (source/'web/src').rglob('*'):
         if path.is_symlink() or (not path.is_dir() and not path.is_file()):raise ValueError('Unsafe new source path')
         if path.is_file():
